@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "Fitness_Application_new"
+  "defaultProject": "Fitness_Application_new",
+  "cli": {
+    "analytics": false
+  }
 }

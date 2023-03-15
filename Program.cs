@@ -35,6 +35,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+builder.Services.AddSwaggerDocument();
 
 var configuration = new MapperConfiguration(cfg =>
 {
@@ -56,7 +57,18 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    //app.UseMigrationsEndPoint();
+    app.UseOpenApi();
+    app.UseSwaggerUi3(config =>
+    {
+        config.TransformToExternalPath = (s, r) =>
+        {
+            string path = s.EndsWith("swagger.json") && !string.IsNullOrEmpty(r.PathBase)
+                ? $"{r.PathBase}{s}"
+                : s;
+            return path;
+        };
+    });
 }
 else
 {
