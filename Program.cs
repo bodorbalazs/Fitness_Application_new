@@ -1,9 +1,9 @@
 using AutoMapper;
 using Duende.IdentityServer.Services;
-using Fitness_Application_new.Data;
+using FitnessApp.DAL.Data;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
-using Fitness_Application_new.Models;
+using FitnessApp.DAL.Models;
 using Fitness_Application_new.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;

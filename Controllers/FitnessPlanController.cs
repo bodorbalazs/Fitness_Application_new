@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Fitness_Application_new.Data;
+using FitnessApp.DAL.Data;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
 //using Fitness_Application_new.Models;
@@ -45,7 +45,7 @@ namespace Fitness_Application_new.Controllers
         public async Task<IActionResult> AddFitnessPlan([FromBody] FitnessPlanDto NewFitnessPlan)
         {
             var created = await _fitnessPlanService
-                .InsertFitnessPlanAsync(_mapper.Map<Models.FitnessPlan>(NewFitnessPlan));
+                .InsertFitnessPlanAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(NewFitnessPlan));
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
@@ -57,7 +57,7 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessPlanDto fitnessPlan)
         {
-            await _fitnessPlanService.UpdateFitnessPlanAsync(id, _mapper.Map<Models.FitnessPlan>(fitnessPlan));
+            await _fitnessPlanService.UpdateFitnessPlanAsync(id, _mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(fitnessPlan));
             return NoContent();
         }
 

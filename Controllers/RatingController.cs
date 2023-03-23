@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Fitness_Application_new.Data;
+using FitnessApp.DAL.Data;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
 //using Fitness_Application_new.Models;
@@ -45,7 +45,7 @@ namespace Fitness_Application_new.Controllers
         public async Task<IActionResult> AddRating([FromBody] RatingDto NewRating)
         {
             var created = await _ratingService
-                .InsertRatingAsync(_mapper.Map<Models.Rating>(NewRating));
+                .InsertRatingAsync(_mapper.Map<FitnessApp.DAL.Models.Rating>(NewRating));
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
@@ -57,7 +57,7 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] RatingDto rating)
         {
-            await _ratingService.UpdateRatingAsync(id, _mapper.Map<Models.Rating>(rating));
+            await _ratingService.UpdateRatingAsync(id, _mapper.Map<FitnessApp.DAL.Models.Rating>(rating));
             return NoContent();
         }
 

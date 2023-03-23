@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Fitness_Application_new.Data;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
 //using Fitness_Application_new.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using FitnessApp.DAL.Data;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -46,7 +46,7 @@ namespace Fitness_Application_new.Controllers
         public async Task<IActionResult> AddFavouriteItem([FromBody] FavouriteItemDto Newfavourite)
         {
             var created = await _favouriteItemService
-                .InsertFavouriteItemAsync(_mapper.Map<Models.FavouriteItem>(Newfavourite));
+                .InsertFavouriteItemAsync(_mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(Newfavourite));
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
@@ -58,7 +58,7 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FavouriteItemDto favourite)
         {
-            await _favouriteItemService.UpdateFavouriteItemAsync(id, _mapper.Map<Models.FavouriteItem>(favourite));
+            await _favouriteItemService.UpdateFavouriteItemAsync(id, _mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(favourite));
             return NoContent();
         }
 

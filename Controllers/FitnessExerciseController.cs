@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Fitness_Application_new.Data;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
 //using Fitness_Application_new.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FitnessApp.DAL.Data;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -45,7 +45,7 @@ namespace Fitness_Application_new.Controllers
         public async Task<IActionResult> AddFitnessExercise([FromBody] FitnessExerciseDto NewFitnessExercise)
         {
             var created = await _fitnessExerciseService
-                .InsertFitnessExerciseAsync(_mapper.Map<Models.FitnessExercise>(NewFitnessExercise));
+                .InsertFitnessExerciseAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(NewFitnessExercise));
             return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
@@ -57,7 +57,7 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessExerciseDto fitnessExercise)
         {
-            await _fitnessExerciseService.UpdateFitnessExerciseAsync(id, _mapper.Map<Models.FitnessExercise>(fitnessExercise));
+            await _fitnessExerciseService.UpdateFitnessExerciseAsync(id, _mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(fitnessExercise));
             return NoContent();
         }
 
