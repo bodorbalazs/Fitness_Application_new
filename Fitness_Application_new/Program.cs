@@ -59,7 +59,7 @@ if (app.Environment.IsDevelopment())
 {
     //app.UseMigrationsEndPoint();
     app.UseOpenApi();
-    app.UseSwaggerUi3(config =>
+    app.UseSwaggerUi3(/*config =>
     {
         config.TransformToExternalPath = (s, r) =>
         {
@@ -68,7 +68,7 @@ if (app.Environment.IsDevelopment())
                 : s;
             return path;
         };
-    });
+    }*/);
 }
 else
 {
