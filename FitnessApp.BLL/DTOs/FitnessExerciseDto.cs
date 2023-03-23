@@ -10,6 +10,6 @@ namespace Fitness_Application_new.DTOs
         public string PictureUrl { get; set; }
         public string Difficulty { get; set; }
         public int FitnessPlanId { get; set; }
-        public FitnessPlanDto FitnessPlan { get; set; }
+        public FitnessPlan FitnessPlan { get; set; }
     }
 }
