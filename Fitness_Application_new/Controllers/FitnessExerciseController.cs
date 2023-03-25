@@ -5,9 +5,11 @@ using Fitness_Application_new.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FitnessApp.DAL.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Fitness_Application_new.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FitnessExerciseController : Controller
