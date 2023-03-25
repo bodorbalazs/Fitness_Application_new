@@ -1454,9 +1454,9 @@ export class FitnessPlan implements IFitnessPlan {
     id!: number;
     name!: string;
     description!: string;
-    exercises!: FitnessExercise[];
-    applicationUserId!: string;
-    applicationUser!: ApplicationUser;
+    exercises?: FitnessExercise[];
+    applicationUserId?: string;
+    applicationUser?: ApplicationUser;
 
     constructor(data?: IFitnessPlan) {
         if (data) {
@@ -1513,9 +1513,9 @@ export interface IFitnessPlan {
     id: number;
     name: string;
     description: string;
-    exercises: FitnessExercise[];
-    applicationUserId: string;
-    applicationUser: ApplicationUser;
+    exercises?: FitnessExercise[];
+    applicationUserId?: string;
+    applicationUser?: ApplicationUser;
 }
 
 export class FitnessExercise implements IFitnessExercise {
@@ -1524,8 +1524,8 @@ export class FitnessExercise implements IFitnessExercise {
     description!: string;
     pictureUrl?: string | undefined;
     difficulty!: string;
-    fitnessPlanId!: number;
-    fitnessPlan!: FitnessPlan;
+    fitnessPlanId?: number;
+    fitnessPlan?: FitnessPlan;
 
     constructor(data?: IFitnessExercise) {
         if (data) {
@@ -1577,8 +1577,8 @@ export interface IFitnessExercise {
     description: string;
     pictureUrl?: string | undefined;
     difficulty: string;
-    fitnessPlanId: number;
-    fitnessPlan: FitnessPlan;
+    fitnessPlanId?: number;
+    fitnessPlan?: FitnessPlan;
 }
 
 export class FitnessExerciseDto implements IFitnessExerciseDto {
@@ -1648,9 +1648,9 @@ export class FitnessPlanDto implements IFitnessPlanDto {
     id!: number;
     name!: string;
     description!: string;
-    exercises!: FitnessExercise[];
-    applicationUserId!: string;
-    applicationUser!: ApplicationUser;
+    exercises?: FitnessExercise[];
+    applicationUserId?: string;
+    applicationUser?: ApplicationUser;
 
     constructor(data?: IFitnessPlanDto) {
         if (data) {
@@ -1707,9 +1707,9 @@ export interface IFitnessPlanDto {
     id: number;
     name: string;
     description: string;
-    exercises: FitnessExercise[];
-    applicationUserId: string;
-    applicationUser: ApplicationUser;
+    exercises?: FitnessExercise[];
+    applicationUserId?: string;
+    applicationUser?: ApplicationUser;
 }
 
 export class RatingDto implements IRatingDto {

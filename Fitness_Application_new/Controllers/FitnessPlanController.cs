@@ -6,6 +6,7 @@ using Fitness_Application_new.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -46,6 +47,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFitnessPlan([FromBody] FitnessPlanDto NewFitnessPlan)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            NewFitnessPlan.ApplicationUserId = userId;
             var created = await _fitnessPlanService
                 .InsertFitnessPlanAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(NewFitnessPlan));
             return CreatedAtAction(

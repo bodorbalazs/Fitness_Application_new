@@ -23,7 +23,7 @@
   
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Choose Job</h4>
+      <h4 class="modal-title" id="modal-basic-title">Choose Exercise</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -72,5 +72,4 @@
       <p>{{item.name}}</p>
     </div>
   
-  <button type="button" (click)="setValue();;showalert()">Add a new event</button>
-  <h1> {{name}}</h1>
+  <button type="button" (click)="setFitnessPlan()">Add a new Fitness Plan</button>

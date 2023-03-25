@@ -12,6 +12,7 @@ export class CreateFitnessPlanComponent implements OnInit {
 public addFitnessPlanForm: FormGroup;
 public addFitnessExerciseForm: FormGroup;
 public fitnessPlanList: FitnessPlanDto[] =[];
+public fitnessExerciseLocalList: FitnessExerciseDto[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
 closeResult:string ="";
 
@@ -40,7 +41,7 @@ closeResult:string ="";
 
   SetExerciseList(){
 
-    this.fitnessExerciseList.push(new FitnessExerciseDto({
+    this.fitnessExerciseLocalList.push(new FitnessExerciseDto({
       id:0,
       name:this.addFitnessExerciseForm.get('name')?.value,
       description:this.addFitnessExerciseForm.get('description')?.value,
@@ -49,7 +50,27 @@ closeResult:string ="";
     }))
   }
 
+ setFitnessPlan(){
+  this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
 
+  this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
+    id:0,
+    name:this.addFitnessPlanForm.get('name')?.value,
+    description:this.addFitnessPlanForm.get('description')?.value
+  })).subscribe();
+
+  this.setExercisesForEvent();
+ }
+ setExercisesForEvent(){
+  let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
+
+  this.fitnessExerciseLocalList.forEach(element =>{
+    element.fitnessPlanId=lastPlanId;
+  })
+  this.fitnessExerciseLocalList.forEach(element =>{
+    this.fitnessExerciseService.addFitnessExercise(element).subscribe();
+  })
+ }
 
 
 
