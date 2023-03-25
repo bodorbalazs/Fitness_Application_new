@@ -33,6 +33,7 @@ builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerDocument();
@@ -57,18 +58,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    //app.UseMigrationsEndPoint();
+    app.UseMigrationsEndPoint();
     app.UseOpenApi();
-    app.UseSwaggerUi3(/*config =>
-    {
-        config.TransformToExternalPath = (s, r) =>
-        {
-            string path = s.EndsWith("swagger.json") && !string.IsNullOrEmpty(r.PathBase)
-                ? $"{r.PathBase}{s}"
-                : s;
-            return path;
-        };
-    }*/);
+    app.UseSwaggerUi3();
 }
 else
 {
@@ -83,7 +75,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

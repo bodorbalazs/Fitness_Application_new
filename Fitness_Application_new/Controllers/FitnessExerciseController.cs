@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
-//using Fitness_Application_new.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FitnessApp.DAL.Data;
@@ -9,8 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fitness_Application_new.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class FitnessExerciseController : Controller
     {
