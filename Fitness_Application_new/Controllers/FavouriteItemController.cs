@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Fitness_Application_new.DTOs;
 using Fitness_Application_new.Interfaces;
-//using Fitness_Application_new.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

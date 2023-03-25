@@ -12,7 +12,6 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { FitnessPlansComponent } from './fitness-plans/fitness-plans.component';
 
-//import { MaterialModule } from 'src/material/material.module';
 import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
 
@@ -29,7 +28,6 @@ import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-  // MaterialModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: 'fitness-plans',component: FitnessPlansComponent},
