@@ -4,6 +4,6 @@ namespace FitnessApp.DAL.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ICollection<FitnessPlan> fitnessPlans { get; set; }
+        public ICollection<FitnessPlan>? fitnessPlans { get; set; }
     }
 }
