@@ -11,6 +11,7 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { FitnessPlansComponent } from './fitness-plans/fitness-plans.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
@@ -21,13 +22,14 @@ import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness
     NavMenuComponent,
     HomeComponent,
     FitnessPlansComponent,
-    CreateFitnessPlanComponent
+    CreateFitnessPlanComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ScrollingModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: 'fitness-plans',component: FitnessPlansComponent},

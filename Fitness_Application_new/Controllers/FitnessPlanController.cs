@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class FitnessPlanController : Controller
     {
