@@ -15,6 +15,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
+import { EditFitnessPlansComponent } from './edit-fitness-plans/edit-fitness-plans.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness
     HomeComponent,
     FitnessPlansComponent,
     CreateFitnessPlanComponent,
+    EditFitnessPlansComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,6 +37,7 @@ import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness
       { path: 'fitness-plans',component: FitnessPlansComponent},
       { path: 'create-fitness-plan',component:CreateFitnessPlanComponent,canActivate: [AuthorizeGuard]},
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'edit-fitness-plans',component: EditFitnessPlansComponent,canActivate: [AuthorizeGuard]},
     ])
   ],
   providers: [
