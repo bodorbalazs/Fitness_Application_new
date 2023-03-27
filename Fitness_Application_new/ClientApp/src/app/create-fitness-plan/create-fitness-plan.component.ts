@@ -65,7 +65,7 @@ closeResult:string ="";
   let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
 
   this.fitnessExerciseLocalList.forEach(element =>{
-    element.fitnessPlanId=lastPlanId;
+    //element.fitnessPlanId=lastPlanId; //TODO
   })
   this.fitnessExerciseLocalList.forEach(element =>{
     this.fitnessExerciseService.addFitnessExercise(element).subscribe();
