@@ -1,1 +1,28 @@
 <p>fitness-plans works!</p>
+<div class="container" style="background-color: rgb(110, 113, 160)">
+    <div class="row" style="background-color: rgb(110, 113, 160)">
+
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of fitnessPlanList" >
+            <div class="card" style="width: 18rem;background-color:rgb(110, 113, 160);">
+                
+                <div class="card-body">
+                      <cdk-virtual-scroll-viewport itemSize="50" >
+                        <div *cdkVirtualFor="let list of fitnessPlanList" >
+                           <li> {{list.name}} </li>
+                        </div>
+                      </cdk-virtual-scroll-viewport> 
+                  <h5 class="card-title text-center">{{item.name}} </h5>
+                  <p class = "card-text">Description: {{item.description}}</p>
+                  
+
+                  
+                <!--    <button class="btn btn-outline-primary" (click)="open(content)">More info</button> -->
+                <!--button class="btn btn-outline-primary"style="background-color:rgb(173,216,230)" (click)="onSelect(item)">More info</button-->
+                  
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      
+    </div>
