@@ -38,19 +38,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerDocument();
 
-var configuration = new MapperConfiguration(cfg =>
-{
-    cfg.CreateMap<FavouriteItem, FavouriteItemDto>().ReverseMap();
-    cfg.CreateMap<FitnessPlan, FitnessPlanDto>().ReverseMap();
-    cfg.CreateMap<FitnessExercise, FitnessExerciseDto>().ReverseMap();
-    cfg.CreateMap<Rating, RatingDto>().ReverseMap();
-});
-// only during development, validate your mappings; remove it before release
-#if DEBUG
-configuration.AssertConfigurationIsValid();
-#endif
-// use DI (http://docs.automapper.org/en/latest/Dependency-injection.html) or create the mapper yourself
-var mapper = configuration.CreateMapper();
 
 var app = builder.Build();
 
