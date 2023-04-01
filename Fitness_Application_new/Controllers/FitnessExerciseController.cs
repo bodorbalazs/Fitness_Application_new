@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class FitnessExerciseController : Controller
     {

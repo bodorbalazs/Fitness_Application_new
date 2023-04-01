@@ -37,7 +37,21 @@ builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerDocument();
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+
+
+builder.Services.AddCors(feature =>
+                feature.AddPolicy(
+                    "CorsPolicy",
+                    apiPolicy => apiPolicy
+                                    //.AllowAnyOrigin()
+                                    //.WithOrigins("http://localhost:4200")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .SetIsOriginAllowed(host => true)
+                                    .AllowCredentials()
+                                ));
 
 var app = builder.Build();
 
@@ -65,7 +79,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
-
+app.UseCors("CorsPolicy");
 app.MapFallbackToFile("index.html"); ;
 
 app.Run();

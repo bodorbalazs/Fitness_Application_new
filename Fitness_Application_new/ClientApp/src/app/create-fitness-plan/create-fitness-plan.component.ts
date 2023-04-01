@@ -14,7 +14,9 @@ public addFitnessExerciseForm: FormGroup;
 public fitnessPlanList: FitnessPlanDto[] =[];
 public fitnessExerciseLocalList: FitnessExerciseDto[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
+public exercises: number =0;
 closeResult:string ="";
+  fulllist: any;
 
   constructor(private formBuilder: FormBuilder,
     private fitnessPlanService: FitnessPlanClient,
@@ -51,22 +53,32 @@ closeResult:string ="";
   }
 
  setFitnessPlan(){
+  this.setExercisesForEvent();
+
   this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
+  let fulllist: FitnessExerciseDto[] =[];
+  fulllist = this.fitnessExerciseList;
+  let newlist: FitnessExerciseDto[] =[];
+  for(let i =0;i<this.exercises;i++){
+    newlist.push(this.fulllist.pop())
+  }
 
   this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
     id:0,
     name:this.addFitnessPlanForm.get('name')?.value,
-    description:this.addFitnessPlanForm.get('description')?.value
+    description:this.addFitnessPlanForm.get('description')?.value,
+    exercises:newlist
   })).subscribe();
 
-  this.setExercisesForEvent();
+  this.fitnessExerciseLocalList =[];
  }
  setExercisesForEvent(){
-  let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
+  //let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id;
+  this.exercises = this.fitnessExerciseLocalList.length;
+  //this.fitnessExerciseLocalList.forEach(element =>{
+  //  element.fitnessPlanId=lastPlanId;
+ // })
 
-  this.fitnessExerciseLocalList.forEach(element =>{
-    //element.fitnessPlanId=lastPlanId; //TODO
-  })
   this.fitnessExerciseLocalList.forEach(element =>{
     this.fitnessExerciseService.addFitnessExercise(element).subscribe();
   })
