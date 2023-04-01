@@ -1637,6 +1637,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
     description!: string;
     pictureUrl!: string;
     difficulty!: string;
+    fitnessPlanId?: number | undefined;
+    fitnessPlan?: FitnessPlanDto | undefined;
 
     constructor(data?: IFitnessExerciseDto) {
         if (data) {
@@ -1654,6 +1656,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
             this.description = _data["description"];
             this.pictureUrl = _data["pictureUrl"];
             this.difficulty = _data["difficulty"];
+            this.fitnessPlanId = _data["fitnessPlanId"];
+            this.fitnessPlan = _data["fitnessPlan"] ? FitnessPlanDto.fromJS(_data["fitnessPlan"]) : <any>undefined;
         }
     }
 
@@ -1671,6 +1675,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
         data["description"] = this.description;
         data["pictureUrl"] = this.pictureUrl;
         data["difficulty"] = this.difficulty;
+        data["fitnessPlanId"] = this.fitnessPlanId;
+        data["fitnessPlan"] = this.fitnessPlan ? this.fitnessPlan.toJSON() : <any>undefined;
         return data;
     }
 }
@@ -1681,6 +1687,8 @@ export interface IFitnessExerciseDto {
     description: string;
     pictureUrl: string;
     difficulty: string;
+    fitnessPlanId?: number | undefined;
+    fitnessPlan?: FitnessPlanDto | undefined;
 }
 
 export class RatingDto implements IRatingDto {
