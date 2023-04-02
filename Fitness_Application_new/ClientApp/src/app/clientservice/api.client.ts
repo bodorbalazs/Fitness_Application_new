@@ -1229,8 +1229,6 @@ export class FavouriteItemDto implements IFavouriteItemDto {
     user?: ApplicationUser | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
-    value!: number;
-    text?: string | undefined;
 
     constructor(data?: IFavouriteItemDto) {
         if (data) {
@@ -1248,8 +1246,6 @@ export class FavouriteItemDto implements IFavouriteItemDto {
             this.user = _data["user"] ? ApplicationUser.fromJS(_data["user"]) : <any>undefined;
             this.fitnessPlanId = _data["fitnessPlanId"];
             this.fitnessPlan = _data["fitnessPlan"] ? FitnessPlanDto.fromJS(_data["fitnessPlan"]) : <any>undefined;
-            this.value = _data["value"];
-            this.text = _data["text"];
         }
     }
 
@@ -1267,8 +1263,6 @@ export class FavouriteItemDto implements IFavouriteItemDto {
         data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         data["fitnessPlanId"] = this.fitnessPlanId;
         data["fitnessPlan"] = this.fitnessPlan ? this.fitnessPlan.toJSON() : <any>undefined;
-        data["value"] = this.value;
-        data["text"] = this.text;
         return data;
     }
 }
@@ -1279,8 +1273,6 @@ export interface IFavouriteItemDto {
     user?: ApplicationUser | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
-    value: number;
-    text?: string | undefined;
 }
 
 export class IdentityUserOfString implements IIdentityUserOfString {
@@ -1445,8 +1437,8 @@ export interface IApplicationUser extends IIdentityUser {
 
 export class FitnessPlan implements IFitnessPlan {
     id!: number;
-    name!: string;
-    description!: string;
+    name?: string | undefined;
+    description?: string | undefined;
     exercises?: FitnessExercise[] | undefined;
     applicationUserId?: string | undefined;
     applicationUser?: ApplicationUser | undefined;
@@ -1500,8 +1492,8 @@ export class FitnessPlan implements IFitnessPlan {
 
 export interface IFitnessPlan {
     id: number;
-    name: string;
-    description: string;
+    name?: string | undefined;
+    description?: string | undefined;
     exercises?: FitnessExercise[] | undefined;
     applicationUserId?: string | undefined;
     applicationUser?: ApplicationUser | undefined;
@@ -1509,10 +1501,10 @@ export interface IFitnessPlan {
 
 export class FitnessExercise implements IFitnessExercise {
     id!: number;
-    name!: string;
-    description!: string;
+    name?: string | undefined;
+    description?: string | undefined;
     pictureUrl?: string | undefined;
-    difficulty!: string;
+    difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlan | undefined;
 
@@ -1559,18 +1551,18 @@ export class FitnessExercise implements IFitnessExercise {
 
 export interface IFitnessExercise {
     id: number;
-    name: string;
-    description: string;
+    name?: string | undefined;
+    description?: string | undefined;
     pictureUrl?: string | undefined;
-    difficulty: string;
+    difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlan | undefined;
 }
 
 export class FitnessPlanDto implements IFitnessPlanDto {
     id!: number;
-    name!: string;
-    description!: string;
+    name?: string | undefined;
+    description?: string | undefined;
     exercises?: FitnessExerciseDto[] | undefined;
     applicationUserId?: string | undefined;
     applicationUser?: ApplicationUser | undefined;
@@ -1624,8 +1616,8 @@ export class FitnessPlanDto implements IFitnessPlanDto {
 
 export interface IFitnessPlanDto {
     id: number;
-    name: string;
-    description: string;
+    name?: string | undefined;
+    description?: string | undefined;
     exercises?: FitnessExerciseDto[] | undefined;
     applicationUserId?: string | undefined;
     applicationUser?: ApplicationUser | undefined;
@@ -1633,10 +1625,10 @@ export interface IFitnessPlanDto {
 
 export class FitnessExerciseDto implements IFitnessExerciseDto {
     id!: number;
-    name!: string;
-    description!: string;
-    pictureUrl!: string;
-    difficulty!: string;
+    name?: string | undefined;
+    description?: string | undefined;
+    pictureUrl?: string | undefined;
+    difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
 
@@ -1683,10 +1675,10 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
 
 export interface IFitnessExerciseDto {
     id: number;
-    name: string;
-    description: string;
-    pictureUrl: string;
-    difficulty: string;
+    name?: string | undefined;
+    description?: string | undefined;
+    pictureUrl?: string | undefined;
+    difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
 }
