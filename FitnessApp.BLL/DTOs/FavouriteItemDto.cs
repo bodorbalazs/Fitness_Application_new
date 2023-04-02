@@ -9,9 +9,5 @@ namespace Fitness_Application_new.DTOs
         public ApplicationUser? User { get; set; }
         public int? FitnessPlanId { get; set; }
         public FitnessPlanDto? FitnessPlan { get; set; }
-
-        public int value { get; set; }
-
-        public string? text { get; set; }
     }
 }

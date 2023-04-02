@@ -17,7 +17,7 @@
 
                   <ng-template #content let-modal>
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Choose Exercise</h4>
+                      <h4 class="modal-title" id="modal-basic-title">Edit Fitness Plan</h4>
                       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -29,11 +29,11 @@
                   
                     <p>Name of the Fitness Plan:</p>
                      <p>
-                        <input type="text" id="name" name="name" formControlName="name">
+                        <input type="text" id="name" name="name" formControlName="name" value={{item.name}} placeholder={{item.name}}>
                      </p>
                         <p>Description of the Fitness Plan:</p>
                            <p>
-                          <input type="text" id="description" name="description" formControlName="description">
+                          <input type="text" id="description" name="description" formControlName="description" value={{item.description}} placeholder={{item.description}}>
                            </p>
                         <p>Data given: {{addFitnessPlanForm.value | json}}</p>
                   

@@ -8,8 +8,5 @@
         public int? FitnessPlanId { get; set; }
         public FitnessPlan? FitnessPlan { get; set; }
 
-        public int value { get; set; }
-
-        public string? text { get; set; }
     }
 }
