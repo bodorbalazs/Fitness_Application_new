@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,9 +38,8 @@ builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerDocument();
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddCors(feature =>
                 feature.AddPolicy(
@@ -71,6 +71,7 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
 
 app.UseAuthentication();
 app.UseIdentityServer();
