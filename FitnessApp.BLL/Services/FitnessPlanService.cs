@@ -39,6 +39,12 @@ namespace Fitness_Application_new.Services
                .SingleOrDefaultAsync(e => e.Id == FitnessPlanId))
                ?? throw new EntityNotFoundException("Nem található a fitness plan");
         }
+        public async Task<IEnumerable<FitnessPlan>> GetUserFitnessPlansAsync(string UserId)
+        {
+            return (await _context.fitnessPlan
+               .Where(e => e.ApplicationUserId == UserId).ToListAsync())
+               ?? throw new EntityNotFoundException("Nem található ilyen fitness plan");
+        }
 
         public async Task<IEnumerable<FitnessPlan>> GetFitnessPlansAsync()
         {
