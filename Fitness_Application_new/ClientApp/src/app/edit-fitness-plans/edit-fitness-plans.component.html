@@ -29,11 +29,11 @@
                   
                     <p>Name of the Fitness Plan:</p>
                      <p>
-                        <input type="text" id="name" name="name" formControlName="name" value={{item.name}} placeholder={{item.name}}>
+                        <input type="text" id="name" name="name" formControlName="name" value={{item.name}}>
                      </p>
                         <p>Description of the Fitness Plan:</p>
                            <p>
-                          <input type="text" id="description" name="description" formControlName="description" value={{item.description}} placeholder={{item.description}}>
+                          <input type="text" id="description" name="description" formControlName="description" value={{item?.description}}>
                            </p>
                         <p>Data given: {{addFitnessPlanForm.value | json}}</p>
                   
