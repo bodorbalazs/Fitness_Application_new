@@ -10,7 +10,7 @@ using System.Security.Claims;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class FitnessPlanController : Controller
     {
@@ -40,6 +40,13 @@ namespace Fitness_Application_new.Controllers
             return _mapper.Map<FitnessPlanDto>(await _fitnessPlanService.GetFitnessPlanAsync(id));
         }
 
+        [HttpGet("GetUsersPlans")]
+        public async Task<ActionResult<IEnumerable<FitnessPlanDto>>> GetUsersPlansAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return _mapper.Map<List<FitnessPlanDto>>(await _fitnessPlanService.GetUserFitnessPlansAsync(userId));
+        }
+
         // POST: Favourites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -61,6 +68,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessPlanDto fitnessPlan)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            fitnessPlan.ApplicationUserId = userId;
             await _fitnessPlanService.UpdateFitnessPlanAsync(id, _mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(fitnessPlan));
             return NoContent();
         }

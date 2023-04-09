@@ -18,6 +18,8 @@ export class EditFitnessPlansComponent implements OnInit{
   public fitnessPlanEdited: FitnessPlanDto = new FitnessPlanDto  ;
   public fitnessExerciseList: FitnessExerciseDto[] =[];
   closeResult:string ="";
+  PlanName: any;
+  PlanDecription: any;
 
   constructor(private formBuilder: FormBuilder,
     private fitnessPlanService: FitnessPlanClient,
@@ -38,17 +40,34 @@ export class EditFitnessPlansComponent implements OnInit{
 
     }
     ngOnInit(): void {  // TODO instead of getAll() , getCUrrentUsersPlans()
-      this.fitnessPlanService.getAll().subscribe(element => this.fitnessPlanList = element);
+      this.fitnessPlanService.getUsersPlans().subscribe(element => this.fitnessPlanList = element);
       this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
     }
     setFitnessPlan(id: number) {
       this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
-      this.fitnessPlanEdited.name=this.addFitnessExerciseForm.get('name')?.value,
-      this.fitnessPlanEdited.description=this.addFitnessExerciseForm.get('name')?.value
+      var FitnessPlanName;
+      var FitnessPlanDescription;
+      
+      if(this.addFitnessPlanForm.get('name')?.value==''){
+         FitnessPlanName = this.fitnessPlanEdited.name;
+      }else{
+         FitnessPlanName=this.addFitnessPlanForm.get('name')?.value
+      }
+
+      if(this.addFitnessPlanForm.get('description')?.value==''){
+        FitnessPlanDescription = this.fitnessPlanEdited.name;
+     }else{
+      FitnessPlanDescription=this.addFitnessPlanForm.get('description')?.value
+     }
+      this.fitnessPlanEdited.name=FitnessPlanName;
+      this.fitnessPlanEdited.description=FitnessPlanDescription;
       this.fitnessPlanService.put(id,this.fitnessPlanEdited).subscribe();
       }
     editFitnessPlan(id:number) {
-
+       this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
+       this.PlanName = this.fitnessPlanEdited.name;
+       this.PlanDecription =this.fitnessPlanEdited.description;
+       
       }
     
 
