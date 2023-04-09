@@ -19,7 +19,8 @@ export class EditFitnessPlansComponent implements OnInit{
   public fitnessExerciseList: FitnessExerciseDto[] =[];
   closeResult:string ="";
   PlanName: any;
-  PlanDecription: any;
+  PlanDescription: any;
+  PlanId: any;
 
   constructor(private formBuilder: FormBuilder,
     private fitnessPlanService: FitnessPlanClient,
@@ -66,7 +67,11 @@ export class EditFitnessPlansComponent implements OnInit{
     editFitnessPlan(id:number) {
        this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
        this.PlanName = this.fitnessPlanEdited.name;
-       this.PlanDecription =this.fitnessPlanEdited.description;
+       this.PlanDescription =this.fitnessPlanEdited.description;
+       this.PlanId=this.fitnessPlanEdited.id;
+      }
+      deleteFitnessPlan(id:number){
+        this.fitnessPlanService.delete(id).subscribe();
       }
     
 
