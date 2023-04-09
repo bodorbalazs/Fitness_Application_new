@@ -28,7 +28,7 @@ export class EditFitnessPlansComponent implements OnInit{
     private modalService:NgbModal) 
     {
       this.addFitnessPlanForm = this.formBuilder.group({
-        name:'',
+        name: '',
         description:''
       })
       this.addFitnessExerciseForm = this.formBuilder.group({
@@ -67,7 +67,6 @@ export class EditFitnessPlansComponent implements OnInit{
        this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
        this.PlanName = this.fitnessPlanEdited.name;
        this.PlanDecription =this.fitnessPlanEdited.description;
-       
       }
     
 
