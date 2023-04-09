@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using FluentValidation;
+using FitnessApp.BLL.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,8 @@ builder.Services.AddTransient<IFavouriteItemService, FavouriteItemService>();
 builder.Services.AddTransient<IFitnessExerciseService, FitnessExerciseService>();
 builder.Services.AddTransient<IFitnessPlanService, FitnessPlanService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
+
+builder.Services.AddScoped<IValidator<FitnessPlanDto>, FitnessPlanValidation>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();

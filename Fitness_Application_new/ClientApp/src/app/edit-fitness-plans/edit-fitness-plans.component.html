@@ -14,36 +14,37 @@
                   <h5 class="card-title text-center">{{item.name}} </h5>
                   <p class = "card-text">Description: {{item.description}}</p>
                   <td><button type="button"  (click)="editFitnessPlan(item.id);open(content)" >Edit Fitness Plan</button></td>
-
-                  <ng-template #content let-modal>
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Edit Fitness Plan</h4>
-                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
+                  <td><button type="button"  (click)="deleteFitnessPlan(item.id)" >Delete Fitness Plan</button></td>
                   
-                  <form [formGroup]="addFitnessPlanForm">
-                  
-                  
-                    <p>Name of the Fitness Plan:</p>
-                     <p>
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Edit Fitness Plan</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+          
+          <form [formGroup]="addFitnessPlanForm">
+          
+          
+            <p>Name of the Fitness Plan:</p>
+             <p>
                         <input type="text" id="name" name="name" formControlName="name" value={{item.name}}>
-                     </p>
-                        <p>Description of the Fitness Plan:</p>
-                           <p>
+             </p>
+                <p>Description of the Fitness Plan:</p>
+                   <p>
                           <input type="text" id="description" name="description" formControlName="description" value={{item?.description}}>
-                           </p>
-                        <p>Data given: {{addFitnessPlanForm.value | json}}</p>
-                  
-                  </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark" (click)="setFitnessPlan(item.id);modal.close('Save click')">Add a new exercise to the event</button>
-                  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') ">close window</button>
-                  </div>
-                  </ng-template>
+                   </p>
+                <p>Data given: {{addFitnessPlanForm.value | json}}</p>
+          
+          </form>
+          </div>
+          <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="setFitnessPlan(item.id);modal.close('Save click')">Save changes</button>
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') ">close window</button>
+          </div>
+          </ng-template>
                 <!--    <button class="btn btn-outline-primary" (click)="open(content)">More info</button> -->
                 <!--button class="btn btn-outline-primary"style="background-color:rgb(173,216,230)" (click)="onSelect(item)">More info</button-->
                   

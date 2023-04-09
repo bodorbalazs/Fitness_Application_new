@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using FluentValidation;
+using FluentValidation.Results;
+using FluentValidation.AspNetCore;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -17,10 +20,12 @@ namespace Fitness_Application_new.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IFitnessPlanService _fitnessPlanService;
         private readonly IMapper _mapper;
+        private IValidator<FitnessPlanDto> _validator;
 
 
-        public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService, IMapper mapper)
+        public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService, IMapper mapper,IValidator<FitnessPlanDto> validator)
         {
+            _validator = validator;
             _context = context;
             _fitnessPlanService = fitnessPlanService;
             _mapper = mapper;
@@ -53,6 +58,11 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFitnessPlan([FromBody] FitnessPlanDto NewFitnessPlan)
         {
+            ValidationResult result = await _validator.ValidateAsync(NewFitnessPlan);
+            if (!result.IsValid)
+            {
+                return BadRequest();
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             NewFitnessPlan.ApplicationUserId = userId;
             var created = await _fitnessPlanService
@@ -68,6 +78,11 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessPlanDto fitnessPlan)
         {
+            ValidationResult result = await _validator.ValidateAsync(fitnessPlan);
+            if (!result.IsValid)
+            {
+                return BadRequest();
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             fitnessPlan.ApplicationUserId = userId;
             await _fitnessPlanService.UpdateFitnessPlanAsync(id, _mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(fitnessPlan));
