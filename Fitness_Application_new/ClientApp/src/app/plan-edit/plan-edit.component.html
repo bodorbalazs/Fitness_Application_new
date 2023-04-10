@@ -1,0 +1,21 @@
+<p>plan-edit works!</p>
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="name">
+      Name:
+    </label>
+    <input id="name" type="text" formControlName="name" [value]="specifiedPlan?.name" >
+  </div>
+
+  <div>
+    <label for="description">
+      Description:
+    </label>
+    <input id="description" type="text" formControlName="description" [value]="specifiedPlan?.description" >
+  </div>
+
+  <button class="button" type="submit">Edit Fitness Plan</button>
+  <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
+</form>
