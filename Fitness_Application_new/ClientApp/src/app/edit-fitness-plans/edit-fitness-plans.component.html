@@ -13,10 +13,10 @@
                       </cdk-virtual-scroll-viewport> 
                   <h5 class="card-title text-center">{{item.name}} </h5>
                   <p class = "card-text">Description: {{item.description}}</p>
-                  <td><button type="button"  (click)="editFitnessPlan(item.id);open(content)" >Edit Fitness Plan</button></td>
+                  <td><button type="button"  (click)="onSelectToEdit(item.id)" >Edit Fitness Plan</button></td>
                   <td><button type="button"  (click)="deleteFitnessPlan(item.id)" >Delete Fitness Plan</button></td>
                   
-          <ng-template #content let-modal>
+          <!--ng-template #content let-modal>
             <div class="modal-header">
               <h4 class="modal-title" id="modal-basic-title">Edit Fitness Plan</h4>
               <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -44,7 +44,7 @@
                     <button type="button" class="btn btn-outline-dark" (click)="setFitnessPlan(item.id);modal.close('Save click')">Save changes</button>
           <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') ">close window</button>
           </div>
-          </ng-template>
+          </ng-template-->
                 <!--    <button class="btn btn-outline-primary" (click)="open(content)">More info</button> -->
                 <!--button class="btn btn-outline-primary"style="background-color:rgb(173,216,230)" (click)="onSelect(item)">More info</button-->
                   

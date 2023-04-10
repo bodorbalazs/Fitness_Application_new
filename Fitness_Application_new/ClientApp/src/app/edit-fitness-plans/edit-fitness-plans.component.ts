@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto } from '../clientservice/api.client';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-edit-fitness-plans',
@@ -26,7 +30,9 @@ export class EditFitnessPlansComponent implements OnInit{
     private fitnessPlanService: FitnessPlanClient,
     private fitnessExerciseService: FitnessExerciseClient,
     private authorizeService: AuthorizeService,
-    private modalService:NgbModal) 
+    private modalService:NgbModal,
+    private route: ActivatedRoute,
+    private router: Router ) 
     {
       this.addFitnessPlanForm = this.formBuilder.group({
         name: '',
@@ -40,55 +46,15 @@ export class EditFitnessPlansComponent implements OnInit{
       })
 
     }
-    ngOnInit(): void {  // TODO instead of getAll() , getCUrrentUsersPlans()
+    ngOnInit(): void {
       this.fitnessPlanService.getUsersPlans().subscribe(element => this.fitnessPlanList = element);
       this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
     }
-    setFitnessPlan(id: number) {
-      this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
-      var FitnessPlanName;
-      var FitnessPlanDescription;
-      
-      if(this.addFitnessPlanForm.get('name')?.value==''){
-         FitnessPlanName = this.fitnessPlanEdited.name;
-      }else{
-         FitnessPlanName=this.addFitnessPlanForm.get('name')?.value
-      }
 
-      if(this.addFitnessPlanForm.get('description')?.value==''){
-        FitnessPlanDescription = this.fitnessPlanEdited.name;
-     }else{
-      FitnessPlanDescription=this.addFitnessPlanForm.get('description')?.value
-     }
-      this.fitnessPlanEdited.name=FitnessPlanName;
-      this.fitnessPlanEdited.description=FitnessPlanDescription;
-      this.fitnessPlanService.put(id,this.fitnessPlanEdited).subscribe();
-      }
-    editFitnessPlan(id:number) {
-       this.fitnessPlanService.get(id).subscribe(element=> this.fitnessPlanEdited);
-       this.PlanName = this.fitnessPlanEdited.name;
-       this.PlanDescription =this.fitnessPlanEdited.description;
-       this.PlanId=this.fitnessPlanEdited.id;
-      }
-      deleteFitnessPlan(id:number){
-        this.fitnessPlanService.delete(id).subscribe();
-      }
-    
-
-      open(content: any) {
-        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      }
-      private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-          return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-          return 'by clicking on a backdrop';
-        } else {
-          return `with: ${reason}`;
-        }
-      }
+    onSelectToEdit(id:number){
+      this.router.navigate(['/plan-edit',id])
+    }
+    deleteFitnessPlan(id:number){
+      this.fitnessPlanService.delete(id).subscribe();
+    }
 }
