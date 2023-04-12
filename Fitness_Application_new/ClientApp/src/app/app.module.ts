@@ -13,10 +13,22 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { FitnessPlansComponent } from './fitness-plans/fitness-plans.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon'
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+
+
 import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
 import { EditFitnessPlansComponent } from './edit-fitness-plans/edit-fitness-plans.component';
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
+import { PlanDetailsComponent } from './plan-details/plan-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +39,7 @@ import { PlanEditComponent } from './plan-edit/plan-edit.component';
     CreateFitnessPlanComponent,
     EditFitnessPlansComponent,
     PlanEditComponent,
+    PlanDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,14 +47,24 @@ import { PlanEditComponent } from './plan-edit/plan-edit.component';
     FormsModule,
     ReactiveFormsModule,
     ScrollingModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ApiAuthorizationModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'fitness-plans',component: FitnessPlansComponent},
       { path: 'create-fitness-plan',component:CreateFitnessPlanComponent,canActivate: [AuthorizeGuard]},
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'edit-fitness-plans',component: EditFitnessPlansComponent,canActivate: [AuthorizeGuard]},
       { path: 'plan-edit/:id', component:PlanEditComponent,canActivate: [AuthorizeGuard]},
-    ])
+      { path: 'plan-details/:id', component:PlanDetailsComponent}
+    ]),
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
