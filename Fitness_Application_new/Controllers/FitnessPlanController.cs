@@ -9,18 +9,21 @@ using System.Security.Claims;
 using FluentValidation;
 using FluentValidation.Results;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Cors;
 
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class FitnessPlanController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IFitnessPlanService _fitnessPlanService;
         private readonly IMapper _mapper;
         private IValidator<FitnessPlanDto> _validator;
+        private readonly string AppDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
 
         public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService, IMapper mapper,IValidator<FitnessPlanDto> validator)

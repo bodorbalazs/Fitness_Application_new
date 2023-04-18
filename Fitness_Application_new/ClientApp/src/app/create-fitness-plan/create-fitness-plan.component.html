@@ -43,9 +43,12 @@
       <input type="text" id="description" name="description" formControlName="description">
     </p>
     <p>Picture of the exercise:</p>
-    <p>
-      <input type="text" id="pictureUrl" name="pictureUrl" formControlName="pictureUrl">
-    </p>
+    <div class="form-group">
+      <label for="file">Choose File</label>
+      <input type="file"
+             id="file"
+             (change)="handleFileInput($any($event.target).files)">
+  </div>
     <p>Difficulty of the exercise:</p>
     <p>
       <input type="text" id="difficulty" name="difficulty" formControlName="difficulty">

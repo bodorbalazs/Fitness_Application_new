@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FitnessApp.DAL.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
     //[Authorize]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class FitnessExerciseController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -45,6 +47,18 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFitnessExercise([FromBody] FitnessExerciseDto NewFitnessExercise)
         {
+            try
+            {
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", NewFitnessExercise.FileName);
+                using (Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    NewFitnessExercise.File.CopyToAsync(stream);
+                }
+            }
+            catch
+            {
+
+            }
             var created = await _fitnessExerciseService
                 .InsertFitnessExerciseAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(NewFitnessExercise));
             return CreatedAtAction(

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using FitnessApp.DAL.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
+    [EnableCors("CorsPolicy")]
     [ApiController]
     public class FavouriteItemController : Controller
     {
