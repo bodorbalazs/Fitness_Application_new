@@ -1,4 +1,7 @@
-﻿namespace FitnessApp.DAL.Models
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FitnessApp.DAL.Models
 {
     public class FitnessExercise
     {
@@ -8,6 +11,7 @@
         public string? PictureUrl { get; set; }
         public string? Difficulty { get; set; }
         public int? FitnessPlanId { get; set; }
-        public FitnessPlan? FitnessPlan { get; set; } 
+        public FitnessPlan? FitnessPlan { get; set; }
+        public string? FileName { get; set; }
     }
 }

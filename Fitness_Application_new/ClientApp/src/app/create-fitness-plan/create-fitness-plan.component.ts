@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto } from '../clientservice/api.client';
 import {NgbModal,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Event } from '@angular/router';
 @Component({
   selector: 'app-create-fitness-plan',
   templateUrl: './create-fitness-plan.component.html',
@@ -15,6 +16,7 @@ public fitnessPlanList: FitnessPlanDto[] =[];
 public fitnessExerciseLocalList: FitnessExerciseDto[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
 public exercises: number =0;
+fileToUpload: File | null = null;
 closeResult:string ="";
   fulllist: any;
 
@@ -32,7 +34,7 @@ closeResult:string ="";
         name:'',
         description:'',
         pictureUrl:'',
-        difficulty:''
+        difficulty:'',
       })
 
     }
@@ -42,28 +44,26 @@ closeResult:string ="";
   }
 
   SetExerciseList(){
-
     this.fitnessExerciseLocalList.push(new FitnessExerciseDto({
       id:0,
       name:this.addFitnessExerciseForm.get('name')?.value,
       description:this.addFitnessExerciseForm.get('description')?.value,
       pictureUrl:this.addFitnessExerciseForm.get('pictureUrl')?.value,
-      difficulty:this.addFitnessExerciseForm.get('difficulty')?.value
+      difficulty:this.addFitnessExerciseForm.get('difficulty')?.value,
+      file:this.fileToUpload,
+      fileName:this.fileToUpload?.name, //TODO
     }))
+  }
+
+  handleFileInput(files: FileList) { //TODO
+    this.fileToUpload = files.item(0);
   }
 
  setFitnessPlan(){
   
 
   this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
-  //let fulllist: FitnessExerciseDto[] =[];
- //fulllist = this.fitnessExerciseList;
-  //let newlist: FitnessExerciseDto[] =[];
- // if(this.fitnessExerciseList != undefined){
-//  for(let i =0;i<this.exercises;i++){
-//    newlist.push(this.fitnessExerciseList.pop()!)
-//  }
-//}
+ 
 
   this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
     id:0,
@@ -85,12 +85,6 @@ closeResult:string ="";
     this.fitnessExerciseService.addFitnessExercise(element).subscribe();
   })
  }
-
-
-
-
-
-
 
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

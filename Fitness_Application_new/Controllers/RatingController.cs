@@ -6,12 +6,14 @@ using Fitness_Application_new.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class RatingController : Controller
     {
         private readonly ApplicationDbContext _context;

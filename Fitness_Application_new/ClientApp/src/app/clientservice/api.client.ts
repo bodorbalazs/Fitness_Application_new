@@ -1562,6 +1562,7 @@ export class FitnessExercise implements IFitnessExercise {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlan | undefined;
+    fileName?: string | undefined;
 
     constructor(data?: IFitnessExercise) {
         if (data) {
@@ -1581,6 +1582,7 @@ export class FitnessExercise implements IFitnessExercise {
             this.difficulty = _data["difficulty"];
             this.fitnessPlanId = _data["fitnessPlanId"];
             this.fitnessPlan = _data["fitnessPlan"] ? FitnessPlan.fromJS(_data["fitnessPlan"]) : <any>undefined;
+            this.fileName = _data["fileName"];
         }
     }
 
@@ -1600,6 +1602,7 @@ export class FitnessExercise implements IFitnessExercise {
         data["difficulty"] = this.difficulty;
         data["fitnessPlanId"] = this.fitnessPlanId;
         data["fitnessPlan"] = this.fitnessPlan ? this.fitnessPlan.toJSON() : <any>undefined;
+        data["fileName"] = this.fileName;
         return data;
     }
 }
@@ -1612,6 +1615,7 @@ export interface IFitnessExercise {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlan | undefined;
+    fileName?: string | undefined;
 }
 
 export class FitnessPlanDto implements IFitnessPlanDto {
@@ -1686,6 +1690,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
+    file?: any | undefined;
+    fileName?: string | undefined;
 
     constructor(data?: IFitnessExerciseDto) {
         if (data) {
@@ -1705,6 +1711,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
             this.difficulty = _data["difficulty"];
             this.fitnessPlanId = _data["fitnessPlanId"];
             this.fitnessPlan = _data["fitnessPlan"] ? FitnessPlanDto.fromJS(_data["fitnessPlan"]) : <any>undefined;
+            this.file = _data["file"];
+            this.fileName = _data["fileName"];
         }
     }
 
@@ -1724,6 +1732,8 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
         data["difficulty"] = this.difficulty;
         data["fitnessPlanId"] = this.fitnessPlanId;
         data["fitnessPlan"] = this.fitnessPlan ? this.fitnessPlan.toJSON() : <any>undefined;
+        data["file"] = this.file;
+        data["fileName"] = this.fileName;
         return data;
     }
 }
@@ -1736,6 +1746,8 @@ export interface IFitnessExerciseDto {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
+    file?: any | undefined;
+    fileName?: string | undefined;
 }
 
 export class RatingDto implements IRatingDto {
