@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using FitnessApp.DAL.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Fitness_Application_new.Services;
+using System.Security.Claims;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -35,6 +37,20 @@ namespace Fitness_Application_new.Controllers
              return _mapper.Map<List<FavouriteItemDto>>(await _favouriteItemService.GetFavouriteItemsAsync());
         }
 
+        [HttpGet("GetUsersFavourites")]
+        public async Task<ActionResult<IEnumerable<FavouriteItemDto>>> GetUsersPlansAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return _mapper.Map<List<FavouriteItemDto>>(await _favouriteItemService.GetUsersFavouriteItemsAsync(userId));
+        }
+
+        [HttpGet("GetPlanUsersFavourite")]
+        public async Task<ActionResult<FavouriteItemDto>> GetPlanUsersFavouriteAsync(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return _mapper.Map<FavouriteItemDto>(await _favouriteItemService.GetPlanUsersFavouriteItemAsync(userId, id));
+        }
+
         // GET: Favourites/Details/5
         [HttpGet("{id}")]
         public async Task<FavouriteItemDto> Get(int id)
@@ -48,6 +64,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFavouriteItem([FromBody] FavouriteItemDto Newfavourite)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Newfavourite.ApplicationUserId = userId;
             var created = await _favouriteItemService
                 .InsertFavouriteItemAsync(_mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(Newfavourite));
             return CreatedAtAction(
@@ -61,6 +79,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FavouriteItemDto favourite)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            favourite.ApplicationUserId = userId;
             await _favouriteItemService.UpdateFavouriteItemAsync(id, _mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(favourite));
             return NoContent();
         }
