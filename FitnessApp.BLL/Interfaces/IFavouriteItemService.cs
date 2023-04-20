@@ -6,8 +6,10 @@ namespace Fitness_Application_new.Interfaces
     {
         Task<FavouriteItem> GetFavouriteItemAsync(int FavouriteItemId);
         Task<IEnumerable<FavouriteItem>> GetFavouriteItemsAsync();
+        Task<IEnumerable<FavouriteItem>> GetUsersFavouriteItemsAsync(string userId);
         Task<FavouriteItem> InsertFavouriteItemAsync(FavouriteItem newFavouriteItem);
         Task UpdateFavouriteItemAsync(int FavouriteItemId, FavouriteItem updatedFavouriteItem);
         Task DeleteFavouriteItemAsync(int FavouriteItemId);
+        Task<FavouriteItem> GetPlanUsersFavouriteItemAsync(string userId, int FitnessplanId);
     }
 }

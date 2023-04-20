@@ -29,6 +29,7 @@ import { EditFitnessPlansComponent } from './edit-fitness-plans/edit-fitness-pla
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
 import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FavouritePlansComponent } from './favourite-plans/favourite-plans.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditFitnessPlansComponent,
     PlanEditComponent,
     PlanDetailsComponent,
+    FavouritePlansComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -62,7 +64,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'edit-fitness-plans',component: EditFitnessPlansComponent,canActivate: [AuthorizeGuard]},
       { path: 'plan-edit/:id', component:PlanEditComponent,canActivate: [AuthorizeGuard]},
-      { path: 'plan-details/:id', component:PlanDetailsComponent}
+      { path: 'plan-details/:id', component:PlanDetailsComponent},
+      { path: 'favourite-plans',component: FavouritePlansComponent,canActivate: [AuthorizeGuard]}
     ]),
     NgbModule
   ],

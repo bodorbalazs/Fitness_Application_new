@@ -39,6 +39,23 @@ namespace Fitness_Application_new.Services
                .SingleOrDefaultAsync(e => e.Id == FavouriteItemId))
                ?? throw new EntityNotFoundException("Nem található a favourite");
         }
+        public async Task<IEnumerable<FavouriteItem>> GetUsersFavouriteItemsAsync(string userId)
+        {
+            return (await _context.favouriteItems
+
+
+               .Where(e => e.ApplicationUserId == userId).ToListAsync())
+               ?? throw new EntityNotFoundException("Nem található a favourite");
+        }
+
+        public async Task<FavouriteItem> GetPlanUsersFavouriteItemAsync(string userId, int FitnessplanId)
+        {
+            return (await _context.favouriteItems
+
+
+               .SingleOrDefaultAsync(e => e.ApplicationUserId == userId && e.FitnessPlanId== FitnessplanId))
+               ?? throw new EntityNotFoundException("Nem található a favourite");
+        }
 
         public async Task<IEnumerable<FavouriteItem>> GetFavouriteItemsAsync()
         {
@@ -72,5 +89,7 @@ namespace Fitness_Application_new.Services
                 else throw;
             }
         }
+
+        
     }
 }
