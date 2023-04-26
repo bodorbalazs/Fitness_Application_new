@@ -32,8 +32,17 @@ export class PlanDetailsComponent {
   ngOnInit():void{
     this.id = parseInt(this.route.snapshot.paramMap.get('id') || '{}');
     this.FitnessPlanService.get(this.id).subscribe(element => this.specifiedPlan = element);
-    this.FitnessExerciseService.getAll().subscribe(element => this.fitnessExercises= element);
-    this.favouriteService.getAll().subscribe(element =>{
+    this.FitnessExerciseService.getAll().subscribe(element =>
+      {
+        this.fitnessExercises= element;
+        this.fitnessExercises.forEach(exercise => {
+          if(exercise.fitnessPlanId== this.id){
+            this.specifiedFitnessExercises.push(exercise);
+          }
+        });
+      });
+    this.favouriteService.getAll().subscribe(element =>
+    {
        this.favouriteList= element;
        this.favouriteList.forEach(favourite =>{
       if(favourite.fitnessPlanId==this.id){
@@ -44,12 +53,7 @@ export class PlanDetailsComponent {
     
     }
     ); 
-    //todo might have to do this in the subscribe of fitnessexercise
-    this.fitnessExercises.forEach(element => {
-      if(element.fitnessPlanId== this.id){
-        this.specifiedFitnessExercises.push(element);
-      }
-    });
+    
   }
 
   onFavouritePlan(){

@@ -1,14 +1,16 @@
 <div class="container  text-center mt-5 mb-5">
   <button class="btn btn-primary me-3" (click)="onFavouritePlan()">{{btnVal}}</button>
 </div>
+<div *ngFor="let item of specifiedFitnessExercises"> almaaaa</div>
+<div class="col-12 col-md-6 col-lg-4" *ngFor="let item of specifiedFitnessExercises" >
 <mat-accordion>
     <mat-expansion-panel >
       <mat-expansion-panel-header collapsedHeight="40" expandedHeight="500">
         <mat-panel-title>
-          This is the expansion title
+          {{item.name}}
         </mat-panel-title>
         <mat-panel-description>
-          This is a summary of the content
+          {{item.description}}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>This is the primary content of the panel.</p>
@@ -24,7 +26,8 @@
           Currently I am {{panelOpenState ? 'open' : 'closed'}}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
+      <p>Difficulty: {{item.difficulty}}</p>
     </mat-expansion-panel>
   </mat-accordion>
+</div>
   
