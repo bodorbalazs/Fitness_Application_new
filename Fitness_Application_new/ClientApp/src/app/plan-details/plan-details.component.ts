@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { FavouriteItemClient, FavouriteItemDto, FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto } from '../clientservice/api.client';
+import { FavouriteItemClient, FavouriteItemDto, FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto, RatingClient ,RatingDto} from '../clientservice/api.client';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {MatAccordion} from '@angular/material/expansion';
@@ -15,6 +15,7 @@ export class PlanDetailsComponent {
 
   id!:number;
   btnVal:string ='Favourite';
+  currentRate=0;
   specifiedPlan! : FitnessPlanDto;
   specifiedFavourite: FavouriteItemDto | undefined;
   fitnessExercises: FitnessExerciseDto[]=[];
@@ -26,7 +27,8 @@ export class PlanDetailsComponent {
     private FitnessPlanService : FitnessPlanClient,
     private router: Router,
     private FitnessExerciseService: FitnessExerciseClient,
-    private favouriteService:FavouriteItemClient)
+    private favouriteService:FavouriteItemClient,
+    private ratingService:RatingClient)
   { }
 
   ngOnInit():void{
@@ -54,6 +56,9 @@ export class PlanDetailsComponent {
     }
     ); 
     
+  }
+  onRateChange(rating: number){
+      
   }
 
   onFavouritePlan(){

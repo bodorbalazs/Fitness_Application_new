@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using System.Security.Claims;
 
 namespace Fitness_Application_new.Controllers
 {
@@ -48,6 +49,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRating([FromBody] RatingDto NewRating)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            NewRating.ApplicationUserId = userId;
             var created = await _ratingService
                 .InsertRatingAsync(_mapper.Map<FitnessApp.DAL.Models.Rating>(NewRating));
             return CreatedAtAction(
@@ -61,6 +64,8 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] RatingDto rating)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            rating.ApplicationUserId = userId;
             await _ratingService.UpdateRatingAsync(id, _mapper.Map<FitnessApp.DAL.Models.Rating>(rating));
             return NoContent();
         }
