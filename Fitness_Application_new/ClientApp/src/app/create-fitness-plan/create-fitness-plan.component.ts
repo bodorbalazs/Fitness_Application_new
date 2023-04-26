@@ -75,8 +75,7 @@ closeResult:string ="";
   this.fitnessExerciseLocalList =[];
  }
  setExercisesForEvent(){
-  //this.fitnessPlanService.getAll().subscribe(element => this.fitnessPlanList = element)
-
+  
   let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
   this.exercises = this.fitnessExerciseLocalList.length;
   this.fitnessExerciseLocalList.forEach(element =>{

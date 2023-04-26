@@ -1,6 +1,10 @@
 <div class="container  text-center mt-5 mb-5">
   <button class="btn btn-primary me-3" (click)="onFavouritePlan()">{{btnVal}}</button>
 </div>
+<ngb-rating [(rate)]="currentRate"
+(rateChange)="onRateChange($event)"></ngb-rating>
+<hr />
+<pre>Rate: <b>{{currentRate}}</b></pre>
 <div *ngFor="let item of specifiedFitnessExercises"> almaaaa</div>
 <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of specifiedFitnessExercises" >
 <mat-accordion>
