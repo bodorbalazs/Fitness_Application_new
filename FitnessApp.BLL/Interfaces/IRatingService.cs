@@ -1,4 +1,5 @@
-﻿using FitnessApp.DAL.Models;
+﻿using Fitness_Application_new.DTOs;
+using FitnessApp.DAL.Models;
 
 namespace Fitness_Application_new.Interfaces
 {
@@ -9,5 +10,7 @@ namespace Fitness_Application_new.Interfaces
         Task<Rating> InsertRatingAsync(Rating newRating);
         Task UpdateRatingAsync(int RatingId, Rating updatedRating);
         Task DeleteRatingAsync(int RatingId);
+        Task<Rating> GetUserSpecificEventRating(int planId,string userId);
+
     }
 }

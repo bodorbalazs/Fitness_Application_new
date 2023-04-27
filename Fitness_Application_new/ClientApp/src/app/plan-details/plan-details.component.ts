@@ -13,7 +13,7 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PlanDetailsComponent {
 
-  id!:number;
+  eventId!:number;
   btnVal:string ='Favourite';
   currentRate=0;
   specifiedPlan! : FitnessPlanDto;
@@ -21,6 +21,8 @@ export class PlanDetailsComponent {
   fitnessExercises: FitnessExerciseDto[]=[];
   specifiedFitnessExercises: FitnessExerciseDto[]=[];
   favouriteList: FavouriteItemDto[]=[];
+  specifiedRating!:RatingDto;
+
   panelOpenState= false;
   @ViewChild(MatAccordion) accordion!: MatAccordion;
   constructor(private route: ActivatedRoute,
@@ -32,13 +34,13 @@ export class PlanDetailsComponent {
   { }
 
   ngOnInit():void{
-    this.id = parseInt(this.route.snapshot.paramMap.get('id') || '{}');
-    this.FitnessPlanService.get(this.id).subscribe(element => this.specifiedPlan = element);
+    this.eventId = parseInt(this.route.snapshot.paramMap.get('id') || '{}');
+    this.FitnessPlanService.get(this.eventId).subscribe(element => this.specifiedPlan = element);
     this.FitnessExerciseService.getAll().subscribe(element =>
       {
         this.fitnessExercises= element;
         this.fitnessExercises.forEach(exercise => {
-          if(exercise.fitnessPlanId== this.id){
+          if(exercise.fitnessPlanId== this.eventId){
             this.specifiedFitnessExercises.push(exercise);
           }
         });
@@ -47,7 +49,7 @@ export class PlanDetailsComponent {
     {
        this.favouriteList= element;
        this.favouriteList.forEach(favourite =>{
-      if(favourite.fitnessPlanId==this.id){
+      if(favourite.fitnessPlanId==this.eventId){
         this.specifiedFavourite=favourite;
         this.btnVal='Unfavourite';
       }
@@ -55,10 +57,38 @@ export class PlanDetailsComponent {
     
     }
     ); 
+    this.ratingService.getSpecificEventRating(this.eventId).subscribe(element => 
+      {
+        this.specifiedRating =element;
+          this.currentRate=this.specifiedRating.value;
+      });
+    //this.ratingService //todo get back rating where eventid:this.id and userid: thisuser
     
   }
   onRateChange(rating: number){
-      
+      if(this.specifiedRating.id==0){
+        this.currentRate=rating;
+        this.ratingService.addRating(
+          new RatingDto({
+            id:0,
+            fitnessPlanId:this.eventId,
+            value:rating
+          })
+        ).subscribe();
+      }else{
+        this.currentRate=rating;
+        this.ratingService.getSpecificEventRating(this.eventId).subscribe(
+          element=>{
+            this.ratingService.put(element.id,new RatingDto({
+              id:element.id,
+              fitnessPlanId: this.eventId,
+              value:rating
+            })
+              
+              ).subscribe();
+          }
+        )
+      }
   }
 
   onFavouritePlan(){
@@ -67,7 +97,7 @@ export class PlanDetailsComponent {
       this.favouriteService.addFavouriteItem(
       new FavouriteItemDto({
           id:0,
-          fitnessPlanId:this.id
+          fitnessPlanId:this.eventId
       })).subscribe();
       this.btnVal='Unfavourite'
     }else{

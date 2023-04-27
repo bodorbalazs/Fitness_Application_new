@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [EnableCors("CorsPolicy")]
     public class RatingController : Controller
@@ -42,6 +42,15 @@ namespace Fitness_Application_new.Controllers
         {
             return _mapper.Map<RatingDto>(await _ratingService.GetRatingAsync(id));
         }
+
+
+        [HttpGet("SpecificEventRating")]
+        public async Task<RatingDto> GetSpecificEventRating(int planId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return _mapper.Map<RatingDto>(await _ratingService.GetUserSpecificEventRating(planId, userId));
+        }
+
 
         // POST: Favourites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
