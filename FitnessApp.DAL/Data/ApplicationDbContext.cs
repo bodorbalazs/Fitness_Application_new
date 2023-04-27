@@ -31,6 +31,7 @@ namespace FitnessApp.DAL.Data
         //disable cascading delete
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Rating>().HasData(new Rating { Id = 1, value = 0 });
             base.OnModelCreating(modelBuilder);
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

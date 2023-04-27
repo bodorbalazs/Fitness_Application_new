@@ -3,6 +3,7 @@ using Fitness_Application_new.Interfaces;
 using FitnessApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Fitness_Application_new.Exceptions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Fitness_Application_new.Services
 {
@@ -38,6 +39,14 @@ namespace Fitness_Application_new.Services
 
                .SingleOrDefaultAsync(e => e.Id == RatingId))
                ?? throw new EntityNotFoundException("Nem található a rating");
+        }
+
+        public async Task<Rating> GetUserSpecificEventRating(int planId,string userId)
+        {
+            return (await _context.rating
+                .OrderBy(e=>e.Id)
+               .LastOrDefaultAsync(e => e.FitnessPlanId == planId && e.ApplicationUserId == userId))
+               ??  new Rating();
         }
 
         public async Task<IEnumerable<Rating>> GetRatingsAsync()
