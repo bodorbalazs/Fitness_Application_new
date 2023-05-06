@@ -18,7 +18,7 @@ export class FitnessPlansComponent implements OnInit {
 
   ngOnInit(): void {
     this.fitnessPlanService.getAll().subscribe(element => this.fitnessPlanList = element);
-
+      //todo ratingsevice.getaverageratingforthisevent(eventid)
     this.favouriteService.getUsersPlans().subscribe(element => this.favouriteList=element);
   }
   

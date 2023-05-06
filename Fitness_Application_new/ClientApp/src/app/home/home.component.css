@@ -1,7 +1,7 @@
-.mat-mdc-form-field + .mat-mdc-form-field {
-    margin-left: 8px;
+body {
+    background-color: lightblue;
   }
-  body,head,header {
+  head {
     background-color: lightblue;
   }
   

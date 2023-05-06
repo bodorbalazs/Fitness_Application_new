@@ -51,6 +51,13 @@ namespace Fitness_Application_new.Controllers
             return _mapper.Map<RatingDto>(await _ratingService.GetUserSpecificEventRating(planId, userId));
         }
 
+        [HttpGet("SpecificEventAverageRating")]
+        public async Task<int> GetSpecificEventAverageRating(int planId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await _ratingService.GetSpecificEventAverageScore(planId);
+        }
+
 
         // POST: Favourites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
