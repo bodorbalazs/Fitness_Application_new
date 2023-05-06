@@ -1,4 +1,9 @@
-<p>create-fitness-plan works!</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--link rel="stylesheet" href="mystyle.css"-->
+  </head>
+  <body>
 <div class="form-center">
     <h1>Here you can create your very own Fitness Plan!</h1>
 </div>
@@ -43,12 +48,14 @@
       <input type="text" id="description" name="description" formControlName="description">
     </p>
     <p>Picture of the exercise:</p>
-    <div class="form-group">
+    <!--div class="form-group"-->
       <label for="file">Choose File</label>
       <input type="file"
              id="file"
-             (change)="handleFileInput($any($event.target).files)">
-  </div>
+             name="file"
+             (change)="handleFileInput($any($event.target).files)"
+             formControlName="file">
+  <!--/div-->
     <p>Difficulty of the exercise:</p>
     <p>
       <input type="text" id="difficulty" name="difficulty" formControlName="difficulty">
@@ -76,3 +83,5 @@
     </div>
   
   <button type="button" (click)="setFitnessPlan()">Add a new Fitness Plan</button>
+</body>
+</html>

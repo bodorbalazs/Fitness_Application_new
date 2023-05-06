@@ -44,21 +44,34 @@ namespace Fitness_Application_new.Controllers
         // POST: Favourites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public async Task<IActionResult> AddFitnessExercise([FromBody] FitnessExerciseDto NewFitnessExercise)
+        [HttpPost("SavePicture")]
+        public async Task<IActionResult> AddExercisePicture([FromBody] IFormFile file)
         {
             try
             {
-                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", NewFitnessExercise.FileName);
+                /*if (Image == null || Image.Length == 0)
+                {
+                    return Content("File not selected");
+                }*/
+                //Path.Combine(_environment.WebRootPath, "FolderNameOfYourWWWRoot", Image.FileName);
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", file.FileName);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
-                    NewFitnessExercise.File.CopyToAsync(stream);
+                    //NewFitnessExercise.File.CopyToAsync(stream);
+                    await file.CopyToAsync(stream);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                return StatusCode(500, $"Internal server error: {ex}");
             }
+            return Ok();
+        }
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> AddFitnessExercise([FromBody] FitnessExerciseDto NewFitnessExercise)
+        {
             var created = await _fitnessExerciseService
                 .InsertFitnessExerciseAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(NewFitnessExercise));
             return CreatedAtAction(

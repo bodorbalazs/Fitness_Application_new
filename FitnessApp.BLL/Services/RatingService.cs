@@ -49,6 +49,24 @@ namespace Fitness_Application_new.Services
                ??  new Rating();
         }
 
+        public async Task<int> GetSpecificEventAverageScore(int planId)
+        {
+            //var ratingList = await _context.rating.Where(r => r.FitnessPlanId == planId).ToListAsync();
+            var ratingList = await _context.rating.Where(r => r.FitnessPlanId == planId).ToListAsync();
+            int avgRating = 0;
+            ratingList.ForEach(rating =>  avgRating = avgRating + rating.value
+            );
+            if(ratingList.Count > 0)
+            {
+                return avgRating / ratingList.Count;
+            }
+            else
+            {
+                return 0;
+            }
+                
+        }
+
         public async Task<IEnumerable<Rating>> GetRatingsAsync()
         {
             var favourites = await _context.rating

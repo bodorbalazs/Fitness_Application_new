@@ -31,6 +31,7 @@ closeResult:string ="";
         description:''
       })
       this.addFitnessExerciseForm = this.formBuilder.group({
+        id:0,
         name:'',
         description:'',
         pictureUrl:'',
@@ -50,7 +51,7 @@ closeResult:string ="";
       description:this.addFitnessExerciseForm.get('description')?.value,
       pictureUrl:this.addFitnessExerciseForm.get('pictureUrl')?.value,
       difficulty:this.addFitnessExerciseForm.get('difficulty')?.value,
-      file:this.fileToUpload,
+      //file:this.fileToUpload,
       fileName:this.fileToUpload?.name, //TODO
     }))
   }

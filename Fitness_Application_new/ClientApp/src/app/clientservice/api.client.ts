@@ -660,6 +660,56 @@ export class FitnessExerciseClient {
         }
         return _observableOf(null as any);
     }
+
+    addExercisePicture(file: FileParameter): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/api/FitnessExercise/SavePicture";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(file);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAddExercisePicture(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAddExercisePicture(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<FileResponse | null>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<FileResponse | null>;
+        }));
+    }
+
+    protected processAddExercisePicture(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: responseBlob as any, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -1368,6 +1418,59 @@ export class RatingClient {
         }
         return _observableOf(null as any);
     }
+
+    getSpecificEventAverageRating(planId: number | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/Rating/SpecificEventAverageRating?";
+        if (planId === null)
+            throw new Error("The parameter 'planId' cannot be null.");
+        else if (planId !== undefined)
+            url_ += "planId=" + encodeURIComponent("" + planId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetSpecificEventAverageRating(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetSpecificEventAverageRating(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processGetSpecificEventAverageRating(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
 }
 
 @Injectable()
@@ -1849,7 +1952,6 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
-    file?: any | undefined;
     fileName?: string | undefined;
 
     constructor(data?: IFitnessExerciseDto) {
@@ -1870,7 +1972,6 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
             this.difficulty = _data["difficulty"];
             this.fitnessPlanId = _data["fitnessPlanId"];
             this.fitnessPlan = _data["fitnessPlan"] ? FitnessPlanDto.fromJS(_data["fitnessPlan"]) : <any>undefined;
-            this.file = _data["file"];
             this.fileName = _data["fileName"];
         }
     }
@@ -1891,7 +1992,6 @@ export class FitnessExerciseDto implements IFitnessExerciseDto {
         data["difficulty"] = this.difficulty;
         data["fitnessPlanId"] = this.fitnessPlanId;
         data["fitnessPlan"] = this.fitnessPlan ? this.fitnessPlan.toJSON() : <any>undefined;
-        data["file"] = this.file;
         data["fileName"] = this.fileName;
         return data;
     }
@@ -1905,7 +2005,6 @@ export interface IFitnessExerciseDto {
     difficulty?: string | undefined;
     fitnessPlanId?: number | undefined;
     fitnessPlan?: FitnessPlanDto | undefined;
-    file?: any | undefined;
     fileName?: string | undefined;
 }
 
@@ -2015,6 +2114,11 @@ export interface IWeatherForecast {
     temperatureC: number;
     temperatureF: number;
     summary?: string | undefined;
+}
+
+export interface FileParameter {
+    data: any;
+    fileName: string;
 }
 
 export interface FileResponse {

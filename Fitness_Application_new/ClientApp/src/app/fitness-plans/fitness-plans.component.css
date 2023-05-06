@@ -1,0 +1,16 @@
+body,head,header {
+    background-color: lightblue;
+  }
+  
+  h1 {
+    color: navy;
+    margin-left: 20px;
+  }
+
+  .card-body{
+    background-color: rgb(181, 183, 209)
+  }
+
+  div + div {
+    margin-top: 10px;
+  }

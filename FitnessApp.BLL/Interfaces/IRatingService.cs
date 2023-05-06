@@ -11,6 +11,7 @@ namespace Fitness_Application_new.Interfaces
         Task UpdateRatingAsync(int RatingId, Rating updatedRating);
         Task DeleteRatingAsync(int RatingId);
         Task<Rating> GetUserSpecificEventRating(int planId,string userId);
+        Task<int> GetSpecificEventAverageScore(int planId);
 
     }
 }
