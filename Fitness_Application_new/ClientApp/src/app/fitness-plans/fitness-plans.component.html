@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of fitnessPlanList" >
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of fitnessWithRatingList" >
             <div class="card" style="width: 18rem">
                 
                 <div class="card-body">
@@ -10,16 +10,16 @@
                   <!--button mat-icon-button color="primary" (click)="FavouritePressed(item.id)" title="View Contact"><mat-icon matSuffix *ngIf="favouriteExists(item.id)">star_border</mat-icon><mat-icon matSuffix *ngIf="!favouriteExists(item.id)">star</mat-icon></button-->
                   <!--img class="img-responsive" src="assets/images/star.png"-->
                       <cdk-virtual-scroll-viewport itemSize="50" >
-                        <div *cdkVirtualFor="let list of fitnessPlanList" >
+                        <div *cdkVirtualFor="let list of fitnessWithRatingList" >
                            <li> {{list.name}} </li>
                         </div>
                       </cdk-virtual-scroll-viewport> 
-                  <h5 class="card-title text-center">{{item.name}} </h5>
-                  <p class = "card-text">Description: {{item.description}}</p>
-                  
+                  <h5 class="card-title text-center">{{item.fitnessPlan.name}} </h5>
+                  <p class = "card-text">Description: {{item.fitnessPlan.description}}</p>
+                  <p class = "card-text">Average Rating: {{item.avgRating}}</p>
 
                   
-                <button class="btn btn-outline-primary" (click)="onSelectPlan(item.id)">More info</button>
+                <button class="btn btn-outline-primary" (click)="onSelectPlan(item.fitnessPlan.id)">More info</button>
                 <!--button class="btn btn-outline-primary"style="background-color:rgb(173,216,230)" (click)="onSelect(item)">More info</button-->
                   
               </div>
