@@ -27,6 +27,9 @@ builder.Services.AddTransient<IFitnessPlanService, FitnessPlanService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
 
 builder.Services.AddScoped<IValidator<FitnessPlanDto>, FitnessPlanValidation>();
+builder.Services.AddScoped<IValidator<FitnessExerciseDto>, FitnessExerciseValidation>();
+builder.Services.AddScoped<IValidator<RatingDto>, RatingValidation>();
+builder.Services.AddScoped<IValidator<FavouriteItemDto>, FavouriteItemValidation>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
