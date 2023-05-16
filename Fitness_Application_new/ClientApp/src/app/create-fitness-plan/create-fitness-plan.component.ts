@@ -3,7 +3,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto } from '../clientservice/api.client';
 import {NgbModal,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Event } from '@angular/router';
+
+interface FitnessExerciseWithPicture{
+  fitnessExercise: FitnessExerciseDto;
+  picture : any;
+}
 @Component({
   selector: 'app-create-fitness-plan',
   templateUrl: './create-fitness-plan.component.html',
@@ -19,12 +26,14 @@ public exercises: number =0;
 fileToUpload: File | null = null;
 closeResult:string ="";
   fulllist: any;
+  filedata:any;
 
   constructor(private formBuilder: FormBuilder,
     private fitnessPlanService: FitnessPlanClient,
     private fitnessExerciseService: FitnessExerciseClient,
     private authorizeService: AuthorizeService,
-    private modalService:NgbModal) 
+    private modalService:NgbModal,
+    private http:HttpClient) 
     {
       this.addFitnessPlanForm = this.formBuilder.group({
         name:'',
@@ -56,8 +65,8 @@ closeResult:string ="";
     }))
   }
 
-  handleFileInput(files: FileList) { //TODO
-    this.fileToUpload = files.item(0);
+  fileEvent(e:any){
+    this.filedata = e.target.files[0];
   }
 
  setFitnessPlan(){

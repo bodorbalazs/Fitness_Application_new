@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FitnessApp.BLL.Validators
 {
-    public class FitnessExerciseValidation : AbstractValidator<FitnessExerciseDto>
+    public class FavouriteItemValidation : AbstractValidator<FavouriteItemDto>
     {
-        public FitnessExerciseValidation()
+        FavouriteItemValidation()
         {
-            RuleFor(x=> x.Id).NotNull().NotEmpty();
+            RuleFor(x=>x.Id).NotEmpty();
         }
     }
 }
