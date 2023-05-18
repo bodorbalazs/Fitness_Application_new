@@ -48,14 +48,8 @@
       <input type="text" id="description" name="description" formControlName="description">
     </p>
     <p>Picture of the exercise:</p>
-    <!--div class="form-group"-->
-      <label for="file">Choose File</label>
-      <input type="file"
-             id="file"
-             name="file"
-             (change)="handleFileInput($any($event.target).files)"
-             formControlName="file">
-  <!--/div-->
+      <input type="file" name="myFile" class="form-control mb-3" (change)="fileEvent($event)"/>
+
     <p>Difficulty of the exercise:</p>
     <p>
       <input type="text" id="difficulty" name="difficulty" formControlName="difficulty">
@@ -78,8 +72,8 @@
   </ng-template>
   
   <p>Exercises added to Fitness Plan:</p>
-    <div *ngFor="let item of fitnessExerciseLocalList">
-      <p>{{item.name}}</p>
+    <div *ngFor="let item of fitnessExerciseLocalListWithPicture">
+      <p>{{item.fitnessExercise.name}}</p>
     </div>
   
   <button type="button" (click)="setFitnessPlan()">Add a new Fitness Plan</button>

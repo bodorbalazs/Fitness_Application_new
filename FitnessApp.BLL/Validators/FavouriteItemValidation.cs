@@ -10,7 +10,7 @@ namespace FitnessApp.BLL.Validators
 {
     public class FavouriteItemValidation : AbstractValidator<FavouriteItemDto>
     {
-        FavouriteItemValidation()
+        public FavouriteItemValidation()
         {
             RuleFor(x=>x.Id).NotEmpty();
         }
