@@ -96,6 +96,8 @@ namespace Fitness_Application_new.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+
+
             await _fitnessPlanService.DeleteFitnessPlanAsync(id);
             return NoContent();
         }

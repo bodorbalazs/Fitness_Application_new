@@ -45,7 +45,7 @@ namespace Fitness_Application_new.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("SavePicture")]
-        public async Task<IActionResult> AddExercisePicture([FromBody] IFormFile file)
+        public async Task<IActionResult> AddExercisePicture([FromForm] IFormFile image)
         {
             try
             {
@@ -54,11 +54,11 @@ namespace Fitness_Application_new.Controllers
                     return Content("File not selected");
                 }*/
                 //Path.Combine(_environment.WebRootPath, "FolderNameOfYourWWWRoot", Image.FileName);
-                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", file.FileName);
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", image.FileName);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     //NewFitnessExercise.File.CopyToAsync(stream);
-                    await file.CopyToAsync(stream);
+                    await image.CopyToAsync(stream);
                 }
             }
             catch (Exception ex)
