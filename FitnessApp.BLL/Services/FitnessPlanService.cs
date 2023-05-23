@@ -24,25 +24,38 @@ namespace Fitness_Application_new.Services
         public async Task DeleteFitnessPlanAsync(int FitnessPlanId)
         {
             //delete associated fitness exercises
-            /*var exerciselist= _context.fitnessExercise.Where(e => e.FitnessPlanId == FitnessPlanId).ToList();
-            exerciselist.ForEach(async e =>
-            {
-                await _exerciseService.DeleteFitnessExerciseAsync(e.Id);
-            });
+            /* await _context.fitnessExercise
+                 .Where(e => e.FitnessPlanId == FitnessPlanId).ForEachAsync(
+                 await _exerciseService.DeleteFitnessExerciseAsync(this.Id)
+
+                 );*/
+            _context.fitnessExercise.RemoveRange(_context.fitnessExercise
+                .Where(e => e.FitnessPlanId == FitnessPlanId));
+            // exerciselist.ForEach(async e =>
+            // {
+            //     await _exerciseService.DeleteFitnessExerciseAsync(e.Id);
+            // });
 
             //delete associated ratings
-            var ratingList = _context.rating.Where(e => e.FitnessPlanId == FitnessPlanId).ToList();
+            _context.rating.RemoveRange(_context.rating
+                .Where(e => e.FitnessPlanId == FitnessPlanId));
+
+            /*var ratingList = await _context.rating.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
             ratingList.ForEach(async e =>
             {
                 await _ratingService.DeleteRatingAsync(e.Id);
-            });
+            });*/
 
             //delete favourites
-            var favouriteList = _context.favouriteItems.Where(e => e.FitnessPlanId == FitnessPlanId).ToList();
+            _context.favouriteItems.RemoveRange(_context.favouriteItems
+                .Where(e => e.FitnessPlanId == FitnessPlanId));
+            /*
+            var favouriteList = await _context.favouriteItems.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
             favouriteList.ForEach(async e =>
             {
                 await _favouriteItemService.DeleteFavouriteItemAsync(e.Id);
             });*/
+
 
             //delete the fitness plan
             _context.fitnessPlan.Remove(new FitnessPlan { Id = FitnessPlanId });

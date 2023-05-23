@@ -9,5 +9,8 @@ namespace Fitness_Application_new.Interfaces
         Task<FitnessExercise> InsertFitnessExerciseAsync(FitnessExercise newFitnessExercise);
         Task UpdateFitnessExerciseAsync(int FitnessExerciseId, FitnessExercise updatedFitnessExercise);
         Task DeleteFitnessExerciseAsync(int FitnessExerciseId);
+
+        Task DeletePlansFitnessExerciseAsync(int FitnessPlanId);
+
     }
 }

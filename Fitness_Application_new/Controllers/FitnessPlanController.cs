@@ -21,17 +21,25 @@ namespace Fitness_Application_new.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IFitnessPlanService _fitnessPlanService;
+        private readonly IRatingService _ratingService;
+        private readonly IFavouriteItemService _favouriteItemService;
+        private readonly IFitnessExerciseService _fitnessExerciseService;
         private readonly IMapper _mapper;
         private IValidator<FitnessPlanDto> _validator;
         private readonly string AppDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
 
-        public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService, IMapper mapper,IValidator<FitnessPlanDto> validator)
+        public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService,
+            IMapper mapper,IValidator<FitnessPlanDto> validator,IRatingService ratingService,IFavouriteItemService favouriteItemService,
+            IFitnessExerciseService fitnessExerciseService)
         {
             _validator = validator;
             _context = context;
             _fitnessPlanService = fitnessPlanService;
             _mapper = mapper;
+            _ratingService = ratingService;
+            _favouriteItemService = favouriteItemService;
+            _fitnessExerciseService = fitnessExerciseService;
         }
 
         // GET: Favourites
@@ -96,8 +104,10 @@ namespace Fitness_Application_new.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-
-
+            //await _fitnessExerciseService.
+            //await _fitnessExerciseService.DeletePlansFitnessExerciseAsync(id);
+            //await _favouriteItemService.DeletePlansFavouriteItemAsync(id);
+            //await _ratingService.DeletePlansRatingAsync(id);
             await _fitnessPlanService.DeleteFitnessPlanAsync(id);
             return NoContent();
         }

@@ -62,7 +62,7 @@ export class EditFitnessPlansComponent implements OnInit{
       this.router.navigate(['/plan-edit',id])
     }
      deleteFitnessPlan(id:number){
-     this.deleteForeignKeys(id);
+     //this.deleteForeignKeys(id);
 
       this.fitnessPlanService.delete(id).subscribe();
       this.fetchData();

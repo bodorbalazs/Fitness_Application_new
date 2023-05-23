@@ -104,7 +104,7 @@ closeResult:string ="";
     headers.append('Accept', 'application/json');
     myFormData.append('image', this.filedata);
     /* Image Post Request */
-    this.http.post('http://localhost/api/FitnessExercise/SavePicture', myFormData, {
+    this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
     headers: headers
     }).subscribe(data => {
      //Check success message

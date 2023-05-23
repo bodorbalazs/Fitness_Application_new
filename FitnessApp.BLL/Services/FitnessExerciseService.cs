@@ -31,6 +31,16 @@ namespace Fitness_Application_new.Services
             }
         }
 
+        public async Task DeletePlansFitnessExerciseAsync(int FitnessPlanId)
+        {
+
+            var exerciselist = await _context.fitnessExercise.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
+            exerciselist.ForEach(async e =>
+            {
+                await DeleteFitnessExerciseAsync(e.Id);
+            });
+        }
+
         public async Task<FitnessExercise> GetFitnessExerciseAsync(int FitnessExerciseId)
         {
             return (await _context.fitnessExercise
