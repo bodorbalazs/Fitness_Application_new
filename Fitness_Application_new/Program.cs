@@ -21,10 +21,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddTransient<IFavouriteItemService, FavouriteItemService>();
-builder.Services.AddTransient<IFitnessExerciseService, FitnessExerciseService>();
-builder.Services.AddTransient<IFitnessPlanService, FitnessPlanService>();
-builder.Services.AddTransient<IRatingService, RatingService>();
+builder.Services.AddScoped<IFavouriteItemService, FavouriteItemService>();
+builder.Services.AddScoped<IFitnessExerciseService, FitnessExerciseService>();
+builder.Services.AddScoped<IFitnessPlanService, FitnessPlanService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 builder.Services.AddScoped<IValidator<FitnessPlanDto>, FitnessPlanValidation>();
 builder.Services.AddScoped<IValidator<FitnessExerciseDto>, FitnessExerciseValidation>();

@@ -18,3 +18,19 @@ implement testing
 long goals:
 
 Azure deployment
+
+
+
+
+
+
+
+
+
+unit test ->jó
+integrációs teszt http kérések
+ui tesztek adott gomb
+
+szkeleton fejezet 2-3 mondat
+
+prezi ppt

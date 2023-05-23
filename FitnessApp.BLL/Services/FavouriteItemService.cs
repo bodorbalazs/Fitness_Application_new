@@ -31,7 +31,27 @@ namespace Fitness_Application_new.Services
             }
         }
 
-        public async Task<FavouriteItem> GetFavouriteItemAsync(int FavouriteItemId)
+        public async Task DeletePlansFavouriteItemAsync(int FitnessPlanId)
+        {
+            var favouriteList = await _context.favouriteItems.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
+            favouriteList.ForEach(async e =>
+            {
+                _context.favouriteItems.Remove(new FavouriteItem { Id = e.Id });
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if ((await _context.favouriteItems
+                        .SingleOrDefaultAsync(p => p.Id == e.Id)) == null)
+                        throw new EntityNotFoundException("Nem található a favourite");
+                    else throw;
+                }
+            });
+        }
+
+            public async Task<FavouriteItem> GetFavouriteItemAsync(int FavouriteItemId)
         {
             return (await _context.favouriteItems
 

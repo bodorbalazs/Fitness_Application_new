@@ -32,7 +32,16 @@ namespace Fitness_Application_new.Services
             }
         }
 
-        public async Task<Rating> GetRatingAsync(int RatingId)
+        public async Task DeletePlansRatingAsync(int FitnessPlanId)
+        {
+            var ratingList = await _context.rating.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
+            ratingList.ForEach(async e =>
+            {
+                await DeleteRatingAsync(e.Id);
+            });
+
+        }
+            public async Task<Rating> GetRatingAsync(int RatingId)
         {
             return (await _context.rating
 
