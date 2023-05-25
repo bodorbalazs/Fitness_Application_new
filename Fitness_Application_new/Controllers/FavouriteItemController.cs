@@ -68,11 +68,12 @@ namespace Fitness_Application_new.Controllers
             Newfavourite.ApplicationUserId = userId;
             var created = await _favouriteItemService
                 .InsertFavouriteItemAsync(_mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(Newfavourite));
-            return CreatedAtAction(
+            /*return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
                         _mapper.Map<FavouriteItemDto>(created)
-            );
+            );*/
+            return Ok();
         }
 
         // GET: Favourites/Edit/5

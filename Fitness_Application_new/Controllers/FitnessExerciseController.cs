@@ -45,7 +45,7 @@ namespace Fitness_Application_new.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("SavePicture")]
-        public async Task<IActionResult> AddExercisePicture([FromForm] IFormFile image)
+        public async Task<IActionResult> AddExercisePicture([FromForm] IFormFile image,[FromForm] string id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Fitness_Application_new.Controllers
                     return Content("File not selected");
                 }*/
                 //Path.Combine(_environment.WebRootPath, "FolderNameOfYourWWWRoot", Image.FileName);
-                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", image.FileName);
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", id);//image.FileName);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     //NewFitnessExercise.File.CopyToAsync(stream);
@@ -74,11 +74,12 @@ namespace Fitness_Application_new.Controllers
         {
             var created = await _fitnessExerciseService
                 .InsertFitnessExerciseAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(NewFitnessExercise));
-            return CreatedAtAction(
+            /*return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
                         _mapper.Map<FitnessExerciseDto>(created)
-            );
+            );*/
+            return Ok();
         }
 
         // GET: Favourites/Edit/5
