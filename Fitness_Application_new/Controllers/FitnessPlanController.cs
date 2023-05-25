@@ -78,11 +78,12 @@ namespace Fitness_Application_new.Controllers
             NewFitnessPlan.ApplicationUserId = userId;
             var created = await _fitnessPlanService
                 .InsertFitnessPlanAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(NewFitnessPlan));
-            return CreatedAtAction(
+            /*return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
                         _mapper.Map<FitnessPlanDto>(created)
-            );
+            );*/
+            return Ok();
         }
 
         // GET: Favourites/Edit/5

@@ -69,11 +69,12 @@ namespace Fitness_Application_new.Controllers
             NewRating.ApplicationUserId = userId;
             var created = await _ratingService
                 .InsertRatingAsync(_mapper.Map<FitnessApp.DAL.Models.Rating>(NewRating));
-            return CreatedAtAction(
+            /*return CreatedAtAction(
                         nameof(Get),
                         new { id = created.Id },
                         _mapper.Map<RatingDto>(created)
-            );
+            );*/
+            return Ok();
         }
 
         // GET: Favourites/Edit/5

@@ -22,12 +22,12 @@ public addFitnessExerciseForm: FormGroup;
 public fitnessPlanList: FitnessPlanDto[] =[];
 public fitnessExerciseLocalListWithPicture: FitnessExerciseWithPicture[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
-public exercises: number =0;
+//public exercises: number =0;
 public lastExerciseId =0;
 fileToUpload: File | null = null;
 closeResult:string ="";
   fulllist: any;
-  filedata:any;
+  filedata:any = null;
 
   constructor(private formBuilder: FormBuilder,
     private fitnessPlanService: FitnessPlanClient,
@@ -63,13 +63,17 @@ closeResult:string ="";
               pictureUrl:this.addFitnessExerciseForm.get('pictureUrl')?.value,
               difficulty:this.addFitnessExerciseForm.get('difficulty')?.value
               }),
-      picture: this.filedata
-  }
-    )
+              
+              picture: this.filedata
+              
+      
+  })
+    this.filedata = undefined;
   }
 
   fileEvent(e:any){
     this.filedata = e.target.files[0];
+    console.log("FILE SAVED");
   }
 
  setFitnessPlan(){
@@ -85,24 +89,27 @@ closeResult:string ="";
   })).subscribe();
   this.setExercisesForEvent();
 
-  this.fitnessExerciseLocalListWithPicture =[];
+  
  }
  setExercisesForEvent(){
   
-  let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
-  this.exercises = this.fitnessExerciseLocalListWithPicture.length;//possibly obsolete
+  let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id;
+  //this.exercises = this.fitnessExerciseLocalListWithPicture.length;//possibly obsolete
   this.fitnessExerciseLocalListWithPicture.forEach(element =>{
     element.fitnessExercise.fitnessPlanId=lastPlanId;
   })
-  this.lastExerciseId = this.fitnessPlanList[this.fitnessExerciseList.length-1].id+1;
+  this.lastExerciseId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
   this.fitnessExerciseLocalListWithPicture.forEach(element =>{
     this.fitnessExerciseService.addFitnessExercise(element.fitnessExercise).subscribe();
-    this.filedata.fileName=this.lastExerciseId.toString();
+    if(element.picture!=undefined){
+    //element.picture.name=this.lastExerciseId.toString();
+    //TODO:: send exercise id back with picture
     var myFormData = new FormData();
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
-    myFormData.append('image', this.filedata);
+    myFormData.append('image', element.picture);
+    myFormData.append('id',this.lastExerciseId.toString());
     /* Image Post Request */
     this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
     headers: headers
@@ -110,9 +117,12 @@ closeResult:string ="";
      //Check success message
      console.log(data);
     });
+  }
     this.lastExerciseId +=1;
 
   });
+  this.filedata=undefined;
+  this.fitnessExerciseLocalListWithPicture =[];
  }
 
   open(content: any) {
