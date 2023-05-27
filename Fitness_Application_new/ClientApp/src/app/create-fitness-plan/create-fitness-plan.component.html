@@ -11,15 +11,12 @@
 <form [formGroup]="addFitnessPlanForm">
 
 
-    <p>Name of the Fitness Plan:</p>
-    <p>
-  
-      <input type="text" id="name" name="name" formControlName="name">
-    </p>
-    <p>Description of the Fitness Plan:</p>
-    <p>
-      <input type="text" id="description" name="description" formControlName="description">
-    </p>
+    <div>
+      <input type="text" id="name" name="name" formControlName="name" required="true" placeholder="Name">
+    </div>
+    <div>
+      <input type="text" id="description" name="description" formControlName="description" placeholder="Description">
+    </div>
     <p>Data given: {{addFitnessPlanForm.value | json}}</p>
   
   
@@ -28,7 +25,7 @@
   
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Choose Exercise</h4>
+      <h4 class="modal-title" id="modal-basic-title">Add an exercise for your plan</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -38,14 +35,11 @@
   <form [formGroup]="addFitnessExerciseForm">
   
   
-    <p>Name of the exercise:</p>
     <p>
-  
-      <input type="text" id="name" name="name" formControlName="name">
+      <input type="text" id="name" name="name" formControlName="name" placeholder="Name of the Exercise">
     </p>
-    <p>Description of the exercise:</p>
     <p>
-      <input type="text" id="description" name="description" formControlName="description">
+      <input type="text" id="description" name="description" formControlName="description" placeholder="Description of the Exercise">
     </p>
     <p>Picture of the exercise:</p>
       <input type="file" name="myFile" class="form-control mb-3" (change)="fileEvent($event)"/>
