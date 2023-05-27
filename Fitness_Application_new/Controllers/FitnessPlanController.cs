@@ -83,7 +83,7 @@ namespace Fitness_Application_new.Controllers
                         new { id = created.Id },
                         _mapper.Map<FitnessPlanDto>(created)
             );*/
-            return Ok();
+            return Ok(created.Id);
         }
 
         // GET: Favourites/Edit/5

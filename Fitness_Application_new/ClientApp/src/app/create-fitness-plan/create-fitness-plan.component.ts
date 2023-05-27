@@ -6,6 +6,8 @@ import {NgbModal,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Event } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { FileResponse } from '../clientservice/api.client';
 
 interface FitnessExerciseWithPicture{
   fitnessExercise: FitnessExerciseDto;
@@ -22,6 +24,7 @@ public addFitnessExerciseForm: FormGroup;
 public fitnessPlanList: FitnessPlanDto[] =[];
 public fitnessExerciseLocalListWithPicture: FitnessExerciseWithPicture[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
+public lastExercise: FileResponse | null =null;
 //public exercises: number =0;
 public lastExerciseId =0;
 fileToUpload: File | null = null;
@@ -76,27 +79,28 @@ closeResult:string ="";
     console.log("FILE SAVED");
   }
 
- setFitnessPlan(){
+ async setFitnessPlan(){
   
-
   this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
  
 
-  this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
+  const response$ = this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
     id:0,
     name:this.addFitnessPlanForm.get('name')?.value,
     description:this.addFitnessPlanForm.get('description')?.value
-  })).subscribe();
-  this.setExercisesForEvent();
-
+  }));
+  this.lastExercise = await lastValueFrom(response$);
+  const createdPlanId = Number(await this.lastExercise?.data.text());
+  console.log(createdPlanId);
   
+  if(!Number.isNaN(createdPlanId))
+  this.setExercisesForEvent(createdPlanId);
  }
- setExercisesForEvent(){
+ setExercisesForEvent(newestplan:number){
   
-  let lastPlanId = this.fitnessPlanList[this.fitnessPlanList.length-1].id;
   //this.exercises = this.fitnessExerciseLocalListWithPicture.length;//possibly obsolete
   this.fitnessExerciseLocalListWithPicture.forEach(element =>{
-    element.fitnessExercise.fitnessPlanId=lastPlanId;
+    element.fitnessExercise.fitnessPlanId=newestplan;
   })
   this.lastExerciseId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
   this.fitnessExerciseLocalListWithPicture.forEach(element =>{

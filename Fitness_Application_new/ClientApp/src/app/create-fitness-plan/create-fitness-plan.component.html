@@ -15,8 +15,10 @@
       <input type="text" id="name" name="name" formControlName="name" required="true" placeholder="Name">
     </div>
     <div>
-      <input type="text" id="description" name="description" formControlName="description" placeholder="Description">
-    </div>
+      <textarea type="text" id="description" name="description" formControlName="description" maxlength='1000' placeholder="Enter your description here">
+        
+      </textarea>
+      </div>
     <p>Data given: {{addFitnessPlanForm.value | json}}</p>
   
   
@@ -42,7 +44,7 @@
       <input type="text" id="description" name="description" formControlName="description" placeholder="Description of the Exercise">
     </p>
     <p>Picture of the exercise:</p>
-      <input type="file" name="myFile" class="form-control mb-3" (change)="fileEvent($event)"/>
+      <input type="file" name="myFile" class="form-control mb-3" accept="image/png, image/jpg, image/gif, image/jpeg" (change)="fileEvent($event)"/>
 
     <p>Difficulty of the exercise:</p>
     <p>
