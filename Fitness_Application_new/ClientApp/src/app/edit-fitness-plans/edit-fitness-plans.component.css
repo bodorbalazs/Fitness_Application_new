@@ -6,3 +6,11 @@ body,head,header {
     color: navy;
     margin-left: 20px;
   }
+
+  .card-body{
+    background-color: rgb(144, 201, 219);
+  }
+
+  div + div {
+    margin-top: 10px;
+  }
