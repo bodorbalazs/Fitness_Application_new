@@ -22,6 +22,7 @@ export class PlanDetailsComponent {
   specifiedFitnessExercises: FitnessExerciseDto[]=[];
   favouriteList: FavouriteItemDto[]=[];
   specifiedRating!:RatingDto;
+  exists:boolean =false;
 
   panelOpenState= false;
   @ViewChild(MatAccordion) accordion!: MatAccordion;
@@ -66,7 +67,7 @@ export class PlanDetailsComponent {
     
   }
   onRateChange(rating: number){
-      if(this.specifiedRating.id==0){
+      if(this.specifiedRating.id==0 && !this.exists){
         this.currentRate=rating;
         this.ratingService.addRating(
           new RatingDto({
@@ -75,7 +76,10 @@ export class PlanDetailsComponent {
             value:rating
           })
         ).subscribe();
+        this.exists=true;
       }else{
+        console.log(this.specifiedRating.id)
+        console.log(this.exists)
         this.currentRate=rating;
         this.ratingService.getSpecificEventRating(this.eventId).subscribe(
           element=>{
