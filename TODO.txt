@@ -1,15 +1,9 @@
 
 short goals:
-
-exercise pictures
-cascading deleting of favourite,rating and exercises before deleting a plan
-find the bugged element with wrong colour in navbar
 change the colour in the log in screen
-change the colour of the cards texts in home
-change the colour of the cards in event list, edit events, favourite events
-change the create event dialog to a sexier one
 change the average rating to stars on the show events cards
 change the favourite button to a star in edit event
+change the more info dialog to show the pictures of the exercises as well
 
 medium goals:
 
