@@ -95,10 +95,13 @@ namespace Fitness_Application_new.Controllers
             return NoContent();
         }
 
-
-        private bool RatingExists(int id)
+        [HttpDelete("DeletePlansratings")]
+        public async Task<IActionResult> DeletePlansRating(int PlanId)
         {
-            return _context.rating.Any(e => e.Id == id);
+            await _ratingService.DeletePlansRatingAsync(PlanId);
+            return NoContent();
         }
+
+        
     }
 }
