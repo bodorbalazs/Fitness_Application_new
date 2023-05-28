@@ -74,7 +74,7 @@ namespace Fitness_Application_new.Controllers
                         new { id = created.Id },
                         _mapper.Map<RatingDto>(created)
             );*/
-            return Ok();
+            return Ok(created.Id);
         }
 
         // GET: Favourites/Edit/5
@@ -94,6 +94,7 @@ namespace Fitness_Application_new.Controllers
             await _ratingService.DeleteRatingAsync(id);
             return NoContent();
         }
+
 
         private bool RatingExists(int id)
         {
