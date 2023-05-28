@@ -34,11 +34,9 @@ namespace Fitness_Application_new.Services
 
         public async Task DeletePlansRatingAsync(int FitnessPlanId)
         {
-            var ratingList = await _context.rating.Where(e => e.FitnessPlanId == FitnessPlanId).ToListAsync();
-            ratingList.ForEach(async e =>
-            {
-                await DeleteRatingAsync(e.Id);
-            });
+            _context.rating.RemoveRange(_context.rating
+                .Where(e => e.FitnessPlanId == FitnessPlanId));
+            
 
         }
             public async Task<Rating> GetRatingAsync(int RatingId)
