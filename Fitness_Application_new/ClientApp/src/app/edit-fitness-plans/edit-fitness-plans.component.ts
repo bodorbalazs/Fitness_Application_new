@@ -62,41 +62,9 @@ export class EditFitnessPlansComponent implements OnInit{
       this.router.navigate(['/plan-edit',id])
     }
      deleteFitnessPlan(id:number){
-     //this.deleteForeignKeys(id);
 
       this.fitnessPlanService.delete(id).subscribe();
       this.fetchData();
-    }
-
-   deleteForeignKeys(id:number){
-      this.fitnessExerciseService.getAll().subscribe(exercises =>{
-        this.fitnessExerciseList = exercises;
-        this.fitnessExerciseList.forEach(exercise=>{
-            if(exercise.fitnessPlanId==id){
-            this.fitnessExerciseService.delete(exercise.id).subscribe();
-            }
-          });
-        
-
-
-        }
-        );
-        this.ratingService.getAll().subscribe(ratings =>{
-          this.ratingList = ratings;
-          this.ratingList.forEach(rating=>{
-              if(rating.fitnessPlanId==id){
-              this.ratingService.delete(rating.id).subscribe();
-              }
-            });
-          });
-          this.favouriteService.getAll().subscribe(favourites =>{
-            this.favouriteList = favourites;
-            this.favouriteList.forEach(favourite=>{
-                if(favourite.fitnessPlanId==id){
-                this.ratingService.delete(favourite.id).subscribe();
-                }
-              });
-            });
     }
 
     fetchData() {
