@@ -1,9 +1,6 @@
 
 short goals:
 change the colour in the log in screen
-change the average rating to stars on the show events cards
-change the favourite button to a star in edit event
-change the more info dialog to show the pictures of the exercises as well
 
 medium goals:
 

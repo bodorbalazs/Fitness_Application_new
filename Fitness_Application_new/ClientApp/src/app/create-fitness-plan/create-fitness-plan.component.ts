@@ -24,9 +24,10 @@ public addFitnessExerciseForm: FormGroup;
 public fitnessPlanList: FitnessPlanDto[] =[];
 public fitnessExerciseLocalListWithPicture: FitnessExerciseWithPicture[] =[];
 public fitnessExerciseList: FitnessExerciseDto[] =[];
+public lastPlan: FileResponse | null =null;
 public lastExercise: FileResponse | null =null;
 //public exercises: number =0;
-public lastExerciseId =0;
+public ExerciseId =0;
 fileToUpload: File | null = null;
 closeResult:string ="";
   fulllist: any;
@@ -55,6 +56,7 @@ closeResult:string ="";
 
   ngOnInit(): void {
     this.fitnessPlanService.getAll().subscribe(element => this.fitnessPlanList = element)
+    this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList=element)
   }
 
   SetExerciseList(){
@@ -81,39 +83,47 @@ closeResult:string ="";
 
  async setFitnessPlan(){
   
-  this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
- 
+  //this.fitnessExerciseService.getAll().subscribe(element => this.fitnessExerciseList = element);
+  //const exerciseResponse$ = this.fitnessExerciseService.getAll();
 
+  //this.fitnessExerciseList = await lastValueFrom(exerciseResponse$);
   const response$ = this.fitnessPlanService.addFitnessPlan(new FitnessPlanDto({
     id:0,
     name:this.addFitnessPlanForm.get('name')?.value,
     description:this.addFitnessPlanForm.get('description')?.value
   }));
-  this.lastExercise = await lastValueFrom(response$);
-  const createdPlanId = Number(await this.lastExercise?.data.text());
+  this.lastPlan = await lastValueFrom(response$);
+  const createdPlanId = Number(await this.lastPlan?.data.text());
   console.log(createdPlanId);
   
   if(!Number.isNaN(createdPlanId))
   this.setExercisesForEvent(createdPlanId);
  }
- setExercisesForEvent(newestplan:number){
+
+
+  setExercisesForEvent(newestplan:number){
   
   //this.exercises = this.fitnessExerciseLocalListWithPicture.length;//possibly obsolete
   this.fitnessExerciseLocalListWithPicture.forEach(element =>{
     element.fitnessExercise.fitnessPlanId=newestplan;
   })
-  this.lastExerciseId = this.fitnessPlanList[this.fitnessPlanList.length-1].id+1;
-  this.fitnessExerciseLocalListWithPicture.forEach(element =>{
-    this.fitnessExerciseService.addFitnessExercise(element.fitnessExercise).subscribe();
+
+  //this.ExerciseId = this.fitnessExerciseList[this.fitnessExerciseList.length-1].id+1;
+
+  this.fitnessExerciseLocalListWithPicture.forEach(async element =>{
+    //exercise save
+    const exerciseResponse$ =this.fitnessExerciseService.addFitnessExercise(element.fitnessExercise);
+    this.lastExercise = await lastValueFrom(exerciseResponse$);
+    this.ExerciseId = Number(await this.lastExercise?.data.text());
+    //picture save
     if(element.picture!=undefined){
-    //element.picture.name=this.lastExerciseId.toString();
-    //TODO:: send exercise id back with picture
+      
     var myFormData = new FormData();
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
     myFormData.append('image', element.picture);
-    myFormData.append('id',this.lastExerciseId.toString());
+    myFormData.append('id',this.ExerciseId.toString());
     /* Image Post Request */
     this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
     headers: headers
@@ -122,7 +132,7 @@ closeResult:string ="";
      console.log(data);
     });
   }
-    this.lastExerciseId +=1;
+    //this.ExerciseId +=1;
 
   });
   this.filedata=undefined;
