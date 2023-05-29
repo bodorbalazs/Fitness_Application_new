@@ -5,11 +5,10 @@
 (rateChange)="onRateChange($event)"></ngb-rating>
 <hr />
 <pre>Rate: <b>{{currentRate}}</b></pre>
-<div *ngFor="let item of specifiedFitnessExercises"> almaaaa</div>
-<div class="col-12 col-md-6 col-lg-4" *ngFor="let item of specifiedFitnessExercises" >
+<div *ngFor="let item of specifiedFitnessExercises" >
 <mat-accordion>
-    <mat-expansion-panel >
-      <mat-expansion-panel-header collapsedHeight="40" expandedHeight="500">
+    <mat-expansion-panel class="expansion" >
+      <mat-expansion-panel-header  collapsedHeight="40" expandedHeight="500">
         <mat-panel-title>
           {{item.name}}
         </mat-panel-title>
@@ -17,7 +16,10 @@
           {{item.description}}
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <div class="expanded">
+      <img src="/assets/images/{{item.id}}" alt="ExeImage">
       <p>This is the primary content of the panel.</p>
+      </div>
     </mat-expansion-panel>
     
     <mat-expansion-panel (opened)="panelOpenState = true"

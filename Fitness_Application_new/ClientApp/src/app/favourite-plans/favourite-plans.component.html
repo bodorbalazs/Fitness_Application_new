@@ -1,26 +1,23 @@
-<p>favourite-plans works!</p>
-<div class="container" style="background-color: rgb(181, 183, 209)">
-    <div class="row" style="background-color: rgb(181, 183, 209)">
+<div class="container">
+    <div class="row">
 
         <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of favouritePlanList" >
-            <div class="card" style="width: 18rem;background-color:rgb(181, 183, 209);">
+            <div class="card" style="width: 18rem">
                 
-                <div class="card-body">
-                  <!--mat-icon matSuffix *ngIf="!form.get('email')?.errors" color="success">check_circle</mat-icon-->
-                  <!--button mat-icon-button color="primary" (click)="FavouritePressed(item.id)" title="View Contact"><mat-icon matSuffix *ngIf="favouriteExists(item.id)">star_border</mat-icon><mat-icon matSuffix *ngIf="!favouriteExists(item.id)">star</mat-icon></button-->
-                  <!--img class="img-responsive" src="assets/images/star.png"-->
-                      <cdk-virtual-scroll-viewport itemSize="50" >
+                <div class="card-body d-flex flex-column h-100">
+                  <cdk-virtual-scroll-viewport itemSize="50" >
                         <div *cdkVirtualFor="let list of fitnessPlanList" >
                            <li> {{list.name}} </li>
                         </div>
                       </cdk-virtual-scroll-viewport> 
                   <h5 class="card-title text-center">{{item.name}} </h5>
                   <p class = "card-text">Description: {{item.description}}</p>
-                  
+                  <!--div class="mt-auto">
+                    <ngb-rating [max]="10" [(rate)]="item.avgRating" [readonly]="true"> </ngb-rating>
+                    <p class = "card-text">{{item.avgRating}}/10</p>
+                  </div-->
 
-                  
-                <button class="btn btn-outline-primary" (click)="onSelectPlan(item.id)">More info</button>
-                <!--button class="btn btn-outline-primary"style="background-color:rgb(173,216,230)" (click)="onSelect(item)">More info</button-->
+                <button class="mt-auto btn btn-outline-primary" (click)="onSelectPlan(item.id)">More info</button>
                   
               </div>
             </div>

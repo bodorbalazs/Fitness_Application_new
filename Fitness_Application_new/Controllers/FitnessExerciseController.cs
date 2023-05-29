@@ -49,15 +49,10 @@ namespace Fitness_Application_new.Controllers
         {
             try
             {
-                /*if (Image == null || Image.Length == 0)
-                {
-                    return Content("File not selected");
-                }*/
                 //Path.Combine(_environment.WebRootPath, "FolderNameOfYourWWWRoot", Image.FileName);
-                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\FitnessApp.DAL\ExerciseImages", id);//image.FileName);
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\Fitness_Application_new\ClientApp\src\assets\images", id);//image.FileName);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
-                    //NewFitnessExercise.File.CopyToAsync(stream);
                     await image.CopyToAsync(stream);
                 }
             }

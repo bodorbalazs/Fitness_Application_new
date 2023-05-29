@@ -6,3 +6,50 @@ body,head,header {
     color: navy;
     margin-left: 20px;
   }
+
+  .card-body{
+    background-color: rgb(144, 201, 219);
+  }
+
+  div + div {
+    margin-top: 10px;
+    border-radius:5px;
+  }
+
+  button {
+
+    appearance:none;
+    -webkit-appearance:none;
+  
+    padding:10px;
+    border:none;
+    background-color:#3F51B5;
+    color:#fff;
+    font-weight:600;
+    border-radius:5px;
+    width:100%;
+  
+  }
+
+  .card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+ }
+
+ ngb-rating{
+  color:yellow;
+ }
+
+ .row{
+
+  display: flex;
+  align-items: stretch;
+ }
+
+ .card{
+  height: 100%;
+ }
