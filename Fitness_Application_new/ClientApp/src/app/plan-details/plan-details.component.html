@@ -1,39 +1,35 @@
-<div class="container  text-center mt-5 mb-5">
-  <button class="btn btn-primary me-3" (click)="onFavouritePlan()">{{btnVal}}</button>
+<div class="welcome">
+<p class="welcometext">Here you can find the detailed information of the Fitness Plan :{{specifiedPlan.name}}</p>
 </div>
-<ngb-rating [(rate)]="currentRate"
-(rateChange)="onRateChange($event)"></ngb-rating>
-<hr />
-<pre>Rate: <b>{{currentRate}}</b></pre>
+
 <div *ngFor="let item of specifiedFitnessExercises" >
 <mat-accordion>
     <mat-expansion-panel class="expansion" >
       <mat-expansion-panel-header  collapsedHeight="40" expandedHeight="500">
-        <mat-panel-title>
-          {{item.name}}
+        <mat-panel-title class="title">
+          Exercise: {{item.name}}
         </mat-panel-title>
-        <mat-panel-description>
-          {{item.description}}
+        <mat-panel-description class="description">
+          Click here for details
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="expanded">
       <img src="/assets/images/{{item.id}}" alt="ExeImage">
-      <p>This is the primary content of the panel.</p>
+      <p>{{item.description}}</p>
       </div>
-    </mat-expansion-panel>
-    
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Self aware panel
-        </mat-panel-title>
-        <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>Difficulty: {{item.difficulty}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-  
+<div class="container  text-center mt-5 mb-5">
+  <div class="item">
+
+    <button class="btn btn-primary" (click)="onFavouritePlan()">{{btnVal}}</button>
+  </div>
+
+<div class="item">
+<a>Rate this exercise:</a>
+<ngb-rating [(rate)]="currentRate"
+    (rateChange)="onRateChange($event)">
+</ngb-rating>
+</div>
+</div>
