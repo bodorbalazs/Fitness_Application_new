@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Cors;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [EnableCors("CorsPolicy")]
     public class FitnessPlanController : Controller
