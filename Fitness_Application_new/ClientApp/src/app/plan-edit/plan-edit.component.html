@@ -19,3 +19,74 @@
   <button class="button" type="submit">Edit Fitness Plan</button>
   <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
 </form>
+
+<div *ngFor="let item of specifiedFitnessExercises" >
+  <mat-accordion>
+      <mat-expansion-panel class="expansion" >
+        <mat-expansion-panel-header  collapsedHeight="40" expandedHeight="500">
+          <mat-panel-title class="title">
+            Exercise: {{item.name}}
+          </mat-panel-title>
+          <mat-panel-description class="description">
+            Click here for details and to edit
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="expanded">
+        <img src="/assets/images/{{item.id}}" alt="ExeImage">
+        <p>{{item.description}}</p>
+        <button type="button"  (click)="selectexercise(item);open(content)" >Edit exercise {{item.name}}</button>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Edit exercise {{item.name}}</h4>
+            <button type="button" class="close" aria-label="Close" style="width:20%" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+        
+        <form [formGroup]="editFitnessExerciseForm">
+        
+        <p>Change the name of the exercise:</p>
+          <p>
+            <input type="text" id="name" name="name" formControlName="name" value={{item.name}}>
+          </p>
+          <p>Change the description of the exercise:</p>
+          <p>
+            <input type="text" id="description" name="description" formControlName="description" value={{item.description}}>
+          </p>
+          <p>Add a new picture to the exercise:</p>
+            <input type="file" name="myFile" class="form-control mb-3" accept="image/png, image/jpg, image/gif, image/jpeg" (change)="fileEvent($event)"/>
+      
+          <p>Change the difficulty of the exercise:</p>
+          <p>
+            <input type="text" id="difficulty" name="difficulty" formControlName="difficulty" value={{item.difficulty}}>
+          </p>
+        
+          
+        
+          
+        
+          <p>Exercise Data given: {{editFitnessExerciseForm.value | json}}</p>
+          
+        
+        
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="EditExerciseList(item.id);modal.close('Save click')">Save edited exercise</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') ">close window</button>
+        </div>
+        </ng-template>
+      
+      
+      
+      
+      
+      </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+
+
+  

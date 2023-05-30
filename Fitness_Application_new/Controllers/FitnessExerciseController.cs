@@ -50,7 +50,14 @@ namespace Fitness_Application_new.Controllers
             try
             {
                 //Path.Combine(_environment.WebRootPath, "FolderNameOfYourWWWRoot", Image.FileName);
-                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\Fitness_Application_new\ClientApp\src\assets\images", id);//image.FileName);
+                string path = Path.Combine(@"C:\Users\bodor\OneDrive\Desktop\egyetemshit\MSC\Dipterv1\Fitness_Application_new\ClientApp\src\assets\images", id);
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
+                
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
