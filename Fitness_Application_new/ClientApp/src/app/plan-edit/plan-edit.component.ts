@@ -115,7 +115,7 @@ export class PlanEditComponent {
                   const headers = new HttpHeaders();
                   headers.append('Content-Type', 'multipart/form-data');
                   headers.append('Accept', 'application/json');
-                  myFormData.append('image', this.filedata.picture);
+                  myFormData.append('image', this.filedata);
                   myFormData.append('id',exerciseId.toString());
                   /* Image Post Request */
                   this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
@@ -123,6 +123,7 @@ export class PlanEditComponent {
                   }).subscribe(data => {
                    //Check success message
                    console.log(data);
+                   window.location.reload();
                   });
                 }
       this.filedata = undefined;
