@@ -27,6 +27,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./Fitness_Application_new/Fitness_Application_new.sln
     - name: Build
-      run: dotnet build ./Fitness_Application_new/Fitness_Application_new.sln --no-restore
+      run: dotnet build ./Fitness_Application_new/Fitness_Application_new.sln --no-restore --legacy-peer-deps
     - name: Test
       run: dotnet test ./FitnessApp.Tests/FitnessApp.Tests.csproj --no-build --verbosity normal
