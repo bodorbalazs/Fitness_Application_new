@@ -1,6 +1,6 @@
 
 short goals:
-change the colour in the log in screen
+make the sites react to the changes
 
 medium goals:
 
@@ -25,3 +25,8 @@ ui tesztek adott gomb
 szkeleton fejezet 2-3 mondat
 
 prezi ppt
+
+
+
+
+nyárra: design bootstrap használata, user teszt mit hogyan csinálna, tesztek, devops

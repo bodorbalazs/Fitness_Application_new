@@ -76,11 +76,6 @@ namespace Fitness_Application_new.Controllers
         {
             var created = await _fitnessExerciseService
                 .InsertFitnessExerciseAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessExercise>(NewFitnessExercise));
-            /*return CreatedAtAction(
-                        nameof(Get),
-                        new { id = created.Id },
-                        _mapper.Map<FitnessExerciseDto>(created)
-            );*/
             return Ok(created.Id);
         }
 

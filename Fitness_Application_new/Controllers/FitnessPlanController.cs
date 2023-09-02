@@ -25,15 +25,13 @@ namespace Fitness_Application_new.Controllers
         private readonly IFavouriteItemService _favouriteItemService;
         private readonly IFitnessExerciseService _fitnessExerciseService;
         private readonly IMapper _mapper;
-        private IValidator<FitnessPlanDto> _validator;
         private readonly string AppDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
 
         public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService,
-            IMapper mapper,IValidator<FitnessPlanDto> validator,IRatingService ratingService,IFavouriteItemService favouriteItemService,
+            IMapper mapper,IRatingService ratingService,IFavouriteItemService favouriteItemService,
             IFitnessExerciseService fitnessExerciseService)
         {
-            _validator = validator;
             _context = context;
             _fitnessPlanService = fitnessPlanService;
             _mapper = mapper;
@@ -69,11 +67,6 @@ namespace Fitness_Application_new.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFitnessPlan([FromBody] FitnessPlanDto NewFitnessPlan)
         {
-            ValidationResult result = await _validator.ValidateAsync(NewFitnessPlan);
-            if (!result.IsValid)
-            {
-                return BadRequest();
-            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             NewFitnessPlan.ApplicationUserId = userId;
             var created = await _fitnessPlanService
@@ -90,11 +83,6 @@ namespace Fitness_Application_new.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessPlanDto fitnessPlan)
         {
-            ValidationResult result = await _validator.ValidateAsync(fitnessPlan);
-            if (!result.IsValid)
-            {
-                return BadRequest();
-            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             fitnessPlan.ApplicationUserId = userId;
             await _fitnessPlanService.UpdateFitnessPlanAsync(id, _mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(fitnessPlan));
@@ -105,10 +93,6 @@ namespace Fitness_Application_new.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            //await _fitnessExerciseService.
-            //await _fitnessExerciseService.DeletePlansFitnessExerciseAsync(id);
-            //await _favouriteItemService.DeletePlansFavouriteItemAsync(id);
-            //await _ratingService.DeletePlansRatingAsync(id);
             await _fitnessPlanService.DeleteFitnessPlanAsync(id);
             return NoContent();
         }

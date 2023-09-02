@@ -102,6 +102,6 @@ namespace Fitness_Application_new.Controllers
             return NoContent();
         }
 
-        
+
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using FluentValidation;
 using FitnessApp.BLL.Validators;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,10 +27,12 @@ builder.Services.AddScoped<IFitnessExerciseService, FitnessExerciseService>();
 builder.Services.AddScoped<IFitnessPlanService, FitnessPlanService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 
+
 builder.Services.AddScoped<IValidator<FitnessPlanDto>, FitnessPlanValidation>();
 builder.Services.AddScoped<IValidator<FitnessExerciseDto>, FitnessExerciseValidation>();
 builder.Services.AddScoped<IValidator<RatingDto>, RatingValidation>();
 builder.Services.AddScoped<IValidator<FavouriteItemDto>, FavouriteItemValidation>();
+builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();

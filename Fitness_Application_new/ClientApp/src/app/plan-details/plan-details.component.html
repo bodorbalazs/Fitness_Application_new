@@ -1,5 +1,6 @@
 <div class="welcome">
-<p class="welcometext">Here you can find the detailed information of the Fitness Plan :{{specifiedPlan.name}}</p>
+<p class="welcometext">Here you can find the detailed information of the Fitness Plan :</p>
+<b>{{specifiedPlan?.name}}</b>
 </div>
 
 <div *ngFor="let item of specifiedFitnessExercises" >
@@ -7,7 +8,7 @@
     <mat-expansion-panel class="expansion" >
       <mat-expansion-panel-header  collapsedHeight="40" expandedHeight="500">
         <mat-panel-title class="title">
-          Exercise: {{item.name}}
+          Exercise: {{item?.name}}
         </mat-panel-title>
         <mat-panel-description class="description">
           Click here for details
@@ -15,7 +16,7 @@
       </mat-expansion-panel-header>
       <div class="expanded">
       <img src="/assets/images/{{item.id}}" alt="ExeImage">
-      <p>{{item.description}}</p>
+      <p>{{item?.description}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
