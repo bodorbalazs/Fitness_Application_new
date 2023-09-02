@@ -23,7 +23,7 @@ jobs:
               
 
     - name: Install Dependencies
-      run: npm ci --legacy peer deps
+      run: npm install --legacy peer deps
     - name: Restore dependencies
       run: dotnet restore ./Fitness_Application_new/Fitness_Application_new.sln
     - name: Build
