@@ -13,7 +13,7 @@ namespace FitnessApp.BLL.Validators
     {
         public RatingValidation()
         {
-            RuleFor(x=> x.value).NotEmpty().InclusiveBetween(0,10).WithMessage("Rating is not between 0 and 10");
+            RuleFor(x=> x.value).NotEmpty().NotNull().InclusiveBetween(0,10).WithMessage("Rating is not between 0 and 10");
         }
     }
 }
