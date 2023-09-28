@@ -26,11 +26,13 @@ namespace FitnessApp.IntegrationTests
         public Mock<IRatingService> RatingServiceMock { get; }
         public Mock<IFavouriteItemService> FavouriteItemServiceMock { get; }
         public Mock<IFitnessExerciseService> FitnessExerciseServiceMock { get; }
+        public Mock<IFitnessPlanService> FitnessPlanServiceMock { get; }
         public CustomWebApplicationFactory()
         {
             FavouriteItemServiceMock = new Mock<IFavouriteItemService>();
             RatingServiceMock= new Mock<IRatingService>();
             FitnessExerciseServiceMock= new Mock<IFitnessExerciseService>();
+            FitnessPlanServiceMock= new Mock<IFitnessPlanService>();
         }
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -45,6 +47,7 @@ namespace FitnessApp.IntegrationTests
                 services.AddSingleton(RatingServiceMock.Object);
                 services.AddSingleton(FavouriteItemServiceMock.Object);
                 services.AddSingleton(FitnessExerciseServiceMock.Object);
+                services.AddSingleton(FitnessPlanServiceMock.Object);
             });
 
         }
