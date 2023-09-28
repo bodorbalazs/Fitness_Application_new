@@ -28,5 +28,7 @@ jobs:
       run: dotnet restore ./Fitness_Application_new/Fitness_Application_new.sln
     - name: Build
       run: dotnet build ./Fitness_Application_new/Fitness_Application_new.sln --no-restore
-    - name: Test
+    - name: UnitTest
       run: dotnet test ./FitnessApp.Tests/FitnessApp.Tests.csproj --no-build --verbosity normal
+    - name: IntegrationTest
+      run: dotnet test ./FitnessApp.IntegrationTests/FitnessApp.IntegrationTests.csproj --no-build --verbosity normal
