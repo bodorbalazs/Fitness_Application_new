@@ -1,30 +1,25 @@
-﻿using Fitness_Application_new.Controllers;
-using Fitness_Application_new.DTOs;
+﻿using Fitness_Application_new.DTOs;
 using FitnessApp.DAL.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Security.Claims;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using System.Security.Claims;
 
 namespace FitnessApp.IntegrationTests
 {
-    public class RatingIntegrationTest :IDisposable
+    public class FitnessExerciseIntegrationTest :IDisposable
     {
         private CustomWebApplicationFactory _factory;
         private HttpClient _client;
 
-        public RatingIntegrationTest()
+        public FitnessExerciseIntegrationTest()
         {
             _factory = new CustomWebApplicationFactory();
             _client = _factory.CreateClient();
@@ -32,70 +27,68 @@ namespace FitnessApp.IntegrationTests
         }
 
         [Fact]
-        public async Task GetAsync_ReturnsListOfRating()
+        public async Task GetAsync_ReturnsListOfFitnessExercise()
         {
             //// Arrange
-            var ratingList = new List<Rating>();
-            ratingList.Add(new Rating { Id = 10 ,value=2
-                });
-            
-            Task<IEnumerable<Rating>> mockRatings = Task.FromResult<IEnumerable<Rating>>(ratingList);
+            var fitnessExerciseList = new List<FitnessExercise>();
+            fitnessExerciseList.Add(new FitnessExercise
+            {
+                Id = 10,
+            });
 
-            _factory.RatingServiceMock
-                .Setup(r => r.GetRatingsAsync())
-                .Returns(mockRatings);
+            Task<IEnumerable<FitnessExercise>> mockFitnessExercises = Task.FromResult<IEnumerable<FitnessExercise>>(fitnessExerciseList);
+
+            _factory.FitnessExerciseServiceMock
+                .Setup(r => r.GetFitnessExercisesAsync())
+                .Returns(mockFitnessExercises);
 
             //// Act
-            var response = await _client.GetAsync("https://localhost:7252/api/Rating");
+            var response = await _client.GetAsync("https://localhost:7252/api/FitnessExercise");
 
             //// Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var unpackData = JsonConvert.DeserializeObject<IEnumerable<RatingDto>>(await response.Content.ReadAsStringAsync());
+            var unpackData = JsonConvert.DeserializeObject<IEnumerable<FitnessExerciseDto>>(await response.Content.ReadAsStringAsync());
             Assert.Collection(unpackData, r =>
             {
                 Assert.Equal(10, r.Id);
-                Assert.Equal(2, r.value);
             });
         }
 
         [Fact]
-        public async Task Get_ReturnsRating()
+        public async Task Get_ReturnsFitnessExercise()
         {
             // Arrange
-            var rating = new Rating
+            var exercise = new FitnessExercise
             {
                 Id = 10,
-                value = 2
             };
 
-            Task<Rating> mockRatings = Task.FromResult<Rating>(rating);
+            Task<FitnessExercise> mockFitnessExercises = Task.FromResult<FitnessExercise>(exercise);
 
-            _factory.RatingServiceMock
-                .Setup(r => r.GetRatingAsync(10))
-                .Returns(mockRatings);
+            _factory.FitnessExerciseServiceMock
+                .Setup(r => r.GetFitnessExerciseAsync(10))
+                .Returns(mockFitnessExercises);
 
             //// Act
-            var response = await _client.GetAsync("https://localhost:7252/api/Rating/10");
-            
+            var response = await _client.GetAsync("https://localhost:7252/api/FitnessExercise/10");
+
             //// Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var unpackData = JsonConvert.DeserializeObject<RatingDto>(await response.Content.ReadAsStringAsync());
-            Assert.Equal(2, unpackData!.value);
-            Assert.Equal(10,unpackData!.Id);
+            var unpackData = JsonConvert.DeserializeObject<FitnessExerciseDto>(await response.Content.ReadAsStringAsync());
+            Assert.Equal(10, unpackData!.Id);
         }
 
         [Fact]
         public async Task Post_ReturnsOkWithCreatedId()
         {
             //// Arrange
-            var rating = new Rating
+            var exercise = new FitnessExercise
             {
                 Id = 10,
-                value=3
             };
-            Task<Rating> mockRating = Task.FromResult<Rating>(rating);
+            Task<FitnessExercise> mockFitnessExercise = Task.FromResult<FitnessExercise>(exercise);
             var claims = new Dictionary<string, object>
             {
                 { ClaimTypes.Name, "test@test.com" },
@@ -105,13 +98,13 @@ namespace FitnessApp.IntegrationTests
             _client.SetFakeBearerToken(claims);
 
 
-            _factory.RatingServiceMock
-                .Setup(r => r.InsertRatingAsync(It.Is<Rating>(ra => ra.Id == 10)))
-                .Returns(mockRating)
+            _factory.FitnessExerciseServiceMock
+                .Setup(r => r.InsertFitnessExerciseAsync(It.Is<FitnessExercise>(e => e.Id == 10)))
+                .Returns(mockFitnessExercise)
                 ;
 
             //// Act
-            var response = await _client.PostAsync("https://localhost:7252/api/Rating", JsonContent.Create(rating));
+            var response = await _client.PostAsync("https://localhost:7252/api/FitnessExercise", JsonContent.Create(exercise));
 
             //// Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -123,10 +116,10 @@ namespace FitnessApp.IntegrationTests
             // Arrange
             var itemId = 10;
 
-            _factory.RatingServiceMock.Setup(service => service.DeleteRatingAsync(itemId)).Returns(Task.CompletedTask);
+            _factory.FitnessExerciseServiceMock.Setup(service => service.DeleteFitnessExerciseAsync(itemId)).Returns(Task.CompletedTask);
 
             // Act
-            var response = await _client.DeleteAsync("https://localhost:7252/api/Rating/10");
+            var response = await _client.DeleteAsync("https://localhost:7252/api/FitnessExercise/10");
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -136,19 +129,17 @@ namespace FitnessApp.IntegrationTests
         public async Task Put_ReturnsNoContentResult()
         {
             // Arrange
-            var Originalrating = new Rating
+            var Originalexercise = new FitnessExercise
             {
                 Id = 10,
                 FitnessPlanId = 10,
-                value=1
             };
 
-            var Changedrating = new Rating
+            var Changedexercise = new FitnessExercise
             {
                 Id = 10,
                 FitnessPlanId = 15,
-                value=2,
-                
+
             };
             var claims = new Dictionary<string, object>
             {
@@ -159,12 +150,11 @@ namespace FitnessApp.IntegrationTests
             _client.SetFakeBearerToken(claims);
 
             // Act
-            var response = await _client.PutAsync("https://localhost:7252/api/Rating/10", JsonContent.Create(Changedrating));
+            var response = await _client.PutAsync("https://localhost:7252/api/FitnessExercise/10", JsonContent.Create(Changedexercise));
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
-
         public void Dispose()
         {
             _client.Dispose();
