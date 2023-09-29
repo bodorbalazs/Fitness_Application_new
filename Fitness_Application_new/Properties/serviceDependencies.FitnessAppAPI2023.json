@@ -1,10 +1,15 @@
 {
   "dependencies": {
+    "mssql1": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection"
+    },
     "mssql2": {
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fitnessappapidbserver2023/databases/FitnessApp.API_db",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fitnessappapidbserver2023/databases/FitnessApp.API_db",
       "type": "mssql.azure",
-      "connectionId": "AzureDbConnection"
+      "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
 }
