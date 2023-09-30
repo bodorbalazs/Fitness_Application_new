@@ -12,7 +12,7 @@ namespace FitnessApp.BLL.Validators
     {
         public FavouriteItemValidation()
         {
-            RuleFor(x=>x.FitnessPlanId).NotEmpty();
+            RuleFor(x=>x.FitnessPlanId).NotEmpty().WithMessage("FitnessPlanId must not be empty");
         }
     }
 }
