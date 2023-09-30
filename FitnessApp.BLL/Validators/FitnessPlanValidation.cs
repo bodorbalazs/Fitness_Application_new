@@ -12,7 +12,6 @@ namespace FitnessApp.BLL.Validators
     {
         public FitnessPlanValidation()
         {
-            RuleFor(x => x.Id).NotNull().NotEmpty().WithMessage("Fitness plan Id must not be null");
             RuleFor(x => x.Name).Length(0, 20).WithMessage("Fitness plan name must be less than 20 characters");
         }
     }
