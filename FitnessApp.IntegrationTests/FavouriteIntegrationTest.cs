@@ -152,7 +152,9 @@ namespace FitnessApp.IntegrationTests
             //// Arrange
             var favourite = new FavouriteItem
             {
-                Id = 10
+                Id = 10,
+                FitnessPlanId = 2
+                
             };
             Task<FavouriteItem> mockFavouriteItem = Task.FromResult<FavouriteItem>(favourite);
 
