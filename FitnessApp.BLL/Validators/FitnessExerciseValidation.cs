@@ -12,7 +12,6 @@ namespace FitnessApp.BLL.Validators
     {
         public FitnessExerciseValidation()
         {
-            RuleFor(x=> x.Id).NotNull().NotEmpty();
             RuleFor(x=> x.Name).Length(0,30).WithMessage("Fitness Exercise name must be less than 30 characters");
             RuleFor(x => x.Difficulty).Length(0, 20).WithMessage("Difficulty must be less than 20 characters");
         }
