@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: Fitness_Application_new/ClientApp
 
     steps:
       - uses: actions/checkout@v2
@@ -26,6 +28,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
+        working-directory: ${{working-directory}}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
