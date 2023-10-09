@@ -13,6 +13,8 @@ using System.Text.Json.Serialization;
 using FluentValidation;
 using FitnessApp.BLL.Validators;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
+using System.Security.Cryptography.X509Certificates;
 
 public class Program
 {
@@ -43,6 +45,7 @@ public class Program
 
         builder.Services.AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+ //           .AddDeveloperSigningCredential();
 
         builder.Services.AddAuthentication()
             .AddIdentityServerJwt();
