@@ -23,7 +23,7 @@ export class FavouriteItemClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     getAll(): Observable<FavouriteItemDto[]> {
@@ -400,7 +400,7 @@ export class FitnessExerciseClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     getAll(): Observable<FitnessExerciseDto[]> {
@@ -720,7 +720,7 @@ export class FitnessPlanClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     getAll(): Observable<FitnessPlanDto[]> {
@@ -1045,7 +1045,7 @@ export class OidcConfigurationClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     getClientRequestParameters(clientId: string | null): Observable<FileResponse | null> {
@@ -1106,7 +1106,7 @@ export class RatingClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     getAll(): Observable<RatingDto[]> {
@@ -1531,7 +1531,7 @@ export class WeatherForecastClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7252";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://fitnessappapi2023.azurewebsites.net";
     }
 
     get(): Observable<WeatherForecast[]> {
