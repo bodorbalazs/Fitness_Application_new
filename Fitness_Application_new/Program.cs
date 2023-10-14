@@ -15,6 +15,7 @@ using FitnessApp.BLL.Validators;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Security.Cryptography.X509Certificates;
+using Azure.Storage.Blobs;
 
 public class Program
 {
@@ -32,6 +33,8 @@ public class Program
         builder.Services.AddScoped<IFitnessExerciseService, FitnessExerciseService>();
         builder.Services.AddScoped<IFitnessPlanService, FitnessPlanService>();
         builder.Services.AddScoped<IRatingService, RatingService>();
+
+        builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnectionString")));
 
 
         builder.Services.AddScoped<IValidator<FitnessPlanDto>, FitnessPlanValidation>();

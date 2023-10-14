@@ -1,4 +1,5 @@
 ﻿using FitnessApp.DAL.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Fitness_Application_new.Interfaces
 {
@@ -12,5 +13,6 @@ namespace Fitness_Application_new.Interfaces
 
         Task DeletePlansFitnessExerciseAsync(int FitnessPlanId);
 
+        Task InsertExercisePictureAsync(IFormFile file,string id);
     }
 }

@@ -3,16 +3,24 @@ using Fitness_Application_new.Interfaces;
 using FitnessApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Fitness_Application_new.Exceptions;
+using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
+using Azure.Storage.Blobs;
+using System.IO;
 
 namespace Fitness_Application_new.Services
 {
-    public class FitnessExerciseService :IFitnessExerciseService
+    public class FitnessExerciseService : IFitnessExerciseService
     {
         private readonly ApplicationDbContext _context;
+        private readonly BlobServiceClient _blobServiceClient;
+        private readonly BlobContainerClient _blobContainerClient;
 
-        public FitnessExerciseService(ApplicationDbContext context)
+        public FitnessExerciseService(ApplicationDbContext context, BlobServiceClient blobServiceClient)
         {
             _context = context;
+            _blobServiceClient = blobServiceClient;
+            _blobContainerClient = _blobServiceClient.GetBlobContainerClient("defaultpicturecontainer");
         }
 
         public async Task DeleteFitnessExerciseAsync(int FitnessExerciseId)
@@ -56,6 +64,17 @@ namespace Fitness_Application_new.Services
                 .ToListAsync();
 
             return favourites;
+        }
+
+        public async Task InsertExercisePictureAsync(IFormFile file, string id)
+        {
+            var blobClient = _blobContainerClient.GetBlobClient(id);
+            var status = await blobClient.UploadAsync(file.OpenReadStream());
+            var fitnessExercise= _context.fitnessExercise.First(a => a.Id == int.Parse(id));
+            fitnessExercise.PictureUrl = blobClient.Uri.AbsoluteUri;
+            await _context.SaveChangesAsync();
+
+            return;
         }
 
         public async Task<FitnessExercise> InsertFitnessExerciseAsync(FitnessExercise newFitnessExercise)
