@@ -4,9 +4,7 @@ using FitnessApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Fitness_Application_new.Exceptions;
 using Microsoft.AspNetCore.Http;
-using static System.Net.Mime.MediaTypeNames;
 using Azure.Storage.Blobs;
-using System.IO;
 
 namespace Fitness_Application_new.Services
 {
