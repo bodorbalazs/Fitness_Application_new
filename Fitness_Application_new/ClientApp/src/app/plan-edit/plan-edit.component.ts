@@ -118,7 +118,7 @@ export class PlanEditComponent {
                   myFormData.append('image', this.filedata);
                   myFormData.append('id',exerciseId.toString());
                   /* Image Post Request */
-                  this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
+                  this.http.post('https://fitnessappapi2023.azurewebsites.net/api/FitnessExercise/SavePicture', myFormData, {
                   headers: headers
                   }).subscribe(data => {
                    //Check success message

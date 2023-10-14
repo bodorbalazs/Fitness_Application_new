@@ -125,7 +125,7 @@ closeResult:string ="";
     myFormData.append('image', element.picture);
     myFormData.append('id',this.ExerciseId.toString());
     /* Image Post Request */
-    this.http.post('https://localhost:7252/api/FitnessExercise/SavePicture', myFormData, {
+    this.http.post('https://fitnessappapi2023.azurewebsites.net/api/FitnessExercise/SavePicture', myFormData, {
     headers: headers
     }).subscribe(data => {
      //Check success message
