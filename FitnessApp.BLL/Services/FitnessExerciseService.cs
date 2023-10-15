@@ -67,7 +67,7 @@ namespace Fitness_Application_new.Services
         public async Task InsertExercisePictureAsync(IFormFile file, string id)
         {
             var blobClient = _blobContainerClient.GetBlobClient(id);
-            var status = await blobClient.UploadAsync(file.OpenReadStream());
+            var status = await blobClient.UploadAsync(file.OpenReadStream(),overwrite: true);
             var fitnessExercise= _context.fitnessExercise.First(a => a.Id == int.Parse(id));
             fitnessExercise.PictureUrl = blobClient.Uri.AbsoluteUri;
             await _context.SaveChangesAsync();
