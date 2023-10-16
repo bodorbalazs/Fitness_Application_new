@@ -42,8 +42,6 @@ export class PlanDetailsComponent {
         this.fitnessExercises= element;
         this.fitnessExercises.forEach(exercise => {
           if(exercise.fitnessPlanId== this.eventId){
-            exercise.pictureUrl=exercise.pictureUrl + '&date=' + new Date().getTime();
-            console.log(exercise.pictureUrl);
             this.specifiedFitnessExercises.push(exercise);
           }
         });
