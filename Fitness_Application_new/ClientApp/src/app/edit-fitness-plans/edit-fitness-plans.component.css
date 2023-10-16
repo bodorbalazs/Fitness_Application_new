@@ -54,3 +54,8 @@ body,head,header {
  .card{
   height: 100%;
  }
+
+ ::ng-deep .blue-snackbar {
+  background: navy;
+}
+

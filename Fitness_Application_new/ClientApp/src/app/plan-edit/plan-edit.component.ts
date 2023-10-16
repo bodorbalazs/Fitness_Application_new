@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPlanDto } from '../clientservice/api.client';
 import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-plan-edit',
@@ -27,7 +28,8 @@ export class PlanEditComponent {
     private formBuilder: FormBuilder,
     private FitnessExerciseService : FitnessExerciseClient,
     private modalService:NgbModal,
-    private http:HttpClient)
+    private http:HttpClient,
+    private _snackBar: MatSnackBar)
     {
       this.editFitnessExerciseForm = this.formBuilder.group({
         id:0,
@@ -98,16 +100,16 @@ export class PlanEditComponent {
   }
 
   EditExerciseList(exerciseId:number){
-
-    this.FitnessExerciseService.put(exerciseId,new FitnessExerciseDto({
-                id:exerciseId,
-                name:this.editFitnessExerciseForm.get('name')?.value,
-                description:this.editFitnessExerciseForm.get('description')?.value,
-                pictureUrl:this.editFitnessExerciseForm.get('pictureUrl')?.value,
-                difficulty:this.editFitnessExerciseForm.get('difficulty')?.value,
-                fitnessPlanId:this.id
-                })
-                ).subscribe();
+    var newFitnessExercise=new FitnessExerciseDto({
+      id:exerciseId,
+      name:this.editFitnessExerciseForm.get('name')?.value,
+      description:this.editFitnessExerciseForm.get('description')?.value,
+      pictureUrl:this.editFitnessExerciseForm.get('pictureUrl')?.value,
+      difficulty:this.editFitnessExerciseForm.get('difficulty')?.value,
+      fitnessPlanId:this.id
+      })
+    this.FitnessExerciseService.put(exerciseId,
+      newFitnessExercise).subscribe();
 
                 if(this.filedata!=undefined){
       
@@ -123,9 +125,15 @@ export class PlanEditComponent {
                   }).subscribe(data => {
                    //Check success message
                    console.log(data);
-                   window.location.reload();
+                         //show the update
+                   let indexToUpdate = this.specifiedFitnessExercises.findIndex(item=> item.id=== exerciseId)
+                   this.specifiedFitnessExercises[indexToUpdate]=newFitnessExercise;
+                   //window.location.reload();
                   });
                 }
+
+      
+      this.openSnackBar("Fitness plan edited","dismiss");
       this.filedata = undefined;
   }
 
@@ -138,5 +146,13 @@ export class PlanEditComponent {
       difficulty:this.formBuilder.control(exercise.difficulty),
     })
   }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      verticalPosition: 'bottom', horizontalPosition: 'center',
+      duration: 2000,
+      panelClass: ['blue-snackbar']
+    });
+}
 
 }

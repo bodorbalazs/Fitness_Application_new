@@ -23,3 +23,7 @@ h1 {
   color: navy;
   margin-left: 20px;
 }
+
+::ng-deep .blue-snackbar {
+  background: navy;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
@@ -39,7 +39,6 @@ export class EditFitnessPlansComponent implements OnInit{
     private router: Router,
     private ratingService: RatingClient ,
     private favouriteService: FavouriteItemClient,
-    private changeDetection: ChangeDetectorRef,
     private _snackBar: MatSnackBar
     ) 
     {
@@ -68,9 +67,7 @@ export class EditFitnessPlansComponent implements OnInit{
      deleteFitnessPlan(id:number){
 
       this.fitnessPlanService.delete(id).subscribe();
-      this.fetchData();
       this.fitnessPlanList =this.fitnessPlanList.filter(item => item.id!=id)
-      //this.changeDetection.detectChanges();
       this.openSnackBar("Fitness plan deleted","dismiss");
     }
 
@@ -81,7 +78,9 @@ export class EditFitnessPlansComponent implements OnInit{
   }
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
+      verticalPosition: 'bottom', horizontalPosition: 'center',
       duration: 2000,
+      panelClass: ['blue-snackbar']
     });
 }
 }
