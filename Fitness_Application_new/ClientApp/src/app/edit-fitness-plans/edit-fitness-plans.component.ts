@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
@@ -37,7 +37,8 @@ export class EditFitnessPlansComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private ratingService: RatingClient ,
-    private favouriteService: FavouriteItemClient) 
+    private favouriteService: FavouriteItemClient,
+    private changeDetection: ChangeDetectorRef) 
     {
       this.addFitnessPlanForm = this.formBuilder.group({
         name: '',
@@ -65,6 +66,7 @@ export class EditFitnessPlansComponent implements OnInit{
 
       this.fitnessPlanService.delete(id).subscribe();
       this.fetchData();
+      this.changeDetection.detectChanges();
     }
 
     fetchData() {
