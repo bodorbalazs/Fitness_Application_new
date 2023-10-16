@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router, ParamMap } from '@angular/router';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-fitness-plans',
@@ -38,7 +39,9 @@ export class EditFitnessPlansComponent implements OnInit{
     private router: Router,
     private ratingService: RatingClient ,
     private favouriteService: FavouriteItemClient,
-    private changeDetection: ChangeDetectorRef) 
+    private changeDetection: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
+    ) 
     {
       this.addFitnessPlanForm = this.formBuilder.group({
         name: '',
@@ -66,7 +69,9 @@ export class EditFitnessPlansComponent implements OnInit{
 
       this.fitnessPlanService.delete(id).subscribe();
       this.fetchData();
-      this.changeDetection.detectChanges();
+      this.fitnessPlanList =this.fitnessPlanList.filter(item => item.id!=id)
+      //this.changeDetection.detectChanges();
+      this.openSnackBar("Fitness plan deleted","dismiss");
     }
 
     fetchData() {
@@ -74,4 +79,9 @@ export class EditFitnessPlansComponent implements OnInit{
         element =>{ this.fitnessPlanList = element
       });
   }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+}
 }

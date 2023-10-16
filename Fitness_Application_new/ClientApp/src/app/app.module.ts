@@ -21,6 +21,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
@@ -54,6 +55,7 @@ import { FavouritePlansComponent } from './favourite-plans/favourite-plans.compo
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     ApiAuthorizationModule,
