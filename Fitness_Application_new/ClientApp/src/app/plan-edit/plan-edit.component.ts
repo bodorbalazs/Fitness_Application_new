@@ -123,7 +123,7 @@ export class PlanEditComponent {
                   }).subscribe(data => {
                    //Check success message
                    console.log(data);
-                   //window.location.reload();
+                   window.location.reload();
                   });
                 }
       this.filedata = undefined;

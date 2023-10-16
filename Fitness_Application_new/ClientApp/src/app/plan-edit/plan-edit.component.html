@@ -32,7 +32,8 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="expanded">
-        <img src="https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/{{item.id}}" alt="ExeImage">
+        <img src={{item.pictureUrl}} alt="ExeImage"
+        onerror="this.src='https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/no-image-icon-15.png'">
         <p>{{item.description}}</p>
         <button type="button"  (click)="selectexercise(item);open(content)" >Edit exercise {{item.name}}</button>
         <ng-template #content let-modal>
