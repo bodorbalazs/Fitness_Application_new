@@ -15,7 +15,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 export class PlanEditComponent {
 
   id!:number;
-  specifiedPlan! : FitnessPlanDto;
+  specifiedPlan : FitnessPlanDto =new FitnessPlanDto;
   updateForm!: FormGroup ;
   editFitnessExerciseForm: FormGroup;
   fitnessExercises: FitnessExerciseDto[]=[];
