@@ -41,7 +41,7 @@
       <input type="text" id="name" name="name" formControlName="name" placeholder="Name of the Exercise">
     </p>
     <p>
-      <input type="text" id="description" name="description" formControlName="description" placeholder="Description of the Exercise">
+      <input type="text" id="description" name="description" formControlName="description" required="true" placeholder="Description of the Exercise">
     </p>
     <p>Picture of the exercise:</p>
       <input type="file" name="myFile" class="form-control mb-3" accept="image/png, image/jpg, image/gif, image/jpeg" (change)="fileEvent($event)"/>

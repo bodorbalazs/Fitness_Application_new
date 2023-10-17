@@ -127,13 +127,13 @@ export class PlanEditComponent {
                   }).subscribe(data => {
                    //Check success message
                    console.log(data);
-                         //show the update
-                   this.specifiedFitnessExercises[indexToUpdate]=newFitnessExercise;
+                         
+                   
                    window.location.reload();
                   });
                 }
-
-      
+      //show the update
+      this.specifiedFitnessExercises[indexToUpdate]=newFitnessExercise;
       this.openSnackBar("Fitness plan edited","dismiss");
       this.filedata = undefined;
   }
