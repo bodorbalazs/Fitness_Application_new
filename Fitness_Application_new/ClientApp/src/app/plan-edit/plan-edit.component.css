@@ -113,3 +113,7 @@
     text-align: center;
   }
   
+  ::ng-deep .blue-snackbar {
+    background:rgb(144, 201, 219);
+  }
+  

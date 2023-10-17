@@ -65,10 +65,13 @@ export class EditFitnessPlansComponent implements OnInit{
       this.router.navigate(['/plan-edit',id])
     }
      deleteFitnessPlan(id:number){
-
+      var fitnessPlanIndex= this.fitnessPlanList.findIndex(item => item.id = id);
+      var fitnessPlanName= this.fitnessPlanList[fitnessPlanIndex].name;
+      if(confirm("Are you sure you want to delete fitness plan " + fitnessPlanName + " ?")){
       this.fitnessPlanService.delete(id).subscribe();
       this.fitnessPlanList =this.fitnessPlanList.filter(item => item.id!=id)
       this.openSnackBar("Fitness plan deleted","dismiss");
+      }
     }
 
     fetchData() {

@@ -100,11 +100,13 @@ export class PlanEditComponent {
   }
 
   EditExerciseList(exerciseId:number){
+    let indexToUpdate = this.specifiedFitnessExercises.findIndex(item=> item.id=== exerciseId)
     var newFitnessExercise=new FitnessExerciseDto({
       id:exerciseId,
       name:this.editFitnessExerciseForm.get('name')?.value,
       description:this.editFitnessExerciseForm.get('description')?.value,
-      pictureUrl:this.editFitnessExerciseForm.get('pictureUrl')?.value,
+      //keep image url, it will be changed in the backend if there is a new one
+      pictureUrl:this.specifiedFitnessExercises[indexToUpdate].pictureUrl,
       difficulty:this.editFitnessExerciseForm.get('difficulty')?.value,
       fitnessPlanId:this.id
       })
@@ -126,9 +128,8 @@ export class PlanEditComponent {
                    //Check success message
                    console.log(data);
                          //show the update
-                   let indexToUpdate = this.specifiedFitnessExercises.findIndex(item=> item.id=== exerciseId)
                    this.specifiedFitnessExercises[indexToUpdate]=newFitnessExercise;
-                   //window.location.reload();
+                   window.location.reload();
                   });
                 }
 

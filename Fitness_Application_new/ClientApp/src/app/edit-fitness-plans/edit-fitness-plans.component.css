@@ -56,6 +56,6 @@ body,head,header {
  }
 
  ::ng-deep .blue-snackbar {
-  background: navy;
+  background:rgb(144, 201, 219);
 }
 
