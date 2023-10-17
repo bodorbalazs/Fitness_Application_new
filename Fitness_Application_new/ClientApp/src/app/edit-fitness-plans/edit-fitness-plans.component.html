@@ -1,25 +1,19 @@
-
 <div class="container">
-    <div class="row">
-
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of fitnessPlanList" >
-            <div class="card" style="width: 18rem">
-                
-                <div class="card-body">
-                      <cdk-virtual-scroll-viewport itemSize="50" >
-                        <div *cdkVirtualFor="let list of fitnessPlanList" >
-                           <li> {{list.name}} </li>
-                        </div>
-                      </cdk-virtual-scroll-viewport> 
-                  <h5 class="card-title text-center">{{item.name}} </h5>
-                  <p class = "card-text">Description: {{item.description}}</p>
-                  <td><button type="button"  (click)="onSelectToEdit(item.id)" >Edit Fitness Plan</button></td>
-                  <td><button type="button"  (click)="deleteFitnessPlan(item.id)" >Delete Fitness Plan</button></td>
-                
-              </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let item of fitnessPlanList">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <cdk-virtual-scroll-viewport itemSize="50">
+            <div *cdkVirtualFor="let list of fitnessPlanList">
+              <li> {{list.name}} </li>
             </div>
-            
-          </div>
+          </cdk-virtual-scroll-viewport>
+          <h5 class="card-title text-center">{{item.name}} </h5>
+          <p class="card-text">Description: {{item.description}}</p>
+          <td><button type="button" (click)="onSelectToEdit(item.id)">Edit Fitness Plan</button></td>
+          <td><button type="button" (click)="deleteFitnessPlan(item.id)">Delete Fitness Plan</button></td>
         </div>
-      
+      </div>
     </div>
+  </div>
+</div>

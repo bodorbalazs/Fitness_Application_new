@@ -1,13 +1,15 @@
-body,head,header {
-    background-color: lightblue;
-  }
-  
-  h1 {
-    color: navy;
-    margin-left: 20px;
-  }
+body,
+head,
+header {
+  background-color: lightblue;
+}
 
-.expansion{
+h1 {
+  color: navy;
+  margin-left: 20px;
+}
+
+.expansion {
   background-color: rgb(144, 201, 219);
   width: 100%;
 }
@@ -18,11 +20,10 @@ img {
   margin: 25px;
 }
 
-.expanded{
+.expanded {
   font-size: 24px;
   margin: 25px;
   outline: 1px black;
-  /* Setup */
   position: relative;
   text-align: center;
 }
@@ -32,7 +33,8 @@ img {
   display: block;
 }
 
-.title,.description{
+.title,
+.description {
   font-size: 25px;
   color: navy;
 }
@@ -47,26 +49,28 @@ img {
 .container .item {
   width: 50%;
 }
-ngb-rating{
-  color:rgb(61, 97, 225);
+
+ngb-rating {
+  color: rgb(61, 97, 225);
   font-size: 20px;
 }
 
-a{
-  font-size:20px;
-}
- 
-button{
+a {
   font-size: 20px;
 }
 
-.welcome,.welcometext{
+button {
+  font-size: 20px;
+}
+
+.welcome,
+.welcometext {
   font-size: 20px;
   color: navy;
   text-align: center;
 }
 
-b{
+b {
   margin: 20px;
   margin-bottom: 50px;
 }

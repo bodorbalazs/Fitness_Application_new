@@ -1,12 +1,12 @@
 <div class="welcome">
-<p class="welcometext">Here you can find the detailed information of the Fitness Plan :</p>
-<b>{{specifiedPlan?.name}}</b>
+  <p class="welcometext">Here you can find the detailed information of the Fitness Plan :</p>
+  <b>{{specifiedPlan.name}}</b>
 </div>
 
-<div *ngFor="let item of specifiedFitnessExercises" >
-<mat-accordion>
-    <mat-expansion-panel class="expansion" >
-      <mat-expansion-panel-header  collapsedHeight="40" expandedHeight="500">
+<div *ngFor="let item of specifiedFitnessExercises">
+  <mat-accordion>
+    <mat-expansion-panel class="expansion">
+      <mat-expansion-panel-header collapsedHeight="40" expandedHeight="500">
         <mat-panel-title class="title">
           Exercise: {{item?.name}}
         </mat-panel-title>
@@ -15,9 +15,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="expanded">
-      <img src={{item.pictureUrl}} alt="ExeImage" 
-      onerror="this.src='https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/no-image-icon-15.png'">
-      <p>{{item?.description}}</p>
+        <img src={{item.pictureUrl}} alt="ExeImage"
+          onerror="this.src='https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/no-image-icon-15.png'">
+        <p>{{item?.description}}</p>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
@@ -28,10 +28,9 @@
     <button class="btn btn-primary" (click)="onFavouritePlan()">{{btnVal}}</button>
   </div>
 
-<div class="item">
-<a>Rate this exercise:</a>
-<ngb-rating [(rate)]="currentRate"
-    (rateChange)="onRateChange($event)">
-</ngb-rating>
-</div>
+  <div class="item">
+    <a>Rate this exercise:</a>
+    <ngb-rating [(rate)]="currentRate" (rateChange)="onRateChange($event)">
+    </ngb-rating>
+  </div>
 </div>

@@ -8,9 +8,9 @@ describe('FavouritePlansComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavouritePlansComponent ]
+      declarations: [FavouritePlansComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FavouritePlansComponent);
     component = fixture.componentInstance;

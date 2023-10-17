@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -11,20 +11,20 @@ import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { FitnessPlansComponent } from './fitness-plans/fitness-plans.component';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon'
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
-import { FavouriteItemClient,RatingClient,FitnessExerciseClient,FitnessPlanClient } from './clientservice/api.client';
+import { FavouriteItemClient, RatingClient, FitnessExerciseClient, FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
 import { EditFitnessPlansComponent } from './edit-fitness-plans/edit-fitness-plans.component';
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
@@ -61,13 +61,13 @@ import { FavouritePlansComponent } from './favourite-plans/favourite-plans.compo
     ApiAuthorizationModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'fitness-plans',component: FitnessPlansComponent},
-      { path: 'create-fitness-plan',component:CreateFitnessPlanComponent,canActivate: [AuthorizeGuard]},
+      { path: 'fitness-plans', component: FitnessPlansComponent },
+      { path: 'create-fitness-plan', component: CreateFitnessPlanComponent, canActivate: [AuthorizeGuard] },
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'edit-fitness-plans',component: EditFitnessPlansComponent,canActivate: [AuthorizeGuard]},
-      { path: 'plan-edit/:id', component:PlanEditComponent,canActivate: [AuthorizeGuard]},
-      { path: 'plan-details/:id', component:PlanDetailsComponent,},
-      { path: 'favourite-plans',component: FavouritePlansComponent,canActivate: [AuthorizeGuard]}
+      { path: 'edit-fitness-plans', component: EditFitnessPlansComponent, canActivate: [AuthorizeGuard] },
+      { path: 'plan-edit/:id', component: PlanEditComponent, canActivate: [AuthorizeGuard] },
+      { path: 'plan-details/:id', component: PlanDetailsComponent, },
+      { path: 'favourite-plans', component: FavouritePlansComponent, canActivate: [AuthorizeGuard] }
     ]),
     NgbModule
   ],
