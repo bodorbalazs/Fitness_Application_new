@@ -23,7 +23,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-
 import { FavouriteItemClient, RatingClient, FitnessExerciseClient, FitnessPlanClient } from './clientservice/api.client';
 import { CreateFitnessPlanComponent } from './create-fitness-plan/create-fitness-plan.component';
 import { EditFitnessPlansComponent } from './edit-fitness-plans/edit-fitness-plans.component';

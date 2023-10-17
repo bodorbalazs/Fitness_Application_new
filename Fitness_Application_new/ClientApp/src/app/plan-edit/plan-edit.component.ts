@@ -68,7 +68,8 @@ export class PlanEditComponent {
       this.specifiedPlan.description = this.updateForm.get('description')?.value;
     }
     this.FitnessPlanService.put(this.id, this.specifiedPlan).subscribe();
-    this.router.navigate(['/edit-fitness-plans'])
+    this.openSnackBar("Fitness plan edited", "dismiss");
+    //this.router.navigate(['/edit-fitness-plans'])
   }
   onSelectBack() {
     this.router.navigate(['/edit-fitness-plans'])
@@ -131,7 +132,7 @@ export class PlanEditComponent {
     }
     //show the update
     this.specifiedFitnessExercises[indexToUpdate] = newFitnessExercise;
-    this.openSnackBar("Fitness plan edited", "dismiss");
+    this.openSnackBar("Fitness exercise edited", "dismiss");
     this.filedata = undefined;
   }
 
