@@ -34,6 +34,14 @@ button {
 
 }
 
+.deleteButton{
+  background-color: #d44551;
+}
+.deleteButton:hover{
+  background-color:#d11a2a;
+  transition: 0.7s;
+}
+
 .card-text {
   overflow: hidden;
   text-overflow: ellipsis;
