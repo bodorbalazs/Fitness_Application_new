@@ -10,7 +10,7 @@
           </cdk-virtual-scroll-viewport>
           <h5 class="card-title text-center">{{item.name}} </h5>
           <p class="card-text">Description: {{item.description}}</p>
-          <td><button type="button" (click)="onSelectToEdit(item.id)">Edit Fitness Plan</button></td>
+          <td><button class="mt-auto btn btn-outline-primary" (click)="onSelectToEdit(item.id)">Edit Fitness Plan</button></td>
           <td><button type="button" class="deleteButton" (click)="deleteFitnessPlan(item.id)">Delete Fitness Plan</button></td>
         </div>
       </div>

@@ -14,13 +14,13 @@
     <input id="description" type="text" formControlName="description" value={{specifiedPlan.description}}>
   </div>
 
-  <button class="button" type="submit">Save changes</button>
+  <button class="btn btn-outline-dark" type="submit">Save changes</button>
   <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
-  <button type="button" (click)="open(addcontent)">Add exercise</button>
+  <button type="button" class="btn btn-outline-dark" (click)="open(addcontent)">Add exercise</button>
   <ng-template #addcontent let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="add-exercise-modal-title">Add an exercise for your plan</h4>
-      <button type="button" class="close" aria-label="Close" style="width:20%" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="btn btn-outline-dark" class="close" aria-label="Close" style="width:20%" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -67,11 +67,11 @@
         <img src={{item.pictureUrl}} alt="ExeImage"
           onerror="this.src='https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/no-image-icon-15.png'">
         <p>{{item.description}}</p>
-        <button type="button" (click)="selectexercise(item);open(content)">Edit exercise {{item.name}}</button>
+        <button type="button" class="btn btn-outline-dark" (click)="selectexercise(item);open(content)">Edit exercise {{item.name}}</button>
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Edit exercise {{item.name}}</h4>
-            <button type="button" class="close" aria-label="Close" style="width:20%"
+            <button type="button" class="btn btn-outline-dark" class="close" aria-label="Close" style="width:20%"
               (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
