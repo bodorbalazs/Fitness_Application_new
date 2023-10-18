@@ -16,6 +16,40 @@
 
   <button class="button" type="submit">Save changes</button>
   <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
+  <button type="button" (click)="open(addcontent)">Add exercise</button>
+  <ng-template #addcontent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="add-exercise-modal-title">Add an exercise for your plan</h4>
+      <button type="button" class="close" aria-label="Close" style="width:20%" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form [formGroup]="addFitnessExerciseForm">
+        <p>
+          <input type="text" id="name" name="name" formControlName="name" placeholder="Name of the Exercise">
+        </p>
+        <p>
+          <input type="text" id="description" name="description" formControlName="description" required="true"
+            placeholder="Description of the Exercise">
+        </p>
+        <p>Picture of the exercise:</p>
+        <input type="file" name="myFile" class="form-control mb-3" accept="image/png, image/jpg, image/gif, image/jpeg"
+          (change)="fileEvent($event)" />
+
+        <p>Difficulty of the exercise:</p>
+        <p>
+          <input type="text" id="difficulty" name="difficulty" formControlName="difficulty">
+        </p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="AddToExerciseList();modal.close('Save click')">Add a new
+        exercise to the event</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click') ">close window</button>
+    </div>
+  </ng-template>
 </form>
 
 <div *ngFor="let item of specifiedFitnessExercises">

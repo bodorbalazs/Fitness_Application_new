@@ -6,6 +6,7 @@ import { FitnessExerciseClient, FitnessExerciseDto, FitnessPlanClient, FitnessPl
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-plan-edit',
@@ -18,8 +19,10 @@ export class PlanEditComponent {
   specifiedPlan: FitnessPlanDto = new FitnessPlanDto;
   updateForm!: FormGroup;
   editFitnessExerciseForm: FormGroup;
+  addFitnessExerciseForm: FormGroup;
   fitnessExercises: FitnessExerciseDto[] = [];
   specifiedFitnessExercises: FitnessExerciseDto[] = [];
+  fitnessExerciseToBeAdded: FitnessExerciseDto[] = [];
   closeResult: string = "";
   filedata: any = undefined;
   constructor(private route: ActivatedRoute,
@@ -31,6 +34,13 @@ export class PlanEditComponent {
     private http: HttpClient,
     private _snackBar: MatSnackBar) {
     this.editFitnessExerciseForm = this.formBuilder.group({
+      id: 0,
+      name: '',
+      description: '',
+      pictureUrl: '',
+      difficulty: '',
+    })
+    this.addFitnessExerciseForm = this.formBuilder.group({
       id: 0,
       name: '',
       description: '',
@@ -152,5 +162,43 @@ export class PlanEditComponent {
       duration: 2000,
       panelClass: ['blue-snackbar']
     });
+  }
+  async AddToExerciseList() {
+    var newFitnessExercise = new FitnessExerciseDto({
+      id: 0,
+      name: this.addFitnessExerciseForm.get('name')?.value,
+      description: this.addFitnessExerciseForm.get('description')?.value,
+      difficulty: this.addFitnessExerciseForm.get('difficulty')?.value,
+      fitnessPlanId: this.id
+    })
+    //exercise save
+    const exerciseResponse$ = this.FitnessExerciseService.addFitnessExercise(newFitnessExercise);
+      var lastExercise = await lastValueFrom(exerciseResponse$);
+      var newExerciseId = Number(await lastExercise?.data.text());
+
+      //picture save
+    if (this.filedata != undefined) {
+
+      var myFormData = new FormData();
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'multipart/form-data');
+      headers.append('Accept', 'application/json');
+      myFormData.append('image', this.filedata);
+      myFormData.append('id', newExerciseId.toString());
+      /* Image Post Request */
+      this.http.post('https://fitnessappapi2023.azurewebsites.net/api/FitnessExercise/SavePicture', myFormData, {
+        headers: headers
+      }).subscribe(data => {
+        //Check success message
+        console.log(data);
+
+
+        window.location.reload();
+      });
+    }
+    //show the update
+    this.specifiedFitnessExercises.push(newFitnessExercise);
+    this.openSnackBar("Fitness exercise added", "dismiss");
+    this.filedata = undefined;
   }
 }
