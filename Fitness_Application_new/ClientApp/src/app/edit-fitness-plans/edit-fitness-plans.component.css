@@ -34,10 +34,10 @@ button {
 
 }
 
-.deleteButton{
+button.deleteButton{
   background-color: #d44551;
 }
-.deleteButton:hover{
+button.deleteButton:hover{
   background-color:#d11a2a;
   transition: 0.7s;
 }
