@@ -13,10 +13,11 @@
     </label>
     <input id="description" type="text" formControlName="description" value={{specifiedPlan.description}}>
   </div>
-
-  <button class="btn btn-outline-dark" type="submit">Save changes</button>
-  <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
-  <button type="button" class="btn btn-outline-dark" (click)="open(addcontent)">Add exercise</button>
+  <div>
+    <button type="button" class="btn btn-outline-dark" type="submit">Save changes</button>
+    <button type="button" class="btn btn-outline-dark" (click)="onSelectBack()">Back to Owned Fitness Plans </button>
+    <button type="button" class="btn btn-outline-dark" (click)="open(addcontent)">Add exercise</button>
+  </div>
   <ng-template #addcontent let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="add-exercise-modal-title">Add an exercise for your plan</h4>
