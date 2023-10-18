@@ -201,4 +201,11 @@ export class PlanEditComponent {
     this.openSnackBar("Fitness exercise added", "dismiss");
     this.filedata = undefined;
   }
+  deleteExercise(exerciseToDelete: FitnessExerciseDto){
+    if (confirm("Are you sure you want to delete fitness exercie " + exerciseToDelete.name + " ?")) {
+    this.FitnessExerciseService.delete(exerciseToDelete.id).subscribe();
+    this.specifiedFitnessExercises = this.specifiedFitnessExercises.filter(item=> item.id!=exerciseToDelete.id)
+    this.openSnackBar("Fitness exercise deleted", "dismiss");
+    }
+  }
 }

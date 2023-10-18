@@ -68,7 +68,10 @@
         <img src={{item.pictureUrl}} alt="ExeImage"
           onerror="this.src='https://fitnesspicturestorage.blob.core.windows.net/defaultpicturecontainer/no-image-icon-15.png'">
         <p>{{item.description}}</p>
-        <button type="button" class="btn btn-outline-dark" (click)="selectexercise(item);open(content)">Edit exercise {{item.name}}</button>
+        <div>
+          <button type="button" class="btn btn-outline-dark" (click)="selectexercise(item);open(content)">Edit exercise {{item.name}}</button>
+          <button type="button" class="btn btn-danger" (click)="deleteExercise(item)">Delete exercise {{item.name}}</button>
+        </div>
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Edit exercise {{item.name}}</h4>
