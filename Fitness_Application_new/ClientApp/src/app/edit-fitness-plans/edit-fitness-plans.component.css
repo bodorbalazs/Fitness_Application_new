@@ -26,12 +26,16 @@ button {
 
   padding: 10px;
   border: none;
-  background-color: #3F51B5;
+  background-color: #5866b6;
   color: #fff;
   font-weight: 600;
   border-radius: 5px;
   width: 100%;
 
+}
+button:hover{
+  background-color:#3F51B5;
+  transition: 0.7s;
 }
 
 button.deleteButton{
