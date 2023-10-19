@@ -33,18 +33,6 @@ button {
   width: 100%;
 
 }
-button:hover{
-  background-color:#3F51B5;
-  transition: 0.7s;
-}
-
-button.deleteButton{
-  background-color: #d44551;
-}
-button.deleteButton:hover{
-  background-color:#d11a2a;
-  transition: 0.7s;
-}
 
 .card-text {
   overflow: hidden;
