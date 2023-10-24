@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Event } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { FileResponse } from '../clientservice/api.client';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 interface FitnessExerciseWithPicture {
   fitnessExercise: FitnessExerciseDto;
@@ -37,7 +38,8 @@ export class CreateFitnessPlanComponent implements OnInit {
     private fitnessExerciseService: FitnessExerciseClient,
     private authorizeService: AuthorizeService,
     private modalService: NgbModal,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private _snackBar: MatSnackBar) {
     this.addFitnessPlanForm = this.formBuilder.group({
       name: '',
       description: ''
@@ -87,6 +89,17 @@ export class CreateFitnessPlanComponent implements OnInit {
 
     if (!Number.isNaN(createdPlanId))
       this.setExercisesForEvent(createdPlanId);
+      window.location.reload();
+      this.openSnackBar("Fitness Plan created","dismiss");
+
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      verticalPosition: 'bottom', horizontalPosition: 'center',
+      duration: 2000,
+      panelClass: ['blue-snackbar']
+    });
   }
 
 
