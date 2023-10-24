@@ -69,6 +69,9 @@ export class CreateFitnessPlanComponent implements OnInit {
       }),
       picture: this.filedata
     })
+    this.addFitnessExerciseForm.get('name')?.setValue('');
+    this.addFitnessExerciseForm.get('description')?.setValue('');
+    this.addFitnessExerciseForm.get('difficulty')?.setValue('');
     this.filedata = undefined;
   }
 
