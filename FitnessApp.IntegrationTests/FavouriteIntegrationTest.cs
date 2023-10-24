@@ -104,8 +104,8 @@ namespace FitnessApp.IntegrationTests
             favouriteList.Add(new FavouriteItem
             {
                 Id = 10,
-                ApplicationUserId="testId"
-                
+                ApplicationUserId = "testId"
+
             });
             favouriteList.Add(new FavouriteItem
             {
@@ -154,7 +154,7 @@ namespace FitnessApp.IntegrationTests
             {
                 Id = 10,
                 FitnessPlanId = 2
-                
+
             };
             Task<FavouriteItem> mockFavouriteItem = Task.FromResult<FavouriteItem>(favourite);
 
@@ -168,7 +168,7 @@ namespace FitnessApp.IntegrationTests
 
 
             _factory.FavouriteItemServiceMock
-                .Setup(r => r.InsertFavouriteItemAsync(It.Is<FavouriteItem>(f=>f.Id==10)))
+                .Setup(r => r.InsertFavouriteItemAsync(It.Is<FavouriteItem>(f => f.Id == 10)))
                 .Returns(mockFavouriteItem)
                 ;
 

@@ -11,7 +11,6 @@ namespace FitnessApp.API.Automapper
             CreateMap<FavouriteItem, FavouriteItemDto>().ReverseMap();
             CreateMap<FitnessPlan, FitnessPlanDto>().ReverseMap();
             CreateMap<FitnessExercise, FitnessExerciseDto>().ReverseMap();
-               // .ForSourceMember(source=> source.File, opt=>opt.DoNotValidate());
             CreateMap<Rating, RatingDto>().ReverseMap();
         }
     }

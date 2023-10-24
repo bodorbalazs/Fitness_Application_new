@@ -14,7 +14,7 @@ using System.Security.Claims;
 
 namespace FitnessApp.IntegrationTests
 {
-    public class FitnessPlanIntegrationTest :IDisposable
+    public class FitnessPlanIntegrationTest : IDisposable
     {
         private CustomWebApplicationFactory _factory;
         private HttpClient _client;

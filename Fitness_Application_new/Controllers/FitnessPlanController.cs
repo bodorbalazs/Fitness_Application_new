@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Cors;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
     [EnableCors("CorsPolicy")]
     public class FitnessPlanController : Controller
@@ -29,7 +28,7 @@ namespace Fitness_Application_new.Controllers
 
 
         public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService,
-            IMapper mapper,IRatingService ratingService,IFavouriteItemService favouriteItemService,
+            IMapper mapper, IRatingService ratingService, IFavouriteItemService favouriteItemService,
             IFitnessExerciseService fitnessExerciseService)
         {
             _context = context;
@@ -40,14 +39,12 @@ namespace Fitness_Application_new.Controllers
             _fitnessExerciseService = fitnessExerciseService;
         }
 
-        // GET: Favourites
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FitnessPlanDto>>> GetAsync()
         {
             return _mapper.Map<List<FitnessPlanDto>>(await _fitnessPlanService.GetFitnessPlansAsync());
         }
 
-        // GET: Favourites/Details/5
         [HttpGet("{id}")]
         public async Task<FitnessPlanDto> Get(int id)
         {
@@ -61,9 +58,6 @@ namespace Fitness_Application_new.Controllers
             return _mapper.Map<List<FitnessPlanDto>>(await _fitnessPlanService.GetUserFitnessPlansAsync(userId));
         }
 
-        // POST: Favourites/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public async Task<IActionResult> AddFitnessPlan([FromBody] FitnessPlanDto NewFitnessPlan)
         {
@@ -71,15 +65,9 @@ namespace Fitness_Application_new.Controllers
             NewFitnessPlan.ApplicationUserId = userId;
             var created = await _fitnessPlanService
                 .InsertFitnessPlanAsync(_mapper.Map<FitnessApp.DAL.Models.FitnessPlan>(NewFitnessPlan));
-            /*return CreatedAtAction(
-                        nameof(Get),
-                        new { id = created.Id },
-                        _mapper.Map<FitnessPlanDto>(created)
-            );*/
             return Ok(created.Id);
         }
 
-        // GET: Favourites/Edit/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessPlanDto fitnessPlan)
         {
@@ -89,17 +77,11 @@ namespace Fitness_Application_new.Controllers
             return NoContent();
         }
 
-        // GET: Favourites/Delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _fitnessPlanService.DeleteFitnessPlanAsync(id);
             return NoContent();
-        }
-
-        private bool FitnessPlanExists(int id)
-        {
-            return _context.fitnessPlan.Any(e => e.Id == id);
         }
     }
 }

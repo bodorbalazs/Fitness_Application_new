@@ -14,17 +14,6 @@ namespace FitnessApp.DAL.Data
         {
 
         }
-
-        /*protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<FavouriteItem>().
-                HasKey(x => new {x.ApplicationUserId,x.FitnessPlanId});
-            builder.Entity<FavouriteItem>()
-                .HasOne(x => x.FitnessPlanId);
-            base.OnModelCreating(builder);
-
-        }*/
-        //disable cascading delete
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Rating>().HasData(new Rating { Id = 1, value = 0 });

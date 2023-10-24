@@ -79,7 +79,6 @@ export class PlanEditComponent {
     }
     this.FitnessPlanService.put(this.id, this.specifiedPlan).subscribe();
     this.openSnackBar("Fitness plan edited", "dismiss");
-    //this.router.navigate(['/edit-fitness-plans'])
   }
   onSelectBack() {
     this.router.navigate(['/edit-fitness-plans'])

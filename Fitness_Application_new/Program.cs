@@ -22,7 +22,7 @@ public class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-         
+
         // Add services to the container.
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -48,7 +48,6 @@ public class Program
 
         builder.Services.AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
- //           .AddDeveloperSigningCredential();
 
         builder.Services.AddAuthentication()
             .AddIdentityServerJwt();
@@ -65,8 +64,6 @@ public class Program
                         feature.AddPolicy(
                             "CorsPolicy",
                             apiPolicy => apiPolicy
-                                            //.AllowAnyOrigin()
-                                            //.WithOrigins("http://localhost:4200")
                                             .AllowAnyHeader()
                                             .AllowAnyMethod()
                                             .SetIsOriginAllowed(host => true)

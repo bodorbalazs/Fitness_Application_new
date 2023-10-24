@@ -30,11 +30,10 @@ namespace Fitness_Application_new.Controllers
             _mapper = mapper;
         }
 
-        // GET: Favourites
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FavouriteItemDto>>> GetAsync()
         {
-             return _mapper.Map<List<FavouriteItemDto>>(await _favouriteItemService.GetFavouriteItemsAsync());
+            return _mapper.Map<List<FavouriteItemDto>>(await _favouriteItemService.GetFavouriteItemsAsync());
         }
 
         [HttpGet("GetUsersFavourites")]
@@ -51,16 +50,12 @@ namespace Fitness_Application_new.Controllers
             return _mapper.Map<FavouriteItemDto>(await _favouriteItemService.GetPlanUsersFavouriteItemAsync(userId, id));
         }
 
-        // GET: Favourites/Details/5
         [HttpGet("{id}")]
         public async Task<FavouriteItemDto> Get(int id)
         {
             return _mapper.Map<FavouriteItemDto>(await _favouriteItemService.GetFavouriteItemAsync(id));
         }
 
-        // POST: Favourites/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public async Task<IActionResult> AddFavouriteItem([FromBody] FavouriteItemDto Newfavourite)
         {
@@ -68,15 +63,9 @@ namespace Fitness_Application_new.Controllers
             Newfavourite.ApplicationUserId = userId;
             var created = await _favouriteItemService
                 .InsertFavouriteItemAsync(_mapper.Map<FitnessApp.DAL.Models.FavouriteItem>(Newfavourite));
-            /*return CreatedAtAction(
-                        nameof(Get),
-                        new { id = created.Id },
-                        _mapper.Map<FavouriteItemDto>(created)
-            );*/
             return Ok(created.Id);
         }
 
-        // GET: Favourites/Edit/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FavouriteItemDto favourite)
         {
@@ -86,17 +75,11 @@ namespace Fitness_Application_new.Controllers
             return NoContent();
         }
 
-        // GET: Favourites/Delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _favouriteItemService.DeleteFavouriteItemAsync(id);
             return NoContent();
-        }
-
-        private bool FavouriteExists(int id)
-        {
-            return _context.favouriteItems.Any(e => e.Id == id);
         }
     }
 }

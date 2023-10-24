@@ -68,8 +68,8 @@ namespace Fitness_Application_new.Services
         {
             var dt = DateTime.Now;
             var blobClient = _blobContainerClient.GetBlobClient(id + dt.ToLongTimeString());
-            var status = await blobClient.UploadAsync(file.OpenReadStream(),overwrite: true);
-            var fitnessExercise= _context.fitnessExercise.First(a => a.Id == int.Parse(id));
+            var status = await blobClient.UploadAsync(file.OpenReadStream(), overwrite: true);
+            var fitnessExercise = _context.fitnessExercise.First(a => a.Id == int.Parse(id));
             fitnessExercise.PictureUrl = blobClient.Uri.AbsoluteUri;
             await _context.SaveChangesAsync();
 

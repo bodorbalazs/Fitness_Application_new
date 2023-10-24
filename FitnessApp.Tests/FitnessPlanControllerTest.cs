@@ -88,9 +88,5 @@ namespace FitnessApp.Tests
             Assert.Equal(StatusCodes.Status204NoContent, actionResult.StatusCode);
             _fitnessPlanServiceMock.Verify(service => service.DeleteFitnessPlanAsync(planId), Times.Once);
         }
-
-
-
-
     }
 }

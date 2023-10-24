@@ -89,7 +89,8 @@ export class CreateFitnessPlanComponent implements OnInit {
 
     if (!Number.isNaN(createdPlanId))
       this.setExercisesForEvent(createdPlanId);
-      window.location.reload();
+      this.addFitnessPlanForm.get('name')?.setValue('');
+      this.addFitnessPlanForm.get('description')?.setValue('');
       this.openSnackBar("Fitness Plan created","dismiss");
 
   }

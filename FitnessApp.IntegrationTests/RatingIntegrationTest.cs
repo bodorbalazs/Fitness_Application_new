@@ -19,7 +19,7 @@ using Xunit;
 
 namespace FitnessApp.IntegrationTests
 {
-    public class RatingIntegrationTest :IDisposable
+    public class RatingIntegrationTest : IDisposable
     {
         private CustomWebApplicationFactory _factory;
         private HttpClient _client;
@@ -36,9 +36,12 @@ namespace FitnessApp.IntegrationTests
         {
             //// Arrange
             var ratingList = new List<Rating>();
-            ratingList.Add(new Rating { Id = 10 ,value=2
-                });
-            
+            ratingList.Add(new Rating
+            {
+                Id = 10,
+                value = 2
+            });
+
             Task<IEnumerable<Rating>> mockRatings = Task.FromResult<IEnumerable<Rating>>(ratingList);
 
             _factory.RatingServiceMock
@@ -77,13 +80,13 @@ namespace FitnessApp.IntegrationTests
 
             //// Act
             var response = await _client.GetAsync("https://localhost:7252/api/Rating/10");
-            
+
             //// Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var unpackData = JsonConvert.DeserializeObject<RatingDto>(await response.Content.ReadAsStringAsync());
             Assert.Equal(2, unpackData!.value);
-            Assert.Equal(10,unpackData!.Id);
+            Assert.Equal(10, unpackData!.Id);
         }
 
         [Fact]
@@ -93,7 +96,7 @@ namespace FitnessApp.IntegrationTests
             var rating = new Rating
             {
                 Id = 10,
-                value=3
+                value = 3
             };
             Task<Rating> mockRating = Task.FromResult<Rating>(rating);
             var claims = new Dictionary<string, object>
@@ -140,15 +143,15 @@ namespace FitnessApp.IntegrationTests
             {
                 Id = 10,
                 FitnessPlanId = 10,
-                value=1
+                value = 1
             };
 
             var Changedrating = new Rating
             {
                 Id = 10,
                 FitnessPlanId = 15,
-                value=2,
-                
+                value = 2,
+
             };
             var claims = new Dictionary<string, object>
             {

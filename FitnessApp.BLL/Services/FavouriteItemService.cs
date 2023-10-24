@@ -6,7 +6,7 @@ using Fitness_Application_new.Exceptions;
 
 namespace Fitness_Application_new.Services
 {
-    public class FavouriteItemService :IFavouriteItemService
+    public class FavouriteItemService : IFavouriteItemService
     {
         private readonly ApplicationDbContext _context;
 
@@ -51,7 +51,7 @@ namespace Fitness_Application_new.Services
             });
         }
 
-            public async Task<FavouriteItem> GetFavouriteItemAsync(int FavouriteItemId)
+        public async Task<FavouriteItem> GetFavouriteItemAsync(int FavouriteItemId)
         {
             return (await _context.favouriteItems
 
@@ -73,7 +73,7 @@ namespace Fitness_Application_new.Services
             return (await _context.favouriteItems
 
 
-               .SingleOrDefaultAsync(e => e.ApplicationUserId == userId && e.FitnessPlanId== FitnessplanId))
+               .SingleOrDefaultAsync(e => e.ApplicationUserId == userId && e.FitnessPlanId == FitnessplanId))
                ?? throw new EntityNotFoundException("Nem található a favourite");
         }
 
@@ -110,6 +110,6 @@ namespace Fitness_Application_new.Services
             }
         }
 
-        
+
     }
 }

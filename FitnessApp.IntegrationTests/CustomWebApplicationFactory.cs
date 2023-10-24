@@ -30,9 +30,9 @@ namespace FitnessApp.IntegrationTests
         public CustomWebApplicationFactory()
         {
             FavouriteItemServiceMock = new Mock<IFavouriteItemService>();
-            RatingServiceMock= new Mock<IRatingService>();
-            FitnessExerciseServiceMock= new Mock<IFitnessExerciseService>();
-            FitnessPlanServiceMock= new Mock<IFitnessPlanService>();
+            RatingServiceMock = new Mock<IRatingService>();
+            FitnessExerciseServiceMock = new Mock<IFitnessExerciseService>();
+            FitnessPlanServiceMock = new Mock<IFitnessPlanService>();
         }
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

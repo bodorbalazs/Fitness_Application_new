@@ -36,10 +36,10 @@ namespace Fitness_Application_new.Services
         {
             _context.rating.RemoveRange(_context.rating
                 .Where(e => e.FitnessPlanId == FitnessPlanId));
-            
+
 
         }
-            public async Task<Rating> GetRatingAsync(int RatingId)
+        public async Task<Rating> GetRatingAsync(int RatingId)
         {
             return (await _context.rating
 
@@ -48,22 +48,21 @@ namespace Fitness_Application_new.Services
                ?? throw new EntityNotFoundException("Nem található a rating");
         }
 
-        public async Task<Rating> GetUserSpecificEventRating(int planId,string userId)
+        public async Task<Rating> GetUserSpecificEventRating(int planId, string userId)
         {
             return (await _context.rating
-                .OrderBy(e=>e.Id)
+                .OrderBy(e => e.Id)
                .LastOrDefaultAsync(e => e.FitnessPlanId == planId && e.ApplicationUserId == userId))
-               ??  new Rating();
+               ?? new Rating();
         }
 
         public async Task<int> GetSpecificEventAverageScore(int planId)
         {
-            //var ratingList = await _context.rating.Where(r => r.FitnessPlanId == planId).ToListAsync();
             var ratingList = await _context.rating.Where(r => r.FitnessPlanId == planId).ToListAsync();
             int avgRating = 0;
-            ratingList.ForEach(rating =>  avgRating = avgRating + rating.value
+            ratingList.ForEach(rating => avgRating = avgRating + rating.value
             );
-            if(ratingList.Count > 0)
+            if (ratingList.Count > 0)
             {
                 return avgRating / ratingList.Count;
             }
@@ -71,7 +70,7 @@ namespace Fitness_Application_new.Services
             {
                 return 0;
             }
-                
+
         }
 
         public async Task<IEnumerable<Rating>> GetRatingsAsync()

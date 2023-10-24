@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Cors;
 namespace Fitness_Application_new.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
     [EnableCors("CorsPolicy")]
     public class FitnessExerciseController : Controller
@@ -27,29 +26,24 @@ namespace Fitness_Application_new.Controllers
             _mapper = mapper;
         }
 
-        // GET: Favourites
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FitnessExerciseDto>>> GetAsync()
         {
             return _mapper.Map<List<FitnessExerciseDto>>(await _fitnessExerciseService.GetFitnessExercisesAsync());
         }
 
-        // GET: Favourites/Details/5
         [HttpGet("{id}")]
         public async Task<FitnessExerciseDto> Get(int id)
         {
             return _mapper.Map<FitnessExerciseDto>(await _fitnessExerciseService.GetFitnessExerciseAsync(id));
         }
 
-        // POST: Favourites/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("SavePicture")]
-        public async Task<IActionResult> AddExercisePicture([FromForm] IFormFile image,[FromForm] string id)
+        public async Task<IActionResult> AddExercisePicture([FromForm] IFormFile image, [FromForm] string id)
         {
             try
             {
-                await _fitnessExerciseService.InsertExercisePictureAsync(image,id);
+                await _fitnessExerciseService.InsertExercisePictureAsync(image, id);
 
             }
             catch (Exception ex)
@@ -58,8 +52,8 @@ namespace Fitness_Application_new.Controllers
             }
             return Ok();
         }
-        
-        
+
+
         [HttpPost]
         public async Task<IActionResult> AddFitnessExercise([FromBody] FitnessExerciseDto NewFitnessExercise)
         {
@@ -68,7 +62,6 @@ namespace Fitness_Application_new.Controllers
             return Ok(created.Id);
         }
 
-        // GET: Favourites/Edit/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FitnessExerciseDto fitnessExercise)
         {
@@ -76,17 +69,11 @@ namespace Fitness_Application_new.Controllers
             return NoContent();
         }
 
-        // GET: Favourites/Delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _fitnessExerciseService.DeleteFitnessExerciseAsync(id);
             return NoContent();
-        }
-
-        private bool FitnessExerciseExists(int id)
-        {
-            return _context.fitnessExercise.Any(e => e.Id == id);
         }
     }
 }

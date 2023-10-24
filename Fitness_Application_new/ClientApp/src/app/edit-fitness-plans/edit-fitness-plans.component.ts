@@ -69,6 +69,7 @@ export class EditFitnessPlansComponent implements OnInit {
     if (confirm("Are you sure you want to delete fitness plan " + fitnessPlanName + " ?")) {
       this.fitnessPlanService.delete(deleteId).subscribe();
       this.fitnessPlanList = this.fitnessPlanList.filter(item => item.id != deleteId)
+      console.log("plan to delete id:" + deleteId);
       this.openSnackBar("Fitness plan deleted", "dismiss");
     }
   }

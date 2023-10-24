@@ -74,7 +74,7 @@ namespace FitnessApp.Tests
         public async Task AddFitnessExercise_ReturnsOkResultWithExerciseId()
         {
             // Arrange
-            var mockExerciseDto = new FitnessExerciseDto(); 
+            var mockExerciseDto = new FitnessExerciseDto();
             var mockExercise = new FitnessExercise { Id = 10 };
 
             _fitnessExerciseServiceMock.Setup(service =>
@@ -95,7 +95,7 @@ namespace FitnessApp.Tests
         public async Task Put_ReturnsNoContentResult()
         {
             // Arrange
-            var exerciseId = 10; 
+            var exerciseId = 10;
             var mockExerciseDto = new FitnessExerciseDto();
 
             // Act
