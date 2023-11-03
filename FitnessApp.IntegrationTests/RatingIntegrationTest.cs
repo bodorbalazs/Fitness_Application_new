@@ -125,6 +125,13 @@ namespace FitnessApp.IntegrationTests
         {
             // Arrange
             var itemId = 10;
+            var claims = new Dictionary<string, object>
+            {
+                { ClaimTypes.Name, "test@test.com" },
+                { ClaimTypes.Role, "user" },
+                { ClaimTypes.NameIdentifier, "testId" }
+            };
+            _client.SetFakeBearerToken(claims);
 
             _factory.RatingServiceMock.Setup(service => service.DeleteRatingAsync(itemId)).Returns(Task.CompletedTask);
 
