@@ -52,7 +52,7 @@ namespace Fitness_Application_new.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return await _ratingService.GetSpecificEventAverageScore(planId);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddRating([FromBody] RatingDto NewRating)
         {
@@ -62,7 +62,7 @@ namespace Fitness_Application_new.Controllers
                 .InsertRatingAsync(_mapper.Map<FitnessApp.DAL.Models.Rating>(NewRating));
             return Ok(created.Id);
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] RatingDto rating)
         {
@@ -71,7 +71,7 @@ namespace Fitness_Application_new.Controllers
             await _ratingService.UpdateRatingAsync(id, _mapper.Map<FitnessApp.DAL.Models.Rating>(rating));
             return NoContent();
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
