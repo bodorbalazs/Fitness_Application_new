@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FitnessPlan, RatingClient, RatingDto, FitnessPlanClient, FavouriteItemClient, FavouriteItemDto, FitnessPlanDto } from '../clientservice/api.client';
 import { Router, ParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 interface FitnessWithRating {
   fitnessPlan: FitnessPlanDto;
   avgRating: number;
@@ -19,6 +20,7 @@ export class FitnessPlansComponent implements OnInit {
 
   constructor(private fitnessPlanService: FitnessPlanClient,
     private favouriteService: FavouriteItemClient,
+    private authorizeService: AuthorizeService,
     private router: Router,
     private ratingClient: RatingClient) { }
 
@@ -37,7 +39,12 @@ export class FitnessPlansComponent implements OnInit {
   }
 
   onSelectPlan(id: number) {
-    this.router.navigate(['/plan-details', id])
+    if(this.authorizeService.isAuthenticated()){
+      this.router.navigate(['/plan-details', id])
+    }
+    else{
+      this.router.navigate(["/authentication/login"])
+    }
   }
 
 }
