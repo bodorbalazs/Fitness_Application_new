@@ -16,6 +16,9 @@ using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
 using System.Security.Cryptography.X509Certificates;
 using Azure.Storage.Blobs;
+using FitnessApp.BLL.Settings;
+using FitnessApp.BLL.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 public class Program
 {
@@ -33,7 +36,8 @@ public class Program
         builder.Services.AddScoped<IFitnessExerciseService, FitnessExerciseService>();
         builder.Services.AddScoped<IFitnessPlanService, FitnessPlanService>();
         builder.Services.AddScoped<IRatingService, RatingService>();
-
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGridSettings"));
         builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("AzureBlobConnectionString")));
 
 
@@ -51,6 +55,9 @@ public class Program
 
         builder.Services.AddAuthentication()
             .AddIdentityServerJwt();
+
+       
+
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         builder.Services.AddControllersWithViews();
         builder.Services.AddControllers();
