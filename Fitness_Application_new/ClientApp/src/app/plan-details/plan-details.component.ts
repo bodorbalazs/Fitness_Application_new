@@ -44,7 +44,7 @@ export class PlanDetailsComponent {
         }
       });
     });
-    this.favouriteService.getAll().subscribe(element => {
+    this.favouriteService.getUsersPlans().subscribe(element => {
       this.favouriteList = element;
       this.favouriteList.forEach(favourite => {
         if (favourite.fitnessPlanId == this.eventId) {

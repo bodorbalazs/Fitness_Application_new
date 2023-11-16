@@ -9,16 +9,10 @@ namespace Fitness_Application_new.Services
     public class FitnessPlanService : IFitnessPlanService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IFitnessExerciseService _exerciseService;
-        private readonly IRatingService _ratingService;
-        private readonly IFavouriteItemService _favouriteItemService;
 
-        public FitnessPlanService(ApplicationDbContext context, IFitnessExerciseService exerciseService, IRatingService ratingService, IFavouriteItemService favouriteItemService)
+        public FitnessPlanService(ApplicationDbContext context)
         {
             _context = context;
-            _exerciseService = exerciseService;
-            _ratingService = ratingService;
-            _favouriteItemService = favouriteItemService;
         }
 
         public async Task DeleteFitnessPlanAsync(int FitnessPlanId)
