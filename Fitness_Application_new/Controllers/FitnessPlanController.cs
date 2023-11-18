@@ -20,22 +20,15 @@ namespace Fitness_Application_new.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IFitnessPlanService _fitnessPlanService;
-        private readonly IRatingService _ratingService;
-        private readonly IFavouriteItemService _favouriteItemService;
-        private readonly IFitnessExerciseService _fitnessExerciseService;
         private readonly IMapper _mapper;
 
 
         public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService,
-            IMapper mapper, IRatingService ratingService, IFavouriteItemService favouriteItemService,
-            IFitnessExerciseService fitnessExerciseService)
+            IMapper mapper)
         {
             _context = context;
             _fitnessPlanService = fitnessPlanService;
             _mapper = mapper;
-            _ratingService = ratingService;
-            _favouriteItemService = favouriteItemService;
-            _fitnessExerciseService = fitnessExerciseService;
         }
 
         [HttpGet]

@@ -4,7 +4,7 @@
     <label for="name">
       Name:
     </label>
-    <input id="name" type="text" formControlName="name" value={{specifiedPlan.name}}>
+    <input id="name" type="text" formControlName="name" value={{specifiedPlan.name}} maxlength='20'>
   </div>
 
   <div>
@@ -29,7 +29,7 @@
 
       <form [formGroup]="addFitnessExerciseForm">
         <p>
-          <input type="text" id="name" name="name" formControlName="name" placeholder="Name of the Exercise">
+          <input type="text" id="name" name="name" formControlName="name" placeholder="Name of the Exercise" maxlength='30'>
         </p>
         <p>
           <input type="text" id="description" name="description" formControlName="description" required="true"
@@ -41,7 +41,7 @@
 
         <p>Difficulty of the exercise:</p>
         <p>
-          <input type="text" id="difficulty" name="difficulty" formControlName="difficulty">
+          <input type="text" id="difficulty" name="difficulty" formControlName="difficulty" maxlength='20'>
         </p>
       </form>
     </div>
