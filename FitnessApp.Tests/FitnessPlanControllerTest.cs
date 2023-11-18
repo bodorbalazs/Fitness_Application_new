@@ -21,18 +21,12 @@ namespace FitnessApp.Tests
         private readonly FitnessPlanController fitnessPlanController;
         private readonly Mock<IFitnessPlanService> _fitnessPlanServiceMock = new Mock<IFitnessPlanService>();
         private readonly Mock<IMapper> mockMapper = new Mock<IMapper>();
-        private readonly Mock<IFavouriteItemService> FavoriteItemServiceMock = new Mock<IFavouriteItemService>();
-        private readonly Mock<IRatingService> ratingServiceMock = new Mock<IRatingService>();
-        private readonly Mock<IFitnessExerciseService> fitnessExerciseServiceMock = new Mock<IFitnessExerciseService>();
         public FitnessPlanControllerTest()
         {
             fitnessPlanController = new FitnessPlanController(
                 null,
                 _fitnessPlanServiceMock.Object,
-                mockMapper.Object,
-                ratingServiceMock.Object,
-                FavoriteItemServiceMock.Object,
-                fitnessExerciseServiceMock.Object
+                mockMapper.Object
                 );
         }
         [Fact]
