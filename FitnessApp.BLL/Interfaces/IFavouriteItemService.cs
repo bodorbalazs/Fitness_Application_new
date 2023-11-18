@@ -10,7 +10,6 @@ namespace Fitness_Application_new.Interfaces
         Task<FavouriteItem> InsertFavouriteItemAsync(FavouriteItem newFavouriteItem);
         Task UpdateFavouriteItemAsync(int FavouriteItemId, FavouriteItem updatedFavouriteItem);
         Task DeleteFavouriteItemAsync(int FavouriteItemId);
-
         Task DeletePlansFavouriteItemAsync(int PlanId);
         Task<FavouriteItem> GetPlanUsersFavouriteItemAsync(string userId, int FitnessplanId);
     }

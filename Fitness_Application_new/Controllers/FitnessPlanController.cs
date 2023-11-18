@@ -24,7 +24,6 @@ namespace Fitness_Application_new.Controllers
         private readonly IFavouriteItemService _favouriteItemService;
         private readonly IFitnessExerciseService _fitnessExerciseService;
         private readonly IMapper _mapper;
-        private readonly string AppDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
 
         public FitnessPlanController(ApplicationDbContext context, IFitnessPlanService fitnessPlanService,

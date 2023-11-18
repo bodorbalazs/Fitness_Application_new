@@ -45,8 +45,6 @@ namespace Fitness_Application_new.Services
         public async Task<FitnessPlan> GetFitnessPlanAsync(int FitnessPlanId)
         {
             return (await _context.fitnessPlan
-
-
                .SingleOrDefaultAsync(e => e.Id == FitnessPlanId))
                ?? throw new EntityNotFoundException("Nem található a fitness plan");
         }
