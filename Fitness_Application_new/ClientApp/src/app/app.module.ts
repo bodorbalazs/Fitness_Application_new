@@ -65,7 +65,7 @@ import { FavouritePlansComponent } from './favourite-plans/favourite-plans.compo
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'edit-fitness-plans', component: EditFitnessPlansComponent, canActivate: [AuthorizeGuard] },
       { path: 'plan-edit/:id', component: PlanEditComponent, canActivate: [AuthorizeGuard] },
-      { path: 'plan-details/:id', component: PlanDetailsComponent, },
+      { path: 'plan-details/:id', component: PlanDetailsComponent, canActivate: [AuthorizeGuard] },
       { path: 'favourite-plans', component: FavouritePlansComponent, canActivate: [AuthorizeGuard] }
     ]),
     NgbModule
